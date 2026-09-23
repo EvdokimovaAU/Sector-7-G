@@ -1,0 +1,910 @@
+fileFormatVersion: 2
+guid: c3b21617a044c3b4f987387addac1bb0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3894415531740123212
+    second: Phone_0
+  - first:
+      213: -140988696014029210
+    second: Phone_1
+  - first:
+      213: 984922140196257204
+    second: Phone_2
+  - first:
+      213: -376848500426078955
+    second: Phone_3
+  - first:
+      213: 7996705535435686302
+    second: Phone_4
+  - first:
+      213: 2390323002928537563
+    second: Phone_5
+  - first:
+      213: 2061996566967735330
+    second: Phone_6
+  - first:
+      213: -6083428184235821305
+    second: Phone_7
+  - first:
+      213: 5087480433125582896
+    second: Phone_8
+  - first:
+      213: -2563971209427963879
+    second: Phone_9
+  - first:
+      213: 977955095720854063
+    second: Phone_10
+  - first:
+      213: 5638467594142279207
+    second: Phone_11
+  - first:
+      213: -1402267122786728160
+    second: Phone_12
+  - first:
+      213: -3094701315788295228
+    second: Phone_13
+  - first:
+      213: -5769898486584807329
+    second: Phone_14
+  - first:
+      213: 4777018190351342200
+    second: Phone_15
+  - first:
+      213: -6924819874197950170
+    second: Phone_16
+  - first:
+      213: -7535863188137650898
+    second: Phone_17
+  - first:
+      213: 1425877213099174366
+    second: Phone_18
+  - first:
+      213: 265263519756839021
+    second: Phone_19
+  - first:
+      213: -5237792158393166797
+    second: Phone_20
+  - first:
+      213: 7155673317137097626
+    second: Phone_21
+  - first:
+      213: -7449106448243108968
+    second: Phone_22
+  - first:
+      213: -3613936256735740083
+    second: Phone_23
+  - first:
+      213: -4154777057168081967
+    second: Phone_24
+  - first:
+      213: -389901138504160466
+    second: Phone_25
+  - first:
+      213: 2045585758890677228
+    second: Phone_26
+  - first:
+      213: 914468230942414160
+    second: Phone_27
+  - first:
+      213: 3556967035203963980
+    second: Phone_28
+  - first:
+      213: 8757643538186050622
+    second: Phone_29
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Phone_0
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 6
+        width: 117
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c405229ea4ebb0630800000000000000
+      internalID: 3894415531740123212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phone_1
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 13
+        width: 33
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66efcb8278b1b0ef0800000000000000
+      internalID: -140988696014029210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phone_2
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 88
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4bdb0d9d7752bad00800000000000000
+      internalID: 984922140196257204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phone_3
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 88
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51507f5194a25caf0800000000000000
+      internalID: -376848500426078955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phone_4
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 88
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e914b0de0510afe60800000000000000
+      internalID: 7996705535435686302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phone_5
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 88
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bdf10005b122c2120800000000000000
+      internalID: 2390323002928537563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phone_6
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 89
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 224df26e3fead9c10800000000000000
+      internalID: 2061996566967735330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phone_7
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 74
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 707360e3c42539ba0800000000000000
+      internalID: -6083428184235821305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phone_8
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 89
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0386332df7c5a9640800000000000000
+      internalID: 5087480433125582896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phone_9
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 74
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 910b7bff4c1fa6cd0800000000000000
+      internalID: -2563971209427963879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phone_10
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 89
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2289b66af4629d00800000000000000
+      internalID: 977955095720854063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phone_11
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 74
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 726e66a276cdf3e40800000000000000
+      internalID: 5638467594142279207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phone_12
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 13
+        width: 80
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 027861a3b752a8ce0800000000000000
+      internalID: -1402267122786728160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phone_13
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 73
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c3318abc896d05d0800000000000000
+      internalID: -3094701315788295228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phone_14
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 58
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f507c0d85e33defa0800000000000000
+      internalID: -5769898486584807329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phone_15
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 73
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87a98710cb06b4240800000000000000
+      internalID: 4777018190351342200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phone_16
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 58
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 621bdd0830916ef90800000000000000
+      internalID: -6924819874197950170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phone_17
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 73
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e25dc1b6b5c3b6790800000000000000
+      internalID: -7535863188137650898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phone_18
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 58
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed9a91c45cbb9c310800000000000000
+      internalID: 1425877213099174366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phone_19
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 73
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d68e9fa04c76ea300800000000000000
+      internalID: 265263519756839021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phone_20
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 58
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33416af68cf9f47b0800000000000000
+      internalID: -5237792158393166797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phone_21
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 59
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a93a2b438fe0e4360800000000000000
+      internalID: 7155673317137097626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phone_22
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 59
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 893d56207257f9890800000000000000
+      internalID: -7449106448243108968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phone_23
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 59
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4f7c583f18b8ddc0800000000000000
+      internalID: -3613936256735740083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phone_24
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 43
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1dbbd8a87444756c0800000000000000
+      internalID: -4154777057168081967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phone_25
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 43
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2b60f5fafac69af0800000000000000
+      internalID: -389901138504160466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phone_26
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 43
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce3d644e861636c10800000000000000
+      internalID: 2045585758890677228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phone_27
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 44
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 055d3bfc208d0bc00800000000000000
+      internalID: 914468230942414160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phone_28
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 44
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4c4b134ca2ec5130800000000000000
+      internalID: 3556967035203963980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phone_29
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 44
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3c1313e566698970800000000000000
+      internalID: 8757643538186050622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Phone_0: 3894415531740123212
+      Phone_1: -140988696014029210
+      Phone_10: 977955095720854063
+      Phone_11: 5638467594142279207
+      Phone_12: -1402267122786728160
+      Phone_13: -3094701315788295228
+      Phone_14: -5769898486584807329
+      Phone_15: 4777018190351342200
+      Phone_16: -6924819874197950170
+      Phone_17: -7535863188137650898
+      Phone_18: 1425877213099174366
+      Phone_19: 265263519756839021
+      Phone_2: 984922140196257204
+      Phone_20: -5237792158393166797
+      Phone_21: 7155673317137097626
+      Phone_22: -7449106448243108968
+      Phone_23: -3613936256735740083
+      Phone_24: -4154777057168081967
+      Phone_25: -389901138504160466
+      Phone_26: 2045585758890677228
+      Phone_27: 914468230942414160
+      Phone_28: 3556967035203963980
+      Phone_29: 8757643538186050622
+      Phone_3: -376848500426078955
+      Phone_4: 7996705535435686302
+      Phone_5: 2390323002928537563
+      Phone_6: 2061996566967735330
+      Phone_7: -6083428184235821305
+      Phone_8: 5087480433125582896
+      Phone_9: -2563971209427963879
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
