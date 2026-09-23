@@ -5,19 +5,30 @@ using UnityEngine;
 public class DailyTask
 {
     [Header("Task")]
+
+    // Текст задания, который увидит игрок.
     [SerializeField] private string description;
 
-    [SerializeField] private PanelElementID targetElement;
 
+    // Какой элемент панели должен изменить игрок.
+    // Используем именно PanelElementID из namespace Panel.
+    [SerializeField]
+    private Panel.PanelElementID targetElement;
+
+
+    // Какое значение необходимо установить.
     [SerializeField] private int requiredValue;
 
+
     [Header("Runtime")]
+
+    // Выполнено ли задание.
     [SerializeField] private bool isCompleted;
 
 
     public string Description => description;
 
-    public PanelElementID TargetElement => targetElement;
+    public Panel.PanelElementID TargetElement => targetElement;
 
     public int RequiredValue => requiredValue;
 
@@ -25,23 +36,31 @@ public class DailyTask
 
 
     /// <summary>
-    /// Проверяет, выполнено ли задание после действия игрока.
+    /// Проверяет действие игрока.
     /// </summary>
-    public bool Check(PanelElementID elementID, int value)
+    public bool Check(
+        Panel.PanelElementID elementID,
+        int value)
     {
-        // Уже выполненное задание повторно не выполняем.
+        // Уже выполненное задание
+        // второй раз не выполняем.
         if (isCompleted)
             return false;
 
-        // Игрок взаимодействовал не с тем элементом.
+
+        // Игрок взаимодействовал
+        // не с тем элементом панели.
         if (targetElement != elementID)
             return false;
 
-        // Значение элемента не соответствует заданию.
+
+        // Элемент правильный,
+        // но установлено неправильное значение.
         if (requiredValue != value)
             return false;
 
-        // Все условия выполнены.
+
+        // И элемент, и значение совпали.
         isCompleted = true;
 
         return true;
@@ -50,7 +69,6 @@ public class DailyTask
 
     /// <summary>
     /// Сбрасывает выполнение задания.
-    /// Пригодится при начале нового дня.
     /// </summary>
     public void ResetTask()
     {

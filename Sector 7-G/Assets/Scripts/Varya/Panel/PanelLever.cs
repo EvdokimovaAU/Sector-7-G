@@ -1,32 +1,54 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Panel
 {
     public class PanelLever : PanelElement
     {
-        // 0 = ÎÒÊÐ, 1 = ÍÎÐ, 2 = ÇÀÊÐ
+        [Header("Lever Settings")]
+
+        // 0 = ÎÒÊÐ
+        // 1 = ÍÎÐ
+        // 2 = ÇÀÊÐ
         [SerializeField] private int state = 1;
 
+
         [Header("Visual")]
-        [SerializeField] private Image targetImage;
+
+        // SpriteRenderer ðû÷àãà íà óðîâíå.
+        [SerializeField] private SpriteRenderer targetRenderer;
+
         [SerializeField] private Sprite spriteOpen;
         [SerializeField] private Sprite spriteNormal;
         [SerializeField] private Sprite spriteClosed;
 
-        public override int GetValue() => state;
+
+        public override int GetValue()
+        {
+            return state;
+        }
+
 
         public override void Interact()
         {
+            // Êàæäûé êëèê ïåðåêëþ÷àåò:
+            // 0 -> 1 -> 2 -> 0...
             state = (state + 1) % 3;
+
             RefreshVisual();
-            PanelEvents.ElementChanged(elementID, GetValue());
+
+            PanelEvents.ElementChanged(
+                elementID,
+                GetValue()
+            );
         }
+
 
         protected override void RefreshVisual()
         {
-            if (targetImage == null) return;
-            targetImage.sprite = state switch
+            if (targetRenderer == null)
+                return;
+
+            targetRenderer.sprite = state switch
             {
                 0 => spriteOpen,
                 1 => spriteNormal,
@@ -35,6 +57,15 @@ namespace Panel
             };
         }
 
-        private void Start() => RefreshVisual();
+
+        private void Start()
+        {
+            if (targetRenderer == null)
+            {
+                targetRenderer = GetComponent<SpriteRenderer>();
+            }
+
+            RefreshVisual();
+        }
     }
 }

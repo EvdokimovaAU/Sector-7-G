@@ -11,26 +11,57 @@ public class TaskManager : MonoBehaviour
 
 
     // Другие системы могут читать задания,
-    // но не могут напрямую менять сам список.
+    // но не могут напрямую менять список.
     public IReadOnlyList<DailyTask> CurrentTasks => currentTasks;
 
 
     // Вызывается, когда изменилось состояние заданий.
+    // Например, когда одно из заданий было выполнено.
     public event Action OnTasksChanged;
 
-    // Вызывается, когда выполнены ВСЕ задания.
+
+    // Вызывается, когда выполнены все задания.
     public event Action OnAllTasksCompleted;
 
 
-    /// <summary>
-    /// Вызывается элементами панели после изменения состояния.
-    ///
-    /// elementID — какой элемент панели изменился.
-    /// value — его новое значение.
-    /// </summary>
-    public void CheckTask(PanelElementID elementID, int value)
+    private void OnEnable()
     {
-        // Защита на случай отсутствия списка.
+        // Подписываемся на реальные действия игрока на панели.
+        Panel.PanelEvents.OnElementChanged += HandlePanelElementChanged;
+    }
+
+
+    private void OnDisable()
+    {
+        // Обязательно отписываемся от события.
+        Panel.PanelEvents.OnElementChanged -= HandlePanelElementChanged;
+    }
+
+
+    /// <summary>
+    /// Получает изменение состояния реального элемента панели.
+    /// </summary>
+    private void HandlePanelElementChanged(
+        Panel.PanelElementID elementID,
+        int value)
+    {
+        Debug.Log(
+            $"[TASK MANAGER] Получено от панели: {elementID} = {value}"
+        );
+
+        CheckTask(elementID, value);
+    }
+
+
+    /// <summary>
+    /// Проверяет задания после действия игрока на панели.
+    /// elementID - какой элемент панели изменился.
+    /// value - новое значение элемента.
+    /// </summary>
+    public void CheckTask(
+        Panel.PanelElementID elementID,
+        int value)
+    {
         if (currentTasks == null)
         {
             Debug.LogError(
@@ -47,15 +78,17 @@ public class TaskManager : MonoBehaviour
 
         foreach (DailyTask task in currentTasks)
         {
-            // Защита от пустого элемента списка.
             if (task == null)
                 continue;
 
 
+            // DailyTask сам проверяет:
+            // 1. нужный ли это элемент;
+            // 2. правильное ли значение.
             if (task.Check(elementID, value))
             {
                 Debug.Log(
-                    $"Выполнено задание: {task.Description}"
+                    $"[TASK COMPLETED] {task.Description}"
                 );
 
                 taskCompletedNow = true;
@@ -66,18 +99,20 @@ public class TaskManager : MonoBehaviour
         }
 
 
-        // Если задание действительно изменилось —
-        // сообщаем UI.
+        // Если задание выполнилось,
+        // сообщаем UI, что нужно обновиться.
         if (taskCompletedNow)
         {
             OnTasksChanged?.Invoke();
         }
 
 
-        // Проверяем завершение всей смены.
+        // Проверяем, выполнены ли теперь все задания.
         if (AreAllTasksCompleted())
         {
-            Debug.Log("ВСЕ ЗАДАНИЯ ВЫПОЛНЕНЫ");
+            Debug.Log(
+                "[TASK MANAGER] Все задания выполнены"
+            );
 
             OnAllTasksCompleted?.Invoke();
         }
@@ -85,20 +120,22 @@ public class TaskManager : MonoBehaviour
 
 
     /// <summary>
-    /// Проверяет, выполнены ли все задания.
+    /// Проверяет, выполнены ли все задания текущего дня.
     /// </summary>
     public bool AreAllTasksCompleted()
     {
-        if (currentTasks == null || currentTasks.Count == 0)
+        if (currentTasks == null ||
+            currentTasks.Count == 0)
+        {
             return false;
+        }
 
 
         foreach (DailyTask task in currentTasks)
         {
-            // Пустой элемент считаем ошибкой,
-            // поэтому смену завершённой не считаем.
             if (task == null)
                 return false;
+
 
             if (!task.IsCompleted)
                 return false;
@@ -111,7 +148,7 @@ public class TaskManager : MonoBehaviour
 
     /// <summary>
     /// Сбрасывает задания.
-    /// Позже понадобится при начале нового дня.
+    /// Позже используется при начале нового дня.
     /// </summary>
     public void ResetTasks()
     {
