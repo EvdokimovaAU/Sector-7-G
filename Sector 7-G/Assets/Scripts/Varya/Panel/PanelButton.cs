@@ -11,31 +11,12 @@ namespace Panel
 
         [Header("Button Settings")]
 
-        // true = кнопка имеет два состояния: ВКЛ / ВЫКЛ.
-        // false = обычная командная кнопка.
+        [Tooltip("Если true — кнопка переключается между 0 и 1.")]
         [SerializeField]
         private bool isTwoState = true;
 
-        // Текущее состояние кнопки.
         [SerializeField]
-        private bool isOn;
-
-
-        // ==================================================
-        // AUTO RESET
-        // ==================================================
-
-        [Header("Auto Reset")]
-
-        // Если включено, кнопка автоматически
-        // вернётся в состояние OFF.
-        [SerializeField]
-        private bool autoReset = false;
-
-        // Через сколько секунд вернуть кнопку в OFF.
-        [Min(0f)]
-        [SerializeField]
-        private float autoResetDelay = 2f;
+        private bool isOn = false;
 
 
         // ==================================================
@@ -44,15 +25,12 @@ namespace Panel
 
         [Header("Button Visual")]
 
-        // SpriteRenderer самой кнопки.
         [SerializeField]
         private SpriteRenderer targetRenderer;
 
-        // Спрайт обычной кнопки.
         [SerializeField]
         private Sprite spriteNormal;
 
-        // Спрайт нажатой кнопки.
         [SerializeField]
         private Sprite spritePressed;
 
@@ -61,34 +39,63 @@ namespace Panel
         // INDICATOR
         // ==================================================
 
-        [Header("Indicator Lamp")]
+        [Header("Indicator")]
 
-        // SpriteRenderer отдельной лампочки.
         [SerializeField]
         private SpriteRenderer indicatorRenderer;
 
-        // Лампочка, когда кнопка выключена.
         [SerializeField]
         private Sprite indicatorOffSprite;
 
-        // Лампочка, когда кнопка включена.
         [SerializeField]
         private Sprite indicatorOnSprite;
 
 
-        // Запущенная корутина автоматического сброса.
+        // ==================================================
+        // AUTO RESET
+        // ==================================================
+
+        [Header("Auto Reset")]
+
+        [SerializeField]
+        private bool autoReset = false;
+
+        [SerializeField]
+        private float autoResetDelay = 0.2f;
+
+
+        // ==================================================
+        // INSTABILITY
+        // ==================================================
+
+        [Header("Instability")]
+
+        [SerializeField]
+        private PanelInstabilityManager instabilityManager;
+
+
         private Coroutine resetCoroutine;
 
 
         // ==================================================
-        // VALUE
+        // UNITY
         // ==================================================
 
-        public override int GetValue()
+        private void Start()
         {
-            return isTwoState
-                ? (isOn ? 1 : 0)
-                : 1;
+            if (instabilityManager == null)
+            {
+                instabilityManager =
+                    FindAnyObjectByType<PanelInstabilityManager>();
+            }
+
+            RefreshVisual();
+        }
+
+
+        private void OnDisable()
+        {
+            StopAutoReset();
         }
 
 
@@ -98,61 +105,230 @@ namespace Panel
 
         public override void Interact()
         {
-            // --------------------------------------------------
-            // TWO STATE BUTTON
-            // --------------------------------------------------
+            Debug.Log(
+                $"[PANEL CLICK] {elementID}"
+            );
+
+
+            // ==================================================
+            // ДВУХПОЗИЦИОННАЯ КНОПКА
+            // ==================================================
 
             if (isTwoState)
             {
-                // Меняем состояние.
                 isOn = !isOn;
 
                 RefreshVisual();
 
-
-                // Сообщаем системам именно о действии игрока.
-                PanelEvents.ElementChanged(
-                    elementID,
-                    GetValue()
-                );
-
-
-                // Если кнопку включили и для неё
-                // разрешён автоматический возврат.
-                if (isOn && autoReset)
-                {
-                    StartAutoReset();
-                }
-                else
-                {
-                    StopAutoReset();
-                }
+                SendAction();
 
                 return;
             }
 
 
-            // --------------------------------------------------
-            // COMMAND BUTTON
-            // --------------------------------------------------
+            // ==================================================
+            // ОБЫЧНАЯ КНОПКА
+            // ==================================================
 
-            // Обычная командная кнопка отправляет 1.
-            PanelEvents.ElementChanged(
-                elementID,
-                1
+            isOn = true;
+
+            RefreshVisual();
+
+            SendAction();
+
+
+            if (autoReset)
+            {
+                StartAutoReset();
+            }
+        }
+
+
+        // ==================================================
+        // GET VALUE
+        //
+        // ЭТО ABSTRACT-МЕТОД ИЗ PanelElement
+        // ==================================================
+
+        public override int GetValue()
+        {
+            if (isTwoState)
+            {
+                return isOn ? 1 : 0;
+            }
+
+
+            // Обычная кнопка при нажатии
+            // всегда отправляет 1.
+            return 1;
+        }
+
+
+        // ==================================================
+        // REFRESH VISUAL
+        //
+        // ЭТО ABSTRACT-МЕТОД ИЗ PanelElement
+        // ==================================================
+
+        protected override void RefreshVisual()
+        {
+            // ------------------------------
+            // Картинка самой кнопки
+            // ------------------------------
+
+            if (targetRenderer != null)
+            {
+                if (isOn)
+                {
+                    if (spritePressed != null)
+                    {
+                        targetRenderer.sprite =
+                            spritePressed;
+                    }
+                }
+                else
+                {
+                    if (spriteNormal != null)
+                    {
+                        targetRenderer.sprite =
+                            spriteNormal;
+                    }
+                }
+            }
+
+
+            // ------------------------------
+            // Лампочка / индикатор
+            // ------------------------------
+
+            if (indicatorRenderer != null)
+            {
+                if (isOn)
+                {
+                    if (indicatorOnSprite != null)
+                    {
+                        indicatorRenderer.sprite =
+                            indicatorOnSprite;
+                    }
+                }
+                else
+                {
+                    if (indicatorOffSprite != null)
+                    {
+                        indicatorRenderer.sprite =
+                            indicatorOffSprite;
+                    }
+                }
+            }
+        }
+
+
+        // ==================================================
+        // SEND ACTION
+        // ==================================================
+
+        private void SendAction()
+        {
+            int value =
+                GetValue();
+
+
+            PanelElementID actualID =
+                GetActualElementID();
+
+
+            Debug.Log(
+                $"[PANEL BUTTON] " +
+                $"Pressed: {elementID} | " +
+                $"Actual action: {actualID} | " +
+                $"Value: {value}"
             );
 
 
-            // Для командной кнопки можем визуально
-            // показать нажатие.
-            if (autoReset)
+            PanelEvents.ElementChanged(
+                actualID,
+                value
+            );
+        }
+
+
+        // ==================================================
+        // INSTABILITY
+        // ==================================================
+
+        private PanelElementID GetActualElementID()
+        {
+            // Если менеджера нет —
+            // всё работает как обычно.
+
+            if (instabilityManager == null)
             {
-                isOn = true;
-
-                RefreshVisual();
-
-                StartAutoReset();
+                return elementID;
             }
+
+
+            PanelElementID actualID =
+                elementID;
+
+
+            // ==================================================
+            // ОСНОВНЫЕ ПОЛОМКИ
+            //
+            // < 80:
+            // Generator
+            // Pump
+            // ReactorSection
+            //
+            // < 60:
+            // Reset <-> WaterSupply
+            //
+            // EmergencyShutdown и ReactorMode
+            // менеджер не изменяет.
+            // ==================================================
+
+            actualID =
+                instabilityManager
+                    .GetActualButtonID(actualID);
+
+
+            // ==================================================
+            // TURBINE
+            //
+            // < 60:
+            //
+            // Turbine1 <-> Turbine1_Stop
+            // Turbine2 <-> Turbine2_Stop
+            // ==================================================
+
+            actualID =
+                instabilityManager
+                    .GetActualTurbineID(actualID);
+
+
+            return actualID;
+        }
+
+
+        // ==================================================
+        // SET STATE
+        // ==================================================
+
+        public void SetState(
+            bool newState,
+            bool sendEvent = false)
+        {
+            isOn = newState;
+
+            RefreshVisual();
+
+
+            if (!sendEvent)
+            {
+                return;
+            }
+
+
+            SendAction();
         }
 
 
@@ -162,23 +338,27 @@ namespace Panel
 
         private void StartAutoReset()
         {
-            // Если старый таймер ещё работает,
-            // сначала останавливаем его.
             StopAutoReset();
 
 
             resetCoroutine =
-                StartCoroutine(AutoResetRoutine());
+                StartCoroutine(
+                    AutoResetRoutine()
+                );
         }
 
 
         private void StopAutoReset()
         {
             if (resetCoroutine == null)
+            {
                 return;
+            }
 
 
-            StopCoroutine(resetCoroutine);
+            StopCoroutine(
+                resetCoroutine
+            );
 
             resetCoroutine = null;
         }
@@ -191,79 +371,19 @@ namespace Panel
             );
 
 
-            // Возвращаем кнопку в обычное состояние.
             isOn = false;
 
-
             RefreshVisual();
-
-
-            resetCoroutine = null;
 
 
             // ВАЖНО:
+            // PanelEvents здесь НЕ вызываем.
             //
-            // PanelEvents.ElementChanged здесь
-            // специально НЕ вызывается.
-            //
-            // Это автоматическое изменение,
-            // а не действие игрока.
-            // Поэтому TaskManager и система штрафов
-            // его не обрабатывают.
-
-            Debug.Log(
-                $"[PANEL AUTO RESET] {elementID}"
-            );
-        }
+            // Иначе после нажатия 1
+            // через 0.2 сек игра получит ещё и 0.
 
 
-        // ==================================================
-        // VISUAL
-        // ==================================================
-
-        protected override void RefreshVisual()
-        {
-            // Кнопка.
-            if (targetRenderer != null)
-            {
-                targetRenderer.sprite =
-                    isOn
-                        ? spritePressed
-                        : spriteNormal;
-            }
-
-
-            // Лампочка.
-            if (indicatorRenderer != null)
-            {
-                indicatorRenderer.sprite =
-                    isOn
-                        ? indicatorOnSprite
-                        : indicatorOffSprite;
-            }
-        }
-
-
-        // ==================================================
-        // START
-        // ==================================================
-
-        private void Start()
-        {
-            if (targetRenderer == null)
-            {
-                targetRenderer =
-                    GetComponent<SpriteRenderer>();
-            }
-
-
-            RefreshVisual();
-        }
-
-
-        private void OnDisable()
-        {
-            StopAutoReset();
+            resetCoroutine = null;
         }
     }
 }

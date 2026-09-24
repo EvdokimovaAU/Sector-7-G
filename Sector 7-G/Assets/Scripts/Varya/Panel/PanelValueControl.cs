@@ -1,147 +1,152 @@
-using TMPro;
+п»їusing TMPro;
 using UnityEngine;
 
 namespace Panel
 {
-    public class PanelValueControl : PanelElement
+    public class PanelValueControl : MonoBehaviour
     {
         // ==================================================
-        // VALUE SETTINGS
+        // ELEMENT
         // ==================================================
 
-        [Header("Value Settings")]
+        [Header("Element")]
+        [SerializeField]
+        private PanelElementID elementID;
 
-        // Значение, которое сейчас выбирает игрок стрелочками.
+
+        // ==================================================
+        // VALUE
+        // ==================================================
+
+        [Header("Value")]
+
         [SerializeField]
         private int currentValue = 0;
 
-        // Значение, которое реально установлено в системе.
         [SerializeField]
-        private int appliedValue = 0;
+        private int minValue = 0;
 
         [SerializeField]
-        private int min = 0;
+        private int maxValue = 100;
 
         [SerializeField]
-        private int max = 100;
-
-        [SerializeField]
-        private int step = 10;
+        private int step = 1;
 
 
         // ==================================================
-        // BUTTONS
+        // UI
         // ==================================================
 
-        [Header("Buttons")]
+        [Header("UI")]
 
-        // Стрелка вверх.
-        [SerializeField]
-        private Collider2D increaseButton;
-
-        // Стрелка вниз.
-        [SerializeField]
-        private Collider2D decreaseButton;
-
-        // Отдельная кнопка "Установить".
-        [SerializeField]
-        private Collider2D applyButton;
-
-
-        // ==================================================
-        // VISUAL
-        // ==================================================
-
-        [Header("Visual")]
-
-        // Показывает выбранное значение.
         [SerializeField]
         private TMP_Text valueText;
+
+
+        // ==================================================
+        // REFERENCES
+        // ==================================================
+
+        [Header("References")]
+
+        [SerializeField]
+        private PanelInstabilityManager instabilityManager;
 
 
         // ==================================================
         // PUBLIC
         // ==================================================
 
-        // Для игровой логики возвращаем именно
-        // установленное значение, а не временно выбранное.
-        public override int GetValue()
-        {
-            return appliedValue;
-        }
+        public int CurrentValue => currentValue;
+
+        public PanelElementID ElementID => elementID;
 
 
-        // У этого элемента взаимодействие происходит
-        // через три отдельных Collider2D.
-        public override void Interact()
+        // ==================================================
+        // UNITY
+        // ==================================================
+
+        private void Start()
         {
+            if (instabilityManager == null)
+            {
+                instabilityManager =
+                    FindAnyObjectByType<
+                        PanelInstabilityManager
+                    >();
+            }
+
+
+            currentValue =
+                Mathf.Clamp(
+                    currentValue,
+                    minValue,
+                    maxValue
+                );
+
+
+            UpdateValueText();
         }
 
 
         // ==================================================
-        // INPUT
+        // INCREASE
         // ==================================================
 
-        private void Update()
+        public void Increase()
         {
-            if (UnityEngine.InputSystem.Mouse.current == null)
-                return;
+            // РџСЂРё РЅРѕСЂРјР°Р»СЊРЅРѕР№ РїР°РЅРµР»Рё:
+            //
+            // в†‘ = СѓРІРµР»РёС‡РµРЅРёРµ
+            //
+            // РџСЂРё РЅР°РґРµР¶РЅРѕСЃС‚Рё < 60:
+            //
+            // в†‘ = СѓРјРµРЅСЊС€РµРЅРёРµ
 
-
-            if (!UnityEngine.InputSystem.Mouse.current
-                    .leftButton.wasPressedThisFrame)
+            if (AreControlsInverted())
             {
-                return;
+                Debug.LogWarning(
+                    $"[CONTROL INVERTED] " +
+                    $"{elementID}: UP -> DOWN"
+                );
+
+
+                ChangeValue(-step);
             }
-
-
-            Camera camera = Camera.main;
-
-            if (camera == null)
-                return;
-
-
-            Vector2 screenPosition =
-                UnityEngine.InputSystem.Mouse.current
-                    .position.ReadValue();
-
-
-            Vector3 worldPosition =
-                camera.ScreenToWorldPoint(screenPosition);
-
-
-            // ----------------------------------------------
-            // Стрелка вверх
-            // ----------------------------------------------
-
-            if (increaseButton != null &&
-                increaseButton.OverlapPoint(worldPosition))
+            else
             {
-                Increase();
-                return;
+                ChangeValue(step);
             }
+        }
 
 
-            // ----------------------------------------------
-            // Стрелка вниз
-            // ----------------------------------------------
+        // ==================================================
+        // DECREASE
+        // ==================================================
 
-            if (decreaseButton != null &&
-                decreaseButton.OverlapPoint(worldPosition))
+        public void Decrease()
+        {
+            // РџСЂРё РЅРѕСЂРјР°Р»СЊРЅРѕР№ РїР°РЅРµР»Рё:
+            //
+            // в†“ = СѓРјРµРЅСЊС€РµРЅРёРµ
+            //
+            // РџСЂРё РЅР°РґРµР¶РЅРѕСЃС‚Рё < 60:
+            //
+            // в†“ = СѓРІРµР»РёС‡РµРЅРёРµ
+
+            if (AreControlsInverted())
             {
-                Decrease();
-                return;
+                Debug.LogWarning(
+                    $"[CONTROL INVERTED] " +
+                    $"{elementID}: DOWN -> UP"
+                );
+
+
+                ChangeValue(step);
             }
-
-
-            // ----------------------------------------------
-            // Кнопка "Установить"
-            // ----------------------------------------------
-
-            if (applyButton != null &&
-                applyButton.OverlapPoint(worldPosition))
+            else
             {
-                ApplyValue();
+                ChangeValue(-step);
             }
         }
 
@@ -150,110 +155,103 @@ namespace Panel
         // CHANGE VALUE
         // ==================================================
 
-        public void Increase()
+        private void ChangeValue(int amount)
         {
-            int next = Mathf.Clamp(
-                currentValue + step,
-                min,
-                max
-            );
+            int oldValue =
+                currentValue;
 
 
-            if (next == currentValue)
-                return;
+            currentValue =
+                Mathf.Clamp(
+                    currentValue + amount,
+                    minValue,
+                    maxValue
+                );
 
 
-            currentValue = next;
-
-
-            // Только обновляем цифру.
-            // PanelEvents здесь НЕ вызываем.
-            RefreshVisual();
+            // РћР±РЅРѕРІР»СЏРµРј С†РёС„СЂСѓ РЅР° РїР°РЅРµР»Рё.
+            UpdateValueText();
 
 
             Debug.Log(
-                $"[PANEL SELECT] {elementID} = {currentValue}"
-            );
-        }
-
-
-        public void Decrease()
-        {
-            int next = Mathf.Clamp(
-                currentValue - step,
-                min,
-                max
+                $"[VALUE CONTROL] " +
+                $"{elementID}: " +
+                $"{oldValue} -> {currentValue}"
             );
 
 
-            if (next == currentValue)
-                return;
+            // РЎРѕРѕР±С‰Р°РµРј РѕСЃС‚Р°Р»СЊРЅРѕР№ РёРіСЂРµ,
+            // РєР°РєРѕРµ Р·РЅР°С‡РµРЅРёРµ СѓСЃС‚Р°РЅРѕРІР»РµРЅРѕ.
 
-
-            currentValue = next;
-
-
-            // Только обновляем цифру.
-            // PanelEvents здесь НЕ вызываем.
-            RefreshVisual();
-
-
-            Debug.Log(
-                $"[PANEL SELECT] {elementID} = {currentValue}"
-            );
-        }
-
-
-        // ==================================================
-        // APPLY
-        // ==================================================
-
-        public void ApplyValue()
-        {
-            // Сохраняем выбранное значение
-            // как реально установленное.
-            appliedValue = currentValue;
-
-
-            // Только теперь сообщаем остальной игре,
-            // что игрок совершил действие.
             PanelEvents.ElementChanged(
                 elementID,
-                appliedValue
-            );
-
-
-            Debug.Log(
-                $"[PANEL APPLY] {elementID} = {appliedValue}"
+                currentValue
             );
         }
 
 
         // ==================================================
-        // VISUAL
+        // UI
         // ==================================================
 
-        protected override void RefreshVisual()
+        private void UpdateValueText()
         {
-            if (valueText != null)
+            if (valueText == null)
             {
-                valueText.text =
-                    currentValue.ToString();
+                return;
             }
+
+
+            valueText.text =
+                currentValue.ToString();
         }
 
 
         // ==================================================
-        // START
+        // INSTABILITY
         // ==================================================
 
-        private void Start()
+        private bool AreControlsInverted()
         {
-            // При запуске выбранное значение
-            // совпадает с реально установленным.
-            currentValue = appliedValue;
+            if (instabilityManager == null)
+            {
+                return false;
+            }
 
-            RefreshVisual();
+
+            return instabilityManager
+                .ShouldInvertValueControl(
+                    elementID
+                );
+        }
+
+
+        // ==================================================
+        // SET VALUE
+        // ==================================================
+
+        public void SetValue(
+            int value,
+            bool sendEvent = true)
+        {
+            currentValue =
+                Mathf.Clamp(
+                    value,
+                    minValue,
+                    maxValue
+                );
+
+
+            UpdateValueText();
+
+
+            if (sendEvent)
+            {
+                PanelEvents.ElementChanged(
+                    elementID,
+                    currentValue
+                );
+            }
         }
     }
 }

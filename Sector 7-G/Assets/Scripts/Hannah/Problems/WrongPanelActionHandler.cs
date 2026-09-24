@@ -218,18 +218,24 @@ public class WrongPanelActionHandler : MonoBehaviour
 
 
         // ==================================================
-        // ПРАВИЛЬНОЕ ДЕЙСТВИЕ ЕЖЕДНЕВНОГО ЗАДАНИЯ
+        // ЭЛЕМЕНТ ОТНОСИТСЯ К ЕЖЕДНЕВНЫМ ЗАДАНИЯМ
         // ==================================================
 
         if (taskManager != null &&
-            taskManager.IsActionRequiredByTask(
-                elementID,
-                value))
+            taskManager.IsElementUsedByTask(elementID))
         {
+            Debug.Log(
+                $"[NO DAMAGE] {elementID} относится " +
+                $"к ежедневным заданиям. " +
+                $"Стабильность АЭС не уменьшается."
+            );
+
+
             RememberCorrectValue(
                 elementID,
                 value
             );
+
 
             return;
         }
