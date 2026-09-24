@@ -4,76 +4,81 @@ using UnityEngine;
 
 public class TaskManager : MonoBehaviour
 {
-    [Header("Tasks")]
+    [Header("Current shift tasks")]
+    [SerializeField]
+    private List<DailyTask> currentTasks = new();
 
-    // Задания текущего игрового дня.
-    [SerializeField] private List<DailyTask> currentTasks = new();
+
+    // --------------------------------------------------
+    // EVENTS
+    // --------------------------------------------------
+
+    // Вызывается при изменении списка заданий.
+    public event Action OnTasksChanged;
+
+    // Вызывается после выполнения одного задания.
+    // Передает количество выполненных заданий.
+    public event Action<int> OnTaskCompleted;
 
 
-    // Другие системы могут читать задания,
-    // но не могут напрямую менять список.
+    // --------------------------------------------------
+    // PUBLIC DATA
+    // --------------------------------------------------
+
     public IReadOnlyList<DailyTask> CurrentTasks => currentTasks;
 
 
-    // Вызывается, когда изменилось состояние заданий.
-    // Например, когда одно из заданий было выполнено.
-    public event Action OnTasksChanged;
+    // Количество уже выполненных заданий.
+    public int CompletedTaskCount
+    {
+        get
+        {
+            if (currentTasks == null)
+                return 0;
+
+            int count = 0;
+
+            foreach (DailyTask task in currentTasks)
+            {
+                if (task != null && task.IsCompleted)
+                {
+                    count++;
+                }
+            }
+
+            return count;
+        }
+    }
 
 
-    // Вызывается, когда выполнены все задания.
-    public event Action OnAllTasksCompleted;
-
+    // --------------------------------------------------
+    // UNITY
+    // --------------------------------------------------
 
     private void OnEnable()
     {
-        // Подписываемся на реальные действия игрока на панели.
-        Panel.PanelEvents.OnElementChanged += HandlePanelElementChanged;
+        Panel.PanelEvents.OnElementChanged +=
+            HandlePanelElementChanged;
     }
 
 
     private void OnDisable()
     {
-        // Обязательно отписываемся от события.
-        Panel.PanelEvents.OnElementChanged -= HandlePanelElementChanged;
+        Panel.PanelEvents.OnElementChanged -=
+            HandlePanelElementChanged;
     }
 
 
-    /// <summary>
-    /// Получает изменение состояния реального элемента панели.
-    /// </summary>
+    // --------------------------------------------------
+    // PANEL EVENTS
+    // --------------------------------------------------
+
     private void HandlePanelElementChanged(
         Panel.PanelElementID elementID,
         int value)
     {
-        Debug.Log(
-            $"[TASK MANAGER] Получено от панели: {elementID} = {value}"
-        );
-
-        CheckTask(elementID, value);
-    }
-
-
-    /// <summary>
-    /// Проверяет задания после действия игрока на панели.
-    /// elementID - какой элемент панели изменился.
-    /// value - новое значение элемента.
-    /// </summary>
-    public void CheckTask(
-        Panel.PanelElementID elementID,
-        int value)
-    {
         if (currentTasks == null)
-        {
-            Debug.LogError(
-                "TaskManager: список Current Tasks отсутствует!",
-                this
-            );
-
             return;
-        }
-
-
-        bool taskCompletedNow = false;
 
 
         foreach (DailyTask task in currentTasks)
@@ -82,46 +87,58 @@ public class TaskManager : MonoBehaviour
                 continue;
 
 
+            // Уже выполненные задания пропускаем.
+            if (task.IsCompleted)
+                continue;
+
+
             // DailyTask сам проверяет:
-            // 1. нужный ли это элемент;
-            // 2. правильное ли значение.
-            if (task.Check(elementID, value))
-            {
-                Debug.Log(
-                    $"[TASK COMPLETED] {task.Description}"
-                );
+            // 1. тот ли элемент панели;
+            // 2. правильное ли значение;
+            // 3. не было ли задание выполнено раньше.
+            //
+            // Если задание выполнилось именно сейчас,
+            // Check вернет true.
 
-                taskCompletedNow = true;
-
-                // Одно действие выполняет максимум одно задание.
-                break;
-            }
-        }
+            bool taskCompletedNow =
+                task.Check(elementID, value);
 
 
-        // Если задание выполнилось,
-        // сообщаем UI, что нужно обновиться.
-        if (taskCompletedNow)
-        {
-            OnTasksChanged?.Invoke();
-        }
+            if (!taskCompletedNow)
+                continue;
 
 
-        // Проверяем, выполнены ли теперь все задания.
-        if (AreAllTasksCompleted())
-        {
             Debug.Log(
-                "[TASK MANAGER] Все задания выполнены"
+                $"Task completed. Total completed: " +
+                $"{CompletedTaskCount}"
             );
 
-            OnAllTasksCompleted?.Invoke();
+
+            // Обновляем UI списка заданий.
+            OnTasksChanged?.Invoke();
+
+
+            // Сообщаем другим системам,
+            // сколько заданий уже выполнено.
+            //
+            // На это событие будет подписана
+            // наша система аварий.
+            OnTaskCompleted?.Invoke(
+                CompletedTaskCount
+            );
+
+
+            // Одно действие панели выполняет
+            // максимум одно ежедневное задание.
+            break;
         }
     }
 
 
-    /// <summary>
-    /// Проверяет, выполнены ли все задания текущего дня.
-    /// </summary>
+    // --------------------------------------------------
+    // PUBLIC METHODS
+    // --------------------------------------------------
+
     public bool AreAllTasksCompleted()
     {
         if (currentTasks == null ||
@@ -134,37 +151,16 @@ public class TaskManager : MonoBehaviour
         foreach (DailyTask task in currentTasks)
         {
             if (task == null)
-                return false;
+                continue;
 
 
             if (!task.IsCompleted)
-                return false;
-        }
-
-
-        return true;
-    }
-
-
-    /// <summary>
-    /// Сбрасывает задания.
-    /// Позже используется при начале нового дня.
-    /// </summary>
-    public void ResetTasks()
-    {
-        if (currentTasks == null)
-            return;
-
-
-        foreach (DailyTask task in currentTasks)
-        {
-            if (task != null)
             {
-                task.ResetTask();
+                return false;
             }
         }
 
 
-        OnTasksChanged?.Invoke();
+        return true;
     }
 }
