@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WrongPanelActionHandler : MonoBehaviour
@@ -19,45 +20,116 @@ public class WrongPanelActionHandler : MonoBehaviour
 
 
     // ==================================================
-    // NORMAL WRONG ACTION
+    // NORMAL ERROR SETTINGS
     // ==================================================
 
-    [Header("Normal Wrong Action")]
+    [Header("Temporary Station Damage")]
 
-    [Tooltip("Минимальный штраф за обычную неправильную кнопку.")]
+    [Tooltip("Минимальный временный урон АЭС за ошибку.")]
     [Min(0)]
     [SerializeField]
-    private int minStabilityPenalty = 5;
+    private int minTemporaryDamage = 5;
 
-    [Tooltip("Максимальный штраф за обычную неправильную кнопку.")]
+    [Tooltip("Максимальный временный урон АЭС за ошибку.")]
     [Min(0)]
     [SerializeField]
-    private int maxStabilityPenalty = 20;
+    private int maxTemporaryDamage = 20;
 
 
     // ==================================================
-    // DANGEROUS BUTTONS
+    // PANEL DAMAGE AFTER FIX
     // ==================================================
 
-    [Header("Dangerous Buttons")]
+    [Header("Panel Damage After Fix")]
 
-    [Tooltip("Штраф стабильности за опасную кнопку.")]
+    [Tooltip(
+        "Минимальное снижение надежности панели " +
+        "после исправления ошибки."
+    )]
     [Min(0)]
     [SerializeField]
-    private int dangerousStabilityPenalty = 50;
+    private int minPanelDamage = 3;
 
-
-    [Header("SOS")]
-
-    [Tooltip("Штраф надежности панели за неправильное нажатие SOS.")]
+    [Tooltip(
+        "Максимальное снижение надежности панели " +
+        "после исправления ошибки."
+    )]
     [Min(0)]
     [SerializeField]
-    private int sosReliabilityPenalty = 50;
+    private int maxPanelDamage = 10;
 
 
-    // Одно физическое нажатие мыши =
-    // максимум один штраф.
-    private int lastPenaltyFrame = -1;
+    // ==================================================
+    // ACCIDENT
+    // ==================================================
+
+    [Header("Accident")]
+
+    [Tooltip(
+        "Сколько одновременно неисправленных ошибок " +
+        "создают настоящую аварию."
+    )]
+    [Min(1)]
+    [SerializeField]
+    private int errorsForAccident = 3;
+
+    [Tooltip(
+        "Постоянный урон обеим шкалам при аварии."
+    )]
+    [Min(0)]
+    [SerializeField]
+    private int accidentDamage = 25;
+
+
+    // ==================================================
+    // RUNTIME
+    // ==================================================
+
+    // Все элементы панели, которые игрок сейчас
+    // оставил в неправильном состоянии.
+    private readonly Dictionary<
+        Panel.PanelElementID,
+        WrongElementState
+    > activeErrors = new();
+
+
+    // Последнее известное корректное состояние
+    // каждого элемента.
+    private readonly Dictionary<
+        Panel.PanelElementID,
+        int
+    > lastCorrectValues = new();
+
+
+    // Нужна защита от нескольких одинаковых
+    // событий за один кадр.
+    private int lastProcessedFrame = -1;
+
+    private Panel.PanelElementID lastProcessedElement;
+
+
+    // ==================================================
+    // ERROR DATA
+    // ==================================================
+
+    private class WrongElementState
+    {
+        // Значение, которое было ДО ошибки.
+        public int PreviousValue;
+
+        // Сколько временной стабильности
+        // потеряла АЭС из-за этой ошибки.
+        public int TemporaryDamage;
+
+
+        public WrongElementState(
+            int previousValue,
+            int temporaryDamage)
+        {
+            PreviousValue = previousValue;
+            TemporaryDamage = temporaryDamage;
+        }
+    }
 
 
     // ==================================================
@@ -92,45 +164,100 @@ public class WrongPanelActionHandler : MonoBehaviour
         Panel.PanelElementID elementID,
         int value)
     {
-        // --------------------------------------------------
-        // ЕЖЕДНЕВНОЕ ЗАДАНИЕ
-        // --------------------------------------------------
+        if (gameState == null)
+            return;
 
-        if (taskManager != null)
+
+        // Защита от случайного двойного события
+        // одного элемента в одном кадре.
+        if (lastProcessedFrame == Time.frameCount &&
+            lastProcessedElement == elementID)
         {
-            if (taskManager.IsActionRequiredByTask(
-                    elementID,
-                    value))
-            {
-                // Эта кнопка сейчас нужна заданию.
-                // Штрафа нет.
-                return;
-            }
+            return;
         }
 
 
-        // --------------------------------------------------
-        // УСТРАНЕНИЕ АВАРИИ
-        // --------------------------------------------------
+        lastProcessedFrame = Time.frameCount;
+        lastProcessedElement = elementID;
 
-        if (emergency != null)
+
+        // ==================================================
+        // ЭТОТ ЭЛЕМЕНТ УЖЕ БЫЛ ОШИБОЧНЫМ
+        // ==================================================
+
+        if (activeErrors.TryGetValue(
+                elementID,
+                out WrongElementState error))
         {
-            if (emergency.IsActionRequiredByEmergency(
-                    elementID,
-                    value))
+            // Игрок вернул элемент именно
+            // в состояние ДО своей ошибки.
+            if (value == error.PreviousValue)
             {
-                // Эта кнопка сейчас нужна для аварии.
-                // Штрафа нет.
+                FixError(
+                    elementID,
+                    error
+                );
+
                 return;
             }
+
+
+            // Игрок продолжает менять уже ошибочный
+            // элемент, но пока не вернул правильное
+            // исходное состояние.
+            //
+            // Новую ошибку не создаём.
+            Debug.LogWarning(
+                $"[ERROR STILL ACTIVE] " +
+                $"{elementID} = {value}. " +
+                $"Return to {error.PreviousValue}"
+            );
+
+            return;
         }
 
 
-        // --------------------------------------------------
-        // НЕПРАВИЛЬНОЕ ДЕЙСТВИЕ
-        // --------------------------------------------------
+        // ==================================================
+        // ПРАВИЛЬНОЕ ДЕЙСТВИЕ ЕЖЕДНЕВНОГО ЗАДАНИЯ
+        // ==================================================
 
-        ApplyWrongActionPenalty(
+        if (taskManager != null &&
+            taskManager.IsActionRequiredByTask(
+                elementID,
+                value))
+        {
+            RememberCorrectValue(
+                elementID,
+                value
+            );
+
+            return;
+        }
+
+
+        // ==================================================
+        // ПРАВИЛЬНЫЙ ШАГ АВАРИИ
+        // ==================================================
+
+        if (emergency != null &&
+            emergency.IsActionRequiredByEmergency(
+                elementID,
+                value))
+        {
+            RememberCorrectValue(
+                elementID,
+                value
+            );
+
+            return;
+        }
+
+
+        // ==================================================
+        // НОВАЯ ОШИБКА
+        // ==================================================
+
+        RegisterNewError(
             elementID,
             value
         );
@@ -138,123 +265,265 @@ public class WrongPanelActionHandler : MonoBehaviour
 
 
     // ==================================================
-    // PENALTY
+    // NEW ERROR
     // ==================================================
 
-    private void ApplyWrongActionPenalty(
+    private void RegisterNewError(
         Panel.PanelElementID elementID,
-        int value)
+        int wrongValue)
     {
-        if (gameState == null)
-            return;
-
-
-        // Защита от нескольких PanelEvents
-        // от одного клика.
-        if (lastPenaltyFrame == Time.frameCount)
-            return;
-
-
-        lastPenaltyFrame = Time.frameCount;
-
-
-        // --------------------------------------------------
-        // SOS
-        // --------------------------------------------------
-
-        if (elementID == Panel.PanelElementID.EmergencyShutdown)
-        {
-            // -50 стабильности станции.
-            gameState.ChangeStationStability(
-                -dangerousStabilityPenalty
-            );
-
-
-            // -50 надежности панели.
-            gameState.ChangePanelReliability(
-                -sosReliabilityPenalty
-            );
-
-
-            Debug.LogWarning(
-                $"[SOS WRONG ACTION] " +
-                $"Station Stability -{dangerousStabilityPenalty}, " +
-                $"Panel Reliability -{sosReliabilityPenalty}"
-            );
-
-
-            return;
-        }
-
-
-        // --------------------------------------------------
-        // ОПАСНЫЕ КНОПКИ
-        // --------------------------------------------------
-
-        if (IsDangerousButton(elementID))
-        {
-            gameState.ChangeStationStability(
-                -dangerousStabilityPenalty
-            );
-
-
-            Debug.LogWarning(
-                $"[DANGEROUS WRONG ACTION] " +
-                $"{elementID} = {value}. " +
-                $"Station Stability -{dangerousStabilityPenalty}"
-            );
-
-
-            return;
-        }
-
-
-        // --------------------------------------------------
-        // ОБЫЧНАЯ НЕПРАВИЛЬНАЯ КНОПКА
-        // --------------------------------------------------
-
-        int minPenalty = Mathf.Min(
-            minStabilityPenalty,
-            maxStabilityPenalty
-        );
-
-        int maxPenalty = Mathf.Max(
-            minStabilityPenalty,
-            maxStabilityPenalty
+        // Получаем состояние элемента,
+        // которое было до неправильного действия.
+        int previousValue = GetPreviousValue(
+            elementID,
+            wrongValue
         );
 
 
-        int randomPenalty = Random.Range(
-            minPenalty,
-            maxPenalty + 1
+        // Случайный временный урон станции.
+        int temporaryDamage = Random.Range(
+            Mathf.Min(
+                minTemporaryDamage,
+                maxTemporaryDamage
+            ),
+            Mathf.Max(
+                minTemporaryDamage,
+                maxTemporaryDamage
+            ) + 1
         );
 
 
+        WrongElementState newError =
+            new WrongElementState(
+                previousValue,
+                temporaryDamage
+            );
+
+
+        activeErrors.Add(
+            elementID,
+            newError
+        );
+
+
+        // Пока это обычная ошибка,
+        // временно снижаем стабильность АЭС.
         gameState.ChangeStationStability(
-            -randomPenalty
+            -temporaryDamage
         );
 
 
         Debug.LogWarning(
-            $"[WRONG PANEL ACTION] " +
-            $"{elementID} = {value}. " +
-            $"Station Stability -{randomPenalty}"
+            $"[NEW PANEL ERROR] " +
+            $"{elementID}: " +
+            $"{previousValue} -> {wrongValue}. " +
+            $"Station -{temporaryDamage}. " +
+            $"Active errors: {activeErrors.Count}"
+        );
+
+
+        // ==================================================
+        // 3 ОШИБКИ = АВАРИЯ
+        // ==================================================
+
+        if (activeErrors.Count >= errorsForAccident)
+        {
+            TriggerAccident();
+        }
+    }
+
+
+    // ==================================================
+    // FIX ERROR
+    // ==================================================
+
+    private void FixError(
+        Panel.PanelElementID elementID,
+        WrongElementState error)
+    {
+        // ----------------------------------------------
+        // Возвращаем временно потерянную
+        // стабильность станции.
+        // ----------------------------------------------
+
+        gameState.ChangeStationStability(
+            error.TemporaryDamage
+        );
+
+
+        // ----------------------------------------------
+        // Но панель пострадала.
+        // ----------------------------------------------
+
+        int panelDamage = Random.Range(
+            Mathf.Min(
+                minPanelDamage,
+                maxPanelDamage
+            ),
+            Mathf.Max(
+                minPanelDamage,
+                maxPanelDamage
+            ) + 1
+        );
+
+
+        gameState.ChangePanelReliability(
+            -panelDamage
+        );
+
+
+        // Ошибка устранена.
+        activeErrors.Remove(
+            elementID
+        );
+
+
+        // Это значение снова считается
+        // нормальным состоянием элемента.
+        RememberCorrectValue(
+            elementID,
+            error.PreviousValue
+        );
+
+
+        Debug.Log(
+            $"[PANEL ERROR FIXED] " +
+            $"{elementID}. " +
+            $"Station +{error.TemporaryDamage}. " +
+            $"Panel -{panelDamage}. " +
+            $"Active errors: {activeErrors.Count}"
         );
     }
 
 
     // ==================================================
-    // DANGEROUS BUTTON CHECK
+    // ACCIDENT
     // ==================================================
 
-    private bool IsDangerousButton(
-        Panel.PanelElementID elementID)
+    private void TriggerAccident()
     {
-        return
-            elementID == Panel.PanelElementID.ReactorSectionB24 ||
-            elementID == Panel.PanelElementID.EmergencyShutdown ||
-            elementID == Panel.PanelElementID.Reset ||
-            elementID == Panel.PanelElementID.WaterSupply;
+        Debug.LogError(
+            $"[ACCIDENT] " +
+            $"{activeErrors.Count} active panel errors!"
+        );
+
+
+        // --------------------------------------------------
+        // Сначала отменяем временный урон.
+        //
+        // Например:
+        //
+        // 100
+        // ошибка 1 -> 90
+        // ошибка 2 -> 78
+        // ошибка 3 -> 70
+        //
+        // Возвращаем временные потери,
+        // чтобы потом применить единый
+        // постоянный штраф аварии -25.
+        // --------------------------------------------------
+
+        int temporaryDamageToRestore = 0;
+
+
+        foreach (
+            KeyValuePair<
+                Panel.PanelElementID,
+                WrongElementState
+            > pair
+            in activeErrors)
+        {
+            temporaryDamageToRestore +=
+                pair.Value.TemporaryDamage;
+        }
+
+
+        if (temporaryDamageToRestore > 0)
+        {
+            gameState.ChangeStationStability(
+                temporaryDamageToRestore
+            );
+        }
+
+
+        // --------------------------------------------------
+        // Постоянный штраф аварии.
+        // --------------------------------------------------
+
+        gameState.ChangeStationStability(
+            -accidentDamage
+        );
+
+
+        gameState.ChangePanelReliability(
+            -accidentDamage
+        );
+
+
+        // Старые ошибки больше нельзя
+        // "откатить" и вернуть эти 25%.
+        activeErrors.Clear();
+
+
+        Debug.LogError(
+            $"[ACCIDENT CREATED] " +
+            $"Station -{accidentDamage}. " +
+            $"Panel -{accidentDamage}."
+        );
+    }
+
+
+    // ==================================================
+    // PREVIOUS VALUES
+    // ==================================================
+
+    private int GetPreviousValue(
+        Panel.PanelElementID elementID,
+        int currentWrongValue)
+    {
+        // Если мы уже знаем последнее нормальное
+        // состояние этого элемента — используем его.
+        if (lastCorrectValues.TryGetValue(
+                elementID,
+                out int previousValue))
+        {
+            return previousValue;
+        }
+
+
+        // --------------------------------------------------
+        // FALLBACK
+        // --------------------------------------------------
+        //
+        // Если элемент ещё ни разу не участвовал
+        // в правильном действии, система пока
+        // не знает его стартового состояния.
+        //
+        // Для двухпозиционных элементов предполагаем
+        // противоположное состояние.
+        //
+        // 1 -> раньше было 0
+        // 0 -> раньше было 1
+
+        if (currentWrongValue == 0)
+            return 1;
+
+        if (currentWrongValue == 1)
+            return 0;
+
+
+        // Для многопозиционных элементов без
+        // сохранённого состояния безопасно считаем
+        // стартовым 0.
+        return 0;
+    }
+
+
+    private void RememberCorrectValue(
+        Panel.PanelElementID elementID,
+        int value)
+    {
+        lastCorrectValues[elementID] = value;
     }
 
 
