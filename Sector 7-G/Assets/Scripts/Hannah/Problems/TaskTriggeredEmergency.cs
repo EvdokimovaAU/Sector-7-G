@@ -17,15 +17,11 @@ public class TaskTriggeredEmergency : MonoBehaviour
 
 
     // ==================================================
-    // TRIGGER SETTINGS
+    // TRIGGER
     // ==================================================
 
     [Header("Trigger")]
 
-    [Tooltip(
-        "После какого количества выполненных " +
-        "ежедневных заданий запускается авария."
-    )]
     [Min(1)]
     [SerializeField]
     private int triggerAfterCompletedTasks = 2;
@@ -37,17 +33,9 @@ public class TaskTriggeredEmergency : MonoBehaviour
 
     [Header("Stability")]
 
-    [Tooltip(
-        "Изменение стабильности при начале аварии. " +
-        "Для падения укажи отрицательное значение."
-    )]
     [SerializeField]
     private int stabilityChangeOnStart = -35;
 
-
-    [Tooltip(
-        "Изменение стабильности после устранения аварии."
-    )]
     [SerializeField]
     private int stabilityChangeOnResolved = 35;
 
@@ -58,16 +46,12 @@ public class TaskTriggeredEmergency : MonoBehaviour
 
     [Header("Emergency Solution")]
 
-    [Tooltip(
-        "Последовательность действий, которую игрок " +
-        "должен выполнить на панели."
-    )]
     [SerializeField]
     private List<EmergencyStep> solution = new();
 
 
     // ==================================================
-    // CURRENT STATE
+    // STATE
     // ==================================================
 
     [Header("Runtime State")]
@@ -134,19 +118,13 @@ public class TaskTriggeredEmergency : MonoBehaviour
     private void HandleTaskCompleted(
         int completedTaskCount)
     {
-        // Уже запущенная авария повторно
-        // не запускается.
         if (isActive)
             return;
 
-
-        // Уже устранённая авария также
-        // не запускается повторно.
         if (isResolved)
             return;
 
 
-        // Ждём нужное количество заданий.
         if (completedTaskCount <
             triggerAfterCompletedTasks)
         {
@@ -159,7 +137,7 @@ public class TaskTriggeredEmergency : MonoBehaviour
 
 
     // ==================================================
-    // START EMERGENCY
+    // START
     // ==================================================
 
     private void StartEmergency()
@@ -176,16 +154,8 @@ public class TaskTriggeredEmergency : MonoBehaviour
 
 
         isActive = true;
-
         currentStep = 0;
 
-
-        // Например:
-        //
-        // стабильность = 100
-        // stabilityChangeOnStart = -35
-        //
-        // результат = 65
 
         gameState.ChangeStationStability(
             stabilityChangeOnStart
@@ -204,22 +174,61 @@ public class TaskTriggeredEmergency : MonoBehaviour
         {
             Debug.LogWarning(
                 "[TaskTriggeredEmergency] " +
-                "Emergency started, but Solution is empty."
+                "Emergency Solution is empty."
             );
         }
     }
 
 
     // ==================================================
-    // PANEL INPUT
+    // CHECK EMERGENCY ACTION
+    // ==================================================
+
+    /// <summary>
+    /// Проверяет, является ли действие текущим
+    /// необходимым шагом устранения аварии.
+    /// </summary>
+    public bool IsActionRequiredByEmergency(
+        Panel.PanelElementID elementID,
+        int value)
+    {
+        if (!isActive)
+            return false;
+
+
+        if (solution == null ||
+            solution.Count == 0)
+        {
+            return false;
+        }
+
+
+        if (currentStep < 0 ||
+            currentStep >= solution.Count)
+        {
+            return false;
+        }
+
+
+        EmergencyStep requiredStep =
+            solution[currentStep];
+
+
+        return requiredStep.Matches(
+            elementID,
+            value
+        );
+    }
+
+
+    // ==================================================
+    // PANEL
     // ==================================================
 
     private void HandlePanelElementChanged(
         Panel.PanelElementID elementID,
         int value)
     {
-        // Пока аварии нет, действия игрока
-        // нас не интересуют.
         if (!isActive)
             return;
 
@@ -242,10 +251,6 @@ public class TaskTriggeredEmergency : MonoBehaviour
             solution[currentStep];
 
 
-        // ----------------------------------------------
-        // CORRECT ACTION
-        // ----------------------------------------------
-
         if (requiredStep.Matches(
                 elementID,
                 value))
@@ -259,25 +264,18 @@ public class TaskTriggeredEmergency : MonoBehaviour
             );
 
 
-            // Все необходимые действия выполнены.
             if (currentStep >= solution.Count)
             {
                 ResolveEmergency();
             }
-
-
-            return;
         }
-
-
-        // ----------------------------------------------
-        // WRONG / UNRELATED ACTION
-        // ----------------------------------------------
-
-        Debug.Log(
-            "[EMERGENCY] Action does not match " +
-            $"current step: {elementID} = {value}"
-        );
+        else
+        {
+            Debug.Log(
+                "[EMERGENCY] Wrong action: " +
+                $"{elementID} = {value}"
+            );
+        }
     }
 
 
@@ -292,7 +290,6 @@ public class TaskTriggeredEmergency : MonoBehaviour
 
 
         isActive = false;
-
         isResolved = true;
 
 

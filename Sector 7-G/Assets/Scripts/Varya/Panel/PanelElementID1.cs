@@ -17,6 +17,7 @@
     Temperature,
     Pressure,
     Power,
+    LoadNumber,
 
     // ТУРБИНЫ
     // 0 = OFF, 1 = ON

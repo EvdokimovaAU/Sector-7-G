@@ -6,25 +6,33 @@ namespace Panel
     {
         [Header("Rotary Switch")]
 
-        // Текущее положение: 0, 1, 2 или 3.
-        [SerializeField] private int currentState = 0;
+        // Значение, которое игрок сейчас выбирает.
+        [SerializeField]
+        private int currentState = 0;
 
-        // Количество положений переключателя.
-        [SerializeField] private int stateCount = 4;
+        // Значение, которое реально установлено.
+        [SerializeField]
+        private int appliedState = 0;
+
+        // Количество положений.
+        [Min(1)]
+        [SerializeField]
+        private int stateCount = 4;
 
 
         [Header("Rotation")]
 
-        // Объект, который физически вращается.
-        // Обычно это SpriteRenderer самой ручки.
-        [SerializeField] private Transform rotatingPart;
+        // Что именно вращаем.
+        [SerializeField]
+        private Transform rotatingPart;
 
-        // Угол первого положения.
-        [SerializeField] private float startAngle = 135f;
+        // Угол положения 0.
+        [SerializeField]
+        private float startAngle = 135f;
 
-        // На сколько градусов поворачиваемся
-        // при переходе на следующее положение.
-        [SerializeField] private float angleStep = 90f;
+        // Шаг между положениями.
+        [SerializeField]
+        private float angleStep = 90f;
 
 
         private void Start()
@@ -34,19 +42,22 @@ namespace Panel
                 rotatingPart = transform;
             }
 
+            currentState = appliedState;
+
             RefreshVisual();
         }
 
 
+        // Возвращаем именно установленное значение.
         public override int GetValue()
         {
-            return currentState;
+            return appliedState;
         }
 
 
+        // При клике только выбираем положение.
         public override void Interact()
         {
-            // 0 -> 1 -> 2 -> 3 -> 0
             currentState++;
 
             if (currentState >= stateCount)
@@ -56,15 +67,25 @@ namespace Panel
 
             RefreshVisual();
 
-            // Отправляем новое положение
-            // в общую систему панели.
+            // Здесь PanelEvents НЕ вызываем.
+            Debug.Log(
+                $"[ROTARY SELECT] {elementID} = {currentState}"
+            );
+        }
+
+
+        // Вызывается общей кнопкой "УСТАНОВИТЬ".
+        public void ApplyValue()
+        {
+            appliedState = currentState;
+
             PanelEvents.ElementChanged(
                 elementID,
-                currentState
+                appliedState
             );
 
             Debug.Log(
-                $"[ROTARY] {elementID} = {currentState}"
+                $"[ROTARY APPLY] {elementID} = {appliedState}"
             );
         }
 
@@ -78,7 +99,11 @@ namespace Panel
                 startAngle - currentState * angleStep;
 
             rotatingPart.localRotation =
-                Quaternion.Euler(0f, 0f, angle);
+                Quaternion.Euler(
+                    0f,
+                    0f,
+                    angle
+                );
         }
     }
 }

@@ -13,11 +13,8 @@ public class TaskManager : MonoBehaviour
     // EVENTS
     // --------------------------------------------------
 
-    // ¬ызываетс€ при изменении списка заданий.
     public event Action OnTasksChanged;
 
-    // ¬ызываетс€ после выполнени€ одного задани€.
-    // ѕередает количество выполненных заданий.
     public event Action<int> OnTaskCompleted;
 
 
@@ -28,7 +25,6 @@ public class TaskManager : MonoBehaviour
     public IReadOnlyList<DailyTask> CurrentTasks => currentTasks;
 
 
-    //  оличество уже выполненных заданий.
     public int CompletedTaskCount
     {
         get
@@ -86,19 +82,9 @@ public class TaskManager : MonoBehaviour
             if (task == null)
                 continue;
 
-
-            // ”же выполненные задани€ пропускаем.
             if (task.IsCompleted)
                 continue;
 
-
-            // DailyTask сам провер€ет:
-            // 1. тот ли элемент панели;
-            // 2. правильное ли значение;
-            // 3. не было ли задание выполнено раньше.
-            //
-            // ≈сли задание выполнилось именно сейчас,
-            // Check вернет true.
 
             bool taskCompletedNow =
                 task.Check(elementID, value);
@@ -114,29 +100,60 @@ public class TaskManager : MonoBehaviour
             );
 
 
-            // ќбновл€ем UI списка заданий.
             OnTasksChanged?.Invoke();
 
 
-            // —ообщаем другим системам,
-            // сколько заданий уже выполнено.
-            //
-            // Ќа это событие будет подписана
-            // наша система аварий.
             OnTaskCompleted?.Invoke(
                 CompletedTaskCount
             );
 
 
-            // ќдно действие панели выполн€ет
-            // максимум одно ежедневное задание.
             break;
         }
     }
 
 
     // --------------------------------------------------
-    // PUBLIC METHODS
+    // CHECK ACTION
+    // --------------------------------------------------
+
+    /// <summary>
+    /// ѕровер€ет, €вл€етс€ ли действие допустимым
+    /// дл€ какого-либо невыполненного ежедневного задани€.
+    ///
+    /// —амо задание этот метод Ќ≈ выполн€ет.
+    /// </summary>
+    public bool IsActionRequiredByTask(
+        Panel.PanelElementID elementID,
+        int value)
+    {
+        if (currentTasks == null)
+            return false;
+
+
+        foreach (DailyTask task in currentTasks)
+        {
+            if (task == null)
+                continue;
+
+            if (task.IsCompleted)
+                continue;
+
+
+            if (task.TargetElement == elementID &&
+                task.RequiredValue == value)
+            {
+                return true;
+            }
+        }
+
+
+        return false;
+    }
+
+
+    // --------------------------------------------------
+    // ALL TASKS COMPLETED
     // --------------------------------------------------
 
     public bool AreAllTasksCompleted()
