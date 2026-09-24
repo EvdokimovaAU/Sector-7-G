@@ -1,93 +1,81 @@
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
+using Station;
 
 public class TaskTriggeredEmergency : MonoBehaviour
 {
-    // ==================================================
-    // REFERENCES
-    // ==================================================
-
     [Header("References")]
-
-    [SerializeField]
-    private TaskManager taskManager;
-
-    [SerializeField]
-    private GameState gameState;
+    [SerializeField] private TaskManager taskManager;
+    [SerializeField] private GameState gameState;
+    [SerializeField] private StationMonitor stationMonitor;
+    [SerializeField] private PhoneController phoneController;
 
 
-    // ==================================================
-    // TRIGGER
-    // ==================================================
+    [Header("Level 1 Emergency")]
 
-    [Header("Trigger")]
-
+    // После какого выполненного ежедневного задания
+    // должна начаться авария.
     [Min(1)]
+    [SerializeField] private int triggerAfterCompletedTasks = 1;
+
+    // Задержка после выполнения задания.
+    [Min(0f)]
+    [SerializeField] private float emergencyDelay = 3f;
+
+    // Цех, в котором произойдет авария.
     [SerializeField]
-    private int triggerAfterCompletedTasks = 2;
+    private StationSector emergencySector =
+        StationSector.ReactorShop;
+
+    // Насколько падает стабильность АЭС.
+    [SerializeField] private int stabilityLoss = 25;
 
 
-    // ==================================================
-    // STABILITY
-    // ==================================================
+    [Header("Phone Responses")]
 
-    [Header("Stability")]
-
+    [TextArea]
     [SerializeField]
-    private int stabilityChangeOnStart = -35;
+    private string confirmedEmergencyText =
+        "Тревога подтверждена. В цехе действительно аварийная ситуация.";
 
+    [TextArea]
     [SerializeField]
-    private int stabilityChangeOnResolved = 35;
+    private string wrongSectorText =
+        "В этом цехе всё в норме. Тревога не подтверждается.";
 
-
-    // ==================================================
-    // SOLUTION
-    // ==================================================
-
-    [Header("Emergency Solution")]
-
-    [SerializeField]
-    private List<EmergencyStep> solution = new();
-
-
-    // ==================================================
-    // STATE
-    // ==================================================
 
     [Header("Runtime State")]
 
-    [SerializeField]
-    private bool isActive;
-
-    [SerializeField]
-    private bool isResolved;
-
-    [SerializeField]
-    private int currentStep;
+    [SerializeField] private bool waitingForEmergency;
+    [SerializeField] private bool isActive;
+    [SerializeField] private bool isConfirmed;
+    [SerializeField] private bool hasTriggered;
 
 
     public bool IsActive => isActive;
+    public bool IsConfirmed => isConfirmed;
+    public StationSector EmergencySector => emergencySector;
 
-    public bool IsResolved => isResolved;
-
-    public int CurrentStep => currentStep;
-
-
-    // ==================================================
-    // UNITY
-    // ==================================================
 
     private void OnEnable()
     {
         if (taskManager != null)
         {
-            taskManager.OnTaskCompleted +=
-                HandleTaskCompleted;
+            taskManager.OnTaskCompleted += HandleTaskCompleted;
         }
 
+        StationEvents.SectorCalled += HandleSectorCalled;
+    }
 
-        Panel.PanelEvents.OnElementChanged +=
-            HandlePanelElementChanged;
+
+    private void OnDisable()
+    {
+        if (taskManager != null)
+        {
+            taskManager.OnTaskCompleted -= HandleTaskCompleted;
+        }
+
+        StationEvents.SectorCalled -= HandleSectorCalled;
     }
 
 
@@ -97,214 +85,174 @@ public class TaskTriggeredEmergency : MonoBehaviour
     }
 
 
-    private void OnDisable()
-    {
-        if (taskManager != null)
-        {
-            taskManager.OnTaskCompleted -=
-                HandleTaskCompleted;
-        }
-
-
-        Panel.PanelEvents.OnElementChanged -=
-            HandlePanelElementChanged;
-    }
-
-
     // ==================================================
-    // TASK TRIGGER
+    // DAILY TASK
     // ==================================================
 
-    private void HandleTaskCompleted(
-        int completedTaskCount)
+    private void HandleTaskCompleted(int completedTaskCount)
     {
+        // Авария первого уровня должна произойти
+        // только один раз.
+        if (hasTriggered)
+            return;
+
+        if (waitingForEmergency)
+            return;
+
         if (isActive)
             return;
 
-        if (isResolved)
+        if (completedTaskCount < triggerAfterCompletedTasks)
             return;
 
 
-        if (completedTaskCount <
-            triggerAfterCompletedTasks)
-        {
-            return;
-        }
+        StartCoroutine(EmergencyDelayRoutine());
+    }
 
+
+    private IEnumerator EmergencyDelayRoutine()
+    {
+        waitingForEmergency = true;
+
+        Debug.Log(
+            $"[EMERGENCY] Авария начнётся через {emergencyDelay} сек."
+        );
+
+        yield return new WaitForSeconds(emergencyDelay);
+
+        waitingForEmergency = false;
 
         StartEmergency();
     }
 
 
     // ==================================================
-    // START
+    // START EMERGENCY
     // ==================================================
 
     private void StartEmergency()
     {
-        if (gameState == null)
-        {
-            Debug.LogError(
-                "[TaskTriggeredEmergency] " +
-                "GameState is not assigned."
-            );
-
+        if (hasTriggered)
             return;
+
+
+        hasTriggered = true;
+        isActive = true;
+        isConfirmed = false;
+
+
+        // Подсвечиваем аварийный цех.
+        if (stationMonitor != null)
+        {
+            stationMonitor.SetSectorProblem(
+                emergencySector,
+                true
+            );
         }
 
 
-        isActive = true;
-        currentStep = 0;
-
-
-        gameState.ChangeStationStability(
-            stabilityChangeOnStart
-        );
+        // Снижаем стабильность АЭС.
+        if (gameState != null)
+        {
+            gameState.ChangeStationStability(
+                -Mathf.Abs(stabilityLoss)
+            );
+        }
 
 
         Debug.Log(
-            "[EMERGENCY STARTED] " +
-            $"Stability changed by " +
-            $"{stabilityChangeOnStart}."
-        );
-
-
-        if (solution == null ||
-            solution.Count == 0)
-        {
-            Debug.LogWarning(
-                "[TaskTriggeredEmergency] " +
-                "Emergency Solution is empty."
-            );
-        }
-    }
-
-
-    // ==================================================
-    // CHECK EMERGENCY ACTION
-    // ==================================================
-
-    /// <summary>
-    /// Проверяет, является ли действие текущим
-    /// необходимым шагом устранения аварии.
-    /// </summary>
-    public bool IsActionRequiredByEmergency(
-        Panel.PanelElementID elementID,
-        int value)
-    {
-        if (!isActive)
-            return false;
-
-
-        if (solution == null ||
-            solution.Count == 0)
-        {
-            return false;
-        }
-
-
-        if (currentStep < 0 ||
-            currentStep >= solution.Count)
-        {
-            return false;
-        }
-
-
-        EmergencyStep requiredStep =
-            solution[currentStep];
-
-
-        return requiredStep.Matches(
-            elementID,
-            value
+            $"[EMERGENCY STARTED] Цех: {emergencySector}. " +
+            $"Стабильность АЭС снижена на {Mathf.Abs(stabilityLoss)}%."
         );
     }
 
 
     // ==================================================
-    // PANEL
+    // PHONE
     // ==================================================
 
-    private void HandlePanelElementChanged(
-        Panel.PanelElementID elementID,
-        int value)
+    private void HandleSectorCalled(StationSector calledSector)
     {
+        // Если авария ещё не началась,
+        // звонок к ней отношения не имеет.
         if (!isActive)
             return;
 
 
-        if (solution == null ||
-            solution.Count == 0)
+        // Игрок позвонил именно в аварийный цех.
+        if (calledSector == emergencySector)
         {
+            ConfirmEmergency();
             return;
         }
 
 
-        if (currentStep < 0 ||
-            currentStep >= solution.Count)
+        // Игрок позвонил не туда.
+        if (phoneController != null)
         {
+            phoneController.ShowResponse(
+                wrongSectorText
+            );
+        }
+
+
+        Debug.Log(
+            $"[EMERGENCY] Игрок позвонил в {calledSector}, " +
+            $"но авария находится в {emergencySector}."
+        );
+    }
+
+
+    private void ConfirmEmergency()
+    {
+        if (isConfirmed)
             return;
-        }
 
 
-        EmergencyStep requiredStep =
-            solution[currentStep];
+        isConfirmed = true;
 
 
-        if (requiredStep.Matches(
-                elementID,
-                value))
+        if (phoneController != null)
         {
-            currentStep++;
-
-
-            Debug.Log(
-                "[EMERGENCY] Correct action. " +
-                $"Step {currentStep}/{solution.Count}"
-            );
-
-
-            if (currentStep >= solution.Count)
-            {
-                ResolveEmergency();
-            }
-        }
-        else
-        {
-            Debug.Log(
-                "[EMERGENCY] Wrong action: " +
-                $"{elementID} = {value}"
+            phoneController.ShowResponse(
+                confirmedEmergencyText
             );
         }
+
+
+        Debug.Log(
+            $"[EMERGENCY CONFIRMED] " +
+            $"Авария в {emergencySector} подтверждена по телефону."
+        );
     }
 
 
     // ==================================================
-    // RESOLVE
+    // FUTURE RESOLVE
     // ==================================================
 
-    private void ResolveEmergency()
+    // Этот метод потом можно будет вызвать,
+    // когда игрок действительно устранит аварию.
+    public void ResolveEmergency()
     {
         if (!isActive)
             return;
 
 
         isActive = false;
-        isResolved = true;
 
 
-        if (gameState != null)
+        if (stationMonitor != null)
         {
-            gameState.ChangeStationStability(
-                stabilityChangeOnResolved
+            stationMonitor.SetSectorProblem(
+                emergencySector,
+                false
             );
         }
 
 
         Debug.Log(
-            "[EMERGENCY RESOLVED] " +
-            $"Stability changed by " +
-            $"{stabilityChangeOnResolved}."
+            $"[EMERGENCY RESOLVED] Авария в {emergencySector} устранена."
         );
     }
 
@@ -318,17 +266,28 @@ public class TaskTriggeredEmergency : MonoBehaviour
         if (taskManager == null)
         {
             Debug.LogError(
-                "[TaskTriggeredEmergency] " +
-                "TaskManager is not assigned."
+                "[TaskTriggeredEmergency] TaskManager не назначен."
             );
         }
-
 
         if (gameState == null)
         {
             Debug.LogError(
-                "[TaskTriggeredEmergency] " +
-                "GameState is not assigned."
+                "[TaskTriggeredEmergency] GameState не назначен."
+            );
+        }
+
+        if (stationMonitor == null)
+        {
+            Debug.LogError(
+                "[TaskTriggeredEmergency] StationMonitor не назначен."
+            );
+        }
+
+        if (phoneController == null)
+        {
+            Debug.LogError(
+                "[TaskTriggeredEmergency] PhoneController не назначен."
             );
         }
     }

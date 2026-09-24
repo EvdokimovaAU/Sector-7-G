@@ -56,12 +56,20 @@ namespace Station
             {
                 if (responseText != null)
                     responseText.text = "Звонок уже использован";
+
                 return;
             }
 
-            if (string.IsNullOrEmpty(_currentNumber)) return;
 
-            var entry = phoneBook.Find(e => e.phoneNumber == _currentNumber);
+            if (string.IsNullOrEmpty(_currentNumber))
+                return;
+
+
+            var entry = phoneBook.Find(
+                e => e.phoneNumber == _currentNumber
+            );
+
+
             if (entry == null)
             {
                 if (responseText != null)
@@ -69,16 +77,33 @@ namespace Station
 
                 _currentNumber = "";
                 UpdateNumberUI();
+
                 return;
             }
 
-            StationEvents.SectorCalled?.Invoke(entry.sector);
 
+            // Сначала обычный ответ.
             if (responseText != null)
+            {
                 responseText.text = GetRandomResponse();
+            }
+
+
+            // После этого сообщаем системам игры,
+            // в какой именно цех позвонил игрок.
+            //
+            // Если сейчас активна авария,
+            // TaskTriggeredEmergency сможет заменить
+            // обычный ответ на аварийный.
+            StationEvents.SectorCalled?.Invoke(
+                entry.sector
+            );
+
 
             callUsed = true;
+
             _currentNumber = "";
+
             UpdateNumberUI();
         }
 

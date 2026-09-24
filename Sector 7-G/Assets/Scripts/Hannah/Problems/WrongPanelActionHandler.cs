@@ -242,24 +242,6 @@ public class WrongPanelActionHandler : MonoBehaviour
 
 
         // ==================================================
-        // œ–¿¬»À‹Õ€… ÿ¿√ ¿¬¿–»»
-        // ==================================================
-
-        if (emergency != null &&
-            emergency.IsActionRequiredByEmergency(
-                elementID,
-                value))
-        {
-            RememberCorrectValue(
-                elementID,
-                value
-            );
-
-            return;
-        }
-
-
-        // ==================================================
         // ÕŒ¬¿ﬂ Œÿ»¡ ¿
         // ==================================================
 

@@ -30,7 +30,7 @@ namespace Station
             RefreshAll();
 
             //тут проверка
-            SetSectorProblem(StationSector.ReactorShop, true);  
+            //SetSectorProblem(StationSector.ReactorShop, true);  
         }
 
         public void SetSectorProblem(StationSector sector, bool hasProblem)
