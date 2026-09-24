@@ -12,7 +12,7 @@ namespace Panel
         Temperature, Pressure, Power,
 
         // “”–¡»Õ€
-        Turbine1, Turbine2,
+        Turbine1, Turbine2, Turbine1_Stop, Turbine2_Stop,
 
         // –≈∆»Ã –≈¿ “Œ–¿
         ReactorMode,

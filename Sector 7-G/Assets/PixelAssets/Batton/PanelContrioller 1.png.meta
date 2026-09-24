@@ -1,0 +1,689 @@
+fileFormatVersion: 2
+guid: c3884270a116ed444aef2f045400b764
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6131643858085411550
+    second: PanelContrioller 1_0
+  - first:
+      213: 5485925208376998999
+    second: PanelContrioller 1_1
+  - first:
+      213: 4939433497786269295
+    second: PanelContrioller 1_2
+  - first:
+      213: 7770342328432270057
+    second: PanelContrioller 1_3
+  - first:
+      213: -3632473461638569923
+    second: PanelContrioller 1_4
+  - first:
+      213: -6651086079239072095
+    second: PanelContrioller 1_5
+  - first:
+      213: 881495617571814438
+    second: PanelContrioller 1_6
+  - first:
+      213: -1949718183199662036
+    second: PanelContrioller 1_7
+  - first:
+      213: -2735812926200354404
+    second: PanelContrioller 1_8
+  - first:
+      213: 3025890523231136892
+    second: PanelContrioller 1_9
+  - first:
+      213: 817295602161029055
+    second: PanelContrioller 1_10
+  - first:
+      213: -5192893392217742147
+    second: PanelContrioller 1_11
+  - first:
+      213: -1178924553786336340
+    second: PanelContrioller 1_12
+  - first:
+      213: -4006316693130148990
+    second: PanelContrioller 1_13
+  - first:
+      213: 4006826562362428238
+    second: PanelContrioller 1_14
+  - first:
+      213: 7741360971755196391
+    second: PanelContrioller 1_15
+  - first:
+      213: 6701158435556225716
+    second: PanelContrioller 1_16
+  - first:
+      213: 5768647238832701237
+    second: PanelContrioller 1_17
+  - first:
+      213: -5500357733734270417
+    second: PanelContrioller 1_18
+  - first:
+      213: 7755836819458943661
+    second: PanelContrioller 1_19
+  - first:
+      213: 7247808732879855104
+    second: PanelContrioller 1_20
+  - first:
+      213: 1109604538595216900
+    second: PanelContrioller 1_21
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PanelContrioller 1_0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 59
+        width: 521
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2250d9dd56608eaa0800000000000000
+      internalID: -6131643858085411550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PanelContrioller 1_1
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 172
+        width: 27
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75cfbad49ebe12c40800000000000000
+      internalID: 5485925208376998999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PanelContrioller 1_2
+      rect:
+        serializedVersion: 2
+        x: 578
+        y: 167
+        width: 27
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6e373398946c8440800000000000000
+      internalID: 4939433497786269295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PanelContrioller 1_3
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 187
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ea136dbd2dc5db60800000000000000
+      internalID: 7770342328432270057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PanelContrioller 1_4
+      rect:
+        serializedVersion: 2
+        x: 632
+        y: 187
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d30effed1acd69dc0800000000000000
+      internalID: -3632473461638569923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PanelContrioller 1_5
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 171
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a6d86c237892b3a0800000000000000
+      internalID: -6651086079239072095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PanelContrioller 1_6
+      rect:
+        serializedVersion: 2
+        x: 632
+        y: 171
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62c7e640893bb3c00800000000000000
+      internalID: 881495617571814438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PanelContrioller 1_7
+      rect:
+        serializedVersion: 2
+        x: 547
+        y: 156
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c20a34674a531f4e0800000000000000
+      internalID: -1949718183199662036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PanelContrioller 1_8
+      rect:
+        serializedVersion: 2
+        x: 561
+        y: 156
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c99e7e973a0780ad0800000000000000
+      internalID: -2735812926200354404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PanelContrioller 1_9
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 124
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7ca966266f1ef920800000000000000
+      internalID: 3025890523231136892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PanelContrioller 1_10
+      rect:
+        serializedVersion: 2
+        x: 615
+        y: 126
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbf0c4b150e975b00800000000000000
+      internalID: 817295602161029055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PanelContrioller 1_11
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 93
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db4636019f22fe7b0800000000000000
+      internalID: -5192893392217742147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PanelContrioller 1_12
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 92
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cab54925d5e93afe0800000000000000
+      internalID: -1178924553786336340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PanelContrioller 1_13
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 66
+        width: 31
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2838248a134b668c0800000000000000
+      internalID: -4006316693130148990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PanelContrioller 1_14
+      rect:
+        serializedVersion: 2
+        x: 589
+        y: 66
+        width: 31
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4b4636878b1b9730800000000000000
+      internalID: 4006826562362428238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PanelContrioller 1_15
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 46
+        width: 31
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ef8a8fc9c6de6b60800000000000000
+      internalID: 7741360971755196391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PanelContrioller 1_16
+      rect:
+        serializedVersion: 2
+        x: 589
+        y: 46
+        width: 31
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b2f0f6c71c4ffc50800000000000000
+      internalID: 6701158435556225716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PanelContrioller 1_17
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 2
+        width: 11
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53f3921a91a5e0050800000000000000
+      internalID: 5768647238832701237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PanelContrioller 1_18
+      rect:
+        serializedVersion: 2
+        x: 564
+        y: 2
+        width: 11
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2a323788cdcaa3b0800000000000000
+      internalID: -5500357733734270417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PanelContrioller 1_19
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 2
+        width: 11
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: daaeebfbe7442ab60800000000000000
+      internalID: 7755836819458943661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PanelContrioller 1_20
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 27
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00e174b54a3659460800000000000000
+      internalID: 7247808732879855104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PanelContrioller 1_21
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 14
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40e012ce27b166f00800000000000000
+      internalID: 1109604538595216900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      PanelContrioller 1_0: -6131643858085411550
+      PanelContrioller 1_1: 5485925208376998999
+      PanelContrioller 1_10: 817295602161029055
+      PanelContrioller 1_11: -5192893392217742147
+      PanelContrioller 1_12: -1178924553786336340
+      PanelContrioller 1_13: -4006316693130148990
+      PanelContrioller 1_14: 4006826562362428238
+      PanelContrioller 1_15: 7741360971755196391
+      PanelContrioller 1_16: 6701158435556225716
+      PanelContrioller 1_17: 5768647238832701237
+      PanelContrioller 1_18: -5500357733734270417
+      PanelContrioller 1_19: 7755836819458943661
+      PanelContrioller 1_2: 4939433497786269295
+      PanelContrioller 1_20: 7247808732879855104
+      PanelContrioller 1_21: 1109604538595216900
+      PanelContrioller 1_3: 7770342328432270057
+      PanelContrioller 1_4: -3632473461638569923
+      PanelContrioller 1_5: -6651086079239072095
+      PanelContrioller 1_6: 881495617571814438
+      PanelContrioller 1_7: -1949718183199662036
+      PanelContrioller 1_8: -2735812926200354404
+      PanelContrioller 1_9: 3025890523231136892
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

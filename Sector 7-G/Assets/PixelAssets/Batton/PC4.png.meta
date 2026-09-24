@@ -1,0 +1,715 @@
+fileFormatVersion: 2
+guid: ba3c9e864c8606347a8b1c2dd0351cac
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2115823208436846878
+    second: PC4_0
+  - first:
+      213: -4714578280373234164
+    second: PC4_1
+  - first:
+      213: 205025361369420242
+    second: PC4_2
+  - first:
+      213: 3138988216745008736
+    second: PC4_3
+  - first:
+      213: -3441896603476547001
+    second: PC4_4
+  - first:
+      213: -2627274760788724119
+    second: PC4_5
+  - first:
+      213: -6581592708215239369
+    second: PC4_6
+  - first:
+      213: -6260131195699874561
+    second: PC4_7
+  - first:
+      213: 4432527229989975999
+    second: PC4_8
+  - first:
+      213: 3167293712372413764
+    second: PC4_9
+  - first:
+      213: -3660620145731349397
+    second: PC4_10
+  - first:
+      213: 5827344487915103776
+    second: PC4_11
+  - first:
+      213: 8144057090253004591
+    second: PC4_12
+  - first:
+      213: 3225991162898088958
+    second: PC4_13
+  - first:
+      213: -4866571031715627924
+    second: PC4_14
+  - first:
+      213: 9016618767610576989
+    second: PC4_15
+  - first:
+      213: 5955742826768331777
+    second: PC4_16
+  - first:
+      213: 5981634865747311593
+    second: PC4_17
+  - first:
+      213: 6435166289307112924
+    second: PC4_18
+  - first:
+      213: 5340972189775907452
+    second: PC4_19
+  - first:
+      213: 8339624276423093901
+    second: PC4_20
+  - first:
+      213: 1623136059739849036
+    second: PC4_21
+  - first:
+      213: 2192640468394909019
+    second: PC4_22
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PC4_0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 59
+        width: 521
+        height: 145
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e11d76a7ff9ec5d10800000000000000
+      internalID: 2115823208436846878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC4_1
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 167
+        width: 27
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c06d49c6804729eb0800000000000000
+      internalID: -4714578280373234164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC4_2
+      rect:
+        serializedVersion: 2
+        x: 578
+        y: 167
+        width: 27
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d1de5ada7568d200800000000000000
+      internalID: 205025361369420242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC4_3
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 187
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06e193de62def8b20800000000000000
+      internalID: 3138988216745008736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC4_4
+      rect:
+        serializedVersion: 2
+        x: 632
+        y: 187
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74a282c664deb30d0800000000000000
+      internalID: -3441896603476547001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC4_5
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 171
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 966b6d3668b0a8bd0800000000000000
+      internalID: -2627274760788724119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC4_6
+      rect:
+        serializedVersion: 2
+        x: 632
+        y: 171
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73d878a7d4c79a4a0800000000000000
+      internalID: -6581592708215239369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC4_7
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 122
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff4b7f858db8f19a0800000000000000
+      internalID: -6260131195699874561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC4_8
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 124
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb77cc8f700838d30800000000000000
+      internalID: 4432527229989975999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC4_9
+      rect:
+        serializedVersion: 2
+        x: 615
+        y: 126
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4453941b9dc74fb20800000000000000
+      internalID: 3167293712372413764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC4_10
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 93
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b645b0c4f5dd23dc0800000000000000
+      internalID: -3660620145731349397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC4_11
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 92
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 026a20aefe2eed050800000000000000
+      internalID: 5827344487915103776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC4_12
+      rect:
+        serializedVersion: 2
+        x: 615
+        y: 107
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2f180746c0850170800000000000000
+      internalID: 8144057090253004591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC4_13
+      rect:
+        serializedVersion: 2
+        x: 629
+        y: 107
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef30711eed505cc20800000000000000
+      internalID: 3225991162898088958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC4_14
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 66
+        width: 31
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6c326c4e67767cb0800000000000000
+      internalID: -4866571031715627924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC4_15
+      rect:
+        serializedVersion: 2
+        x: 589
+        y: 66
+        width: 31
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d508c8e3ff6712d70800000000000000
+      internalID: 9016618767610576989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC4_16
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 46
+        width: 31
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1047b1bcb8c07a250800000000000000
+      internalID: 5955742826768331777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC4_17
+      rect:
+        serializedVersion: 2
+        x: 589
+        y: 46
+        width: 31
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ebb5f4e739030350800000000000000
+      internalID: 5981634865747311593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC4_18
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 2
+        width: 11
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd518b825ad4e4950800000000000000
+      internalID: 6435166289307112924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC4_19
+      rect:
+        serializedVersion: 2
+        x: 564
+        y: 2
+        width: 11
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7a45dea8e1fe1a40800000000000000
+      internalID: 5340972189775907452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC4_20
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 2
+        width: 11
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8e2c6c181c4cb370800000000000000
+      internalID: 8339624276423093901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC4_21
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 27
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c41cbe685a9868610800000000000000
+      internalID: 1623136059739849036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC4_22
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 14
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5d13de83e2dd6e10800000000000000
+      internalID: 2192640468394909019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 3210fd05c993a304abc66f2e6b6d4eaf
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      PC4_0: 2115823208436846878
+      PC4_1: -4714578280373234164
+      PC4_10: -3660620145731349397
+      PC4_11: 5827344487915103776
+      PC4_12: 8144057090253004591
+      PC4_13: 3225991162898088958
+      PC4_14: -4866571031715627924
+      PC4_15: 9016618767610576989
+      PC4_16: 5955742826768331777
+      PC4_17: 5981634865747311593
+      PC4_18: 6435166289307112924
+      PC4_19: 5340972189775907452
+      PC4_2: 205025361369420242
+      PC4_20: 8339624276423093901
+      PC4_21: 1623136059739849036
+      PC4_22: 2192640468394909019
+      PC4_3: 3138988216745008736
+      PC4_4: -3441896603476547001
+      PC4_5: -2627274760788724119
+      PC4_6: -6581592708215239369
+      PC4_7: -6260131195699874561
+      PC4_8: 4432527229989975999
+      PC4_9: 3167293712372413764
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
