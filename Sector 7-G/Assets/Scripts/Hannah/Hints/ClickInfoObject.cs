@@ -5,17 +5,23 @@ public class ClickInfoObject : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameObject infoPanel;
 
-    [Header("Settings")]
-    [SerializeField] private bool closeOnSecondClick = true;
 
     private void Start()
     {
-        // При запуске окно скрыто.
         if (infoPanel != null)
+        {
             infoPanel.SetActive(false);
+        }
     }
 
+
     private void OnMouseDown()
+    {
+        OpenPanel();
+    }
+
+
+    public void OpenPanel()
     {
         if (infoPanel == null)
         {
@@ -26,22 +32,37 @@ public class ClickInfoObject : MonoBehaviour
             return;
         }
 
-        if (closeOnSecondClick)
+
+        if (UIWindowManager.Instance != null)
         {
-            // Повторный клик переключает окно.
-            infoPanel.SetActive(!infoPanel.activeSelf);
+            UIWindowManager.Instance.OpenWindow(
+                infoPanel
+            );
         }
         else
         {
-            // Окно только открывается.
+            // Запасной вариант, если менеджер
+            // случайно не добавлен на сцену.
             infoPanel.SetActive(true);
         }
     }
 
-    // Можно привязать к отдельной кнопке "Закрыть".
+
     public void ClosePanel()
     {
-        if (infoPanel != null)
+        if (infoPanel == null)
+            return;
+
+
+        if (UIWindowManager.Instance != null)
+        {
+            UIWindowManager.Instance.CloseWindow(
+                infoPanel
+            );
+        }
+        else
+        {
             infoPanel.SetActive(false);
+        }
     }
 }

@@ -220,7 +220,17 @@ public class EmergencyJournal : MonoBehaviour
         }
 
 
-        journalWindow.SetActive(true);
+        if (UIWindowManager.Instance != null)
+        {
+            UIWindowManager.Instance.OpenWindow(
+                journalWindow
+            );
+        }
+        else
+        {
+            journalWindow.SetActive(true);
+        }
+
 
         RefreshPage();
     }
@@ -232,7 +242,16 @@ public class EmergencyJournal : MonoBehaviour
             return;
 
 
-        journalWindow.SetActive(false);
+        if (UIWindowManager.Instance != null)
+        {
+            UIWindowManager.Instance.CloseWindow(
+                journalWindow
+            );
+        }
+        else
+        {
+            journalWindow.SetActive(false);
+        }
     }
 
 

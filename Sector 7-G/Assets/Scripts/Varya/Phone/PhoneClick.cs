@@ -29,10 +29,16 @@ public class PhoneClick : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("[PhoneClick] Клик по телефону");
-
-        if (phonePanel != null)
-            phonePanel.SetActive(!phonePanel.activeSelf);   
+        if (UIWindowManager.Instance != null)
+        {
+            UIWindowManager.Instance.OpenWindow(
+                phonePanel
+            );
+        }
+        else
+        {
+            phonePanel.SetActive(true);
+        }
     }
 
     private void OnCalled(StationSector sector)
