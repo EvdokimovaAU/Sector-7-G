@@ -5,253 +5,190 @@ namespace Panel
 {
     public class PanelValueControl : MonoBehaviour
     {
-        // ==================================================
-        // ELEMENT
-        // ==================================================
-
         [Header("Element")]
-        [SerializeField]
-        private PanelElementID elementID;
+        [SerializeField] private PanelElementID elementID;
 
-
-
-
-        // ==================================================
-        // VALUE
-        // ==================================================
 
         [Header("Value")]
+        [SerializeField] private int currentValue = 0;
+        [SerializeField] private int minValue = 0;
+        [SerializeField] private int maxValue = 100;
+        [SerializeField] private int step = 1;
 
-        [SerializeField]
-        private int currentValue = 0;
-
-        [SerializeField]
-        private int minValue = 0;
-
-        [SerializeField]
-        private int maxValue = 100;
-
-        [SerializeField]
-        private int step = 1;
-
-
-        // ==================================================
-        // UI
-        // ==================================================
 
         [Header("UI")]
+        [SerializeField] private TMP_Text valueText;
 
-        [SerializeField]
-        private TMP_Text valueText;
-
-
-        // ==================================================
-        // REFERENCES
-        // ==================================================
 
         [Header("References")]
-
-        [SerializeField]
-        private PanelInstabilityManager instabilityManager;
+        [SerializeField] private PanelInstabilityManager instabilityManager;
 
 
-        // ==================================================
-        // PUBLIC
-        // ==================================================
+        private int appliedValue;
+
 
         public int CurrentValue => currentValue;
-
+        public int AppliedValue => appliedValue;
         public PanelElementID ElementID => elementID;
 
-
-        // ==================================================
-        // UNITY
-        // ==================================================
 
         private void Start()
         {
             if (instabilityManager == null)
             {
                 instabilityManager =
-                    FindAnyObjectByType<
-                        PanelInstabilityManager
-                    >();
+                    FindAnyObjectByType<PanelInstabilityManager>();
             }
 
+            currentValue = Mathf.Clamp(
+                currentValue,
+                minValue,
+                maxValue
+            );
 
-            currentValue =
-                Mathf.Clamp(
-                    currentValue,
-                    minValue,
-                    maxValue
-                );
-
+            appliedValue = currentValue;
 
             UpdateValueText();
+
+            Debug.Log(
+                $"[VALUE CONTROL READY] {elementID} = {currentValue}"
+            );
         }
 
 
-        // ==================================================
-        // INCREASE
-        // ==================================================
+        // ==========================================
+        // +
+        // ==========================================
 
         public void Increase()
         {
-            // При нормальной панели:
-            //
-            // ↑ = увеличение
-            //
-            // При надежности < 60:
-            //
-            // ↑ = уменьшение
+            Debug.Log("[VALUE] Increase вызван");
+
+            int amount = step;
 
             if (AreControlsInverted())
-            {
-                Debug.LogWarning(
-                    $"[CONTROL INVERTED] " +
-                    $"{elementID}: UP -> DOWN"
-                );
+                amount = -step;
 
-
-                ChangeValue(-step);
-            }
-            else
-            {
-                ChangeValue(step);
-            }
+            ChangePreviewValue(amount);
         }
 
 
-        // ==================================================
-        // DECREASE
-        // ==================================================
+        // ==========================================
+        // -
+        // ==========================================
 
         public void Decrease()
         {
-            // При нормальной панели:
-            //
-            // ↓ = уменьшение
-            //
-            // При надежности < 60:
-            //
-            // ↓ = увеличение
+            Debug.Log("[VALUE] Decrease вызван");
+
+            int amount = -step;
 
             if (AreControlsInverted())
-            {
-                Debug.LogWarning(
-                    $"[CONTROL INVERTED] " +
-                    $"{elementID}: DOWN -> UP"
-                );
+                amount = step;
 
-
-                ChangeValue(step);
-            }
-            else
-            {
-                ChangeValue(-step);
-            }
+            ChangePreviewValue(amount);
         }
 
 
-        // ==================================================
-        // CHANGE VALUE
-        // ==================================================
+        // ==========================================
+        // ИЗМЕНЕНИЕ ПРЕДВАРИТЕЛЬНОГО ЗНАЧЕНИЯ
+        // ==========================================
 
-        private void ChangeValue(int amount)
+        private void ChangePreviewValue(int amount)
         {
-            int oldValue =
-                currentValue;
+            int oldValue = currentValue;
 
-
-            currentValue =
-                Mathf.Clamp(
-                    currentValue + amount,
-                    minValue,
-                    maxValue
-                );
-
-
-            // Обновляем цифру на панели.
-            UpdateValueText();
-
-
-            Debug.Log(
-                $"[VALUE CONTROL] " +
-                $"{elementID}: " +
-                $"{oldValue} -> {currentValue}"
+            currentValue = Mathf.Clamp(
+                currentValue + amount,
+                minValue,
+                maxValue
             );
 
+            UpdateValueText();
 
-            // Сообщаем остальной игре,
-            // какое значение установлено.
+            Debug.Log(
+                $"[VALUE CHANGED] {elementID}: " +
+                $"{oldValue} -> {currentValue}"
+            );
+        }
+
+
+        // ==========================================
+        // ПРИМЕНИТЬ
+        // ==========================================
+
+        public void Apply()
+        {
+            appliedValue = currentValue;
+
+            Debug.Log(
+                $"[VALUE APPLIED] {elementID} = {appliedValue}"
+            );
 
             PanelEvents.ElementChanged(
                 elementID,
-                currentValue
+                appliedValue
             );
         }
 
 
-        // ==================================================
-        // UI
-        // ==================================================
+        // ==========================================
+        // TEXT
+        // ==========================================
 
         private void UpdateValueText()
         {
             if (valueText == null)
             {
+                Debug.LogError(
+                    $"[{elementID}] Value Text не назначен!"
+                );
+
                 return;
             }
 
-
-            valueText.text =
-                currentValue.ToString();
+            valueText.text = currentValue.ToString();
         }
 
 
-        // ==================================================
+        // ==========================================
         // INSTABILITY
-        // ==================================================
+        // ==========================================
 
         private bool AreControlsInverted()
         {
             if (instabilityManager == null)
-            {
                 return false;
-            }
-
 
             return instabilityManager
-                .ShouldInvertValueControl(
-                    elementID
-                );
+                .ShouldInvertValueControl(elementID);
         }
 
 
-        // ==================================================
+        // ==========================================
         // SET VALUE
-        // ==================================================
+        // ==========================================
 
         public void SetValue(
             int value,
-            bool sendEvent = true)
+            bool sendEvent = true
+        )
         {
-            currentValue =
-                Mathf.Clamp(
-                    value,
-                    minValue,
-                    maxValue
-                );
+            currentValue = Mathf.Clamp(
+                value,
+                minValue,
+                maxValue
+            );
 
+            appliedValue = currentValue;
 
             UpdateValueText();
-
 
             if (sendEvent)
             {
                 PanelEvents.ElementChanged(
                     elementID,
-                    currentValue
+                    appliedValue
                 );
             }
         }

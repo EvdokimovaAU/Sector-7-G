@@ -2615,6 +2615,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 333180060}
   m_CullTransparentMesh: 1
+--- !u!1 &346404731 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3626916532809856869, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
+  m_PrefabInstance: {fileID: 6961461372400618799}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &346404732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346404731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd09e1576888a6d4e9ca7c5cef2ffdab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Panel.PanelValueControl
+  elementID: 7
+  currentValue: 68
+  minValue: 0
+  maxValue: 100
+  step: 1
+  valueText: {fileID: 1130746180}
+  instabilityManager: {fileID: 1649376414}
 --- !u!1 &377487118
 GameObject:
   m_ObjectHideFlags: 0
@@ -3786,7 +3810,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5357807577100912408, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
   m_PrefabInstance: {fileID: 6961461372400618799}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &547763467
+--- !u!114 &547763471
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3795,16 +3819,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 547763463}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd09e1576888a6d4e9ca7c5cef2ffdab, type: 3}
+  m_Script: {fileID: 11500000, guid: eee17bb0ab33bc64a80d067cf6fbdda5, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Panel.PanelValueControl
-  elementID: 7
-  currentValue: 67
-  minValue: 0
-  maxValue: 100
-  step: 1
-  valueText: {fileID: 1130746180}
-  instabilityManager: {fileID: 1649376414}
+  m_EditorClassIdentifier: Assembly-CSharp::Panel.PanelValueArrow
+  valueControl: {fileID: 346404732}
+  arrowType: 1
 --- !u!4 &552380876 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3649193561716008524, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
@@ -5279,7 +5298,6 @@ GameObject:
   m_Component:
   - component: {fileID: 741790376}
   - component: {fileID: 741790379}
-  - component: {fileID: 741790378}
   - component: {fileID: 741790377}
   m_Layer: 0
   m_Name: SavePower
@@ -5349,30 +5367,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.47, y: 0.13}
   m_EdgeRadius: 0
---- !u!114 &741790378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 741790375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1142305492d794478f6c7ed3e07de55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Panel.PanelButton
-  elementID: 9
-  isTwoState: 1
-  isOn: 0
-  targetRenderer: {fileID: 0}
-  spriteNormal: {fileID: 0}
-  spritePressed: {fileID: 0}
-  indicatorRenderer: {fileID: 0}
-  indicatorOffSprite: {fileID: 0}
-  indicatorOnSprite: {fileID: 0}
-  autoReset: 1
-  autoResetDelay: 2
-  instabilityManager: {fileID: 0}
 --- !u!212 &741790379
 SpriteRenderer:
   serializedVersion: 2
@@ -6171,7 +6165,6 @@ GameObject:
   m_Component:
   - component: {fileID: 996591825}
   - component: {fileID: 996591828}
-  - component: {fileID: 996591827}
   - component: {fileID: 996591826}
   m_Layer: 0
   m_Name: SavePressure
@@ -6241,30 +6234,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.47, y: 0.13}
   m_EdgeRadius: 0
---- !u!114 &996591827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 996591824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1142305492d794478f6c7ed3e07de55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Panel.PanelButton
-  elementID: 8
-  isTwoState: 1
-  isOn: 0
-  targetRenderer: {fileID: 0}
-  spriteNormal: {fileID: 0}
-  spritePressed: {fileID: 0}
-  indicatorRenderer: {fileID: 0}
-  indicatorOffSprite: {fileID: 0}
-  indicatorOnSprite: {fileID: 0}
-  autoReset: 1
-  autoResetDelay: 2
-  instabilityManager: {fileID: 0}
 --- !u!212 &996591828
 SpriteRenderer:
   serializedVersion: 2
@@ -6324,6 +6293,23 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1041498565 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4320289151711165522, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
+  m_PrefabInstance: {fileID: 6961461372400618799}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1041498568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1041498565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ecbe59274536ad44921d6f606bd0dd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Panel.PanelMouseInput
 --- !u!1 &1048161975
 GameObject:
   m_ObjectHideFlags: 0
@@ -6610,7 +6596,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1075493730}
   - component: {fileID: 1075493733}
-  - component: {fileID: 1075493732}
+  - component: {fileID: 1075493734}
   - component: {fileID: 1075493731}
   m_Layer: 0
   m_Name: SaveTemperature
@@ -6680,30 +6666,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.47, y: 0.13}
   m_EdgeRadius: 0
---- !u!114 &1075493732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1075493729}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1142305492d794478f6c7ed3e07de55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Panel.PanelButton
-  elementID: 7
-  isTwoState: 1
-  isOn: 0
-  targetRenderer: {fileID: 0}
-  spriteNormal: {fileID: 0}
-  spritePressed: {fileID: 0}
-  indicatorRenderer: {fileID: 0}
-  indicatorOffSprite: {fileID: 0}
-  indicatorOnSprite: {fileID: 0}
-  autoReset: 1
-  autoResetDelay: 2
-  instabilityManager: {fileID: 0}
 --- !u!212 &1075493733
 SpriteRenderer:
   serializedVersion: 2
@@ -6763,6 +6725,20 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1075493734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075493729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0118b0dd48d5d9d4c92027c4a16dbaf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Panel.PanelValueButton
+  valueControl: {fileID: 346404732}
+  action: 2
 --- !u!1 &1076938639
 GameObject:
   m_ObjectHideFlags: 0
@@ -7336,6 +7312,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1148791805}
   m_CullTransparentMesh: 1
+--- !u!1 &1161314043 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5926166729266960448, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
+  m_PrefabInstance: {fileID: 6961461372400618799}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1161314048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1161314043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eee17bb0ab33bc64a80d067cf6fbdda5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Panel.PanelValueArrow
+  valueControl: {fileID: 346404732}
+  arrowType: 0
 --- !u!1 &1213066787
 GameObject:
   m_ObjectHideFlags: 0
@@ -11388,7 +11383,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1863884391}
   - component: {fileID: 1863884394}
-  - component: {fileID: 1863884393}
   - component: {fileID: 1863884392}
   m_Layer: 0
   m_Name: SaveMode
@@ -11458,30 +11452,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.47, y: 0.13}
   m_EdgeRadius: 0
---- !u!114 &1863884393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1863884390}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1142305492d794478f6c7ed3e07de55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Panel.PanelButton
-  elementID: 14
-  isTwoState: 1
-  isOn: 0
-  targetRenderer: {fileID: 0}
-  spriteNormal: {fileID: 0}
-  spritePressed: {fileID: 0}
-  indicatorRenderer: {fileID: 0}
-  indicatorOffSprite: {fileID: 0}
-  indicatorOnSprite: {fileID: 0}
-  autoReset: 1
-  autoResetDelay: 2
-  instabilityManager: {fileID: 0}
 --- !u!212 &1863884394
 SpriteRenderer:
   serializedVersion: 2
@@ -12512,6 +12482,10 @@ PrefabInstance:
       propertyPath: indicatorOffSprite
       value: 
       objectReference: {fileID: 3225991162898088958, guid: ba3c9e864c8606347a8b1c2dd0351cac, type: 3}
+    - target: {fileID: 1733650945079844487, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
+      propertyPath: instabilityManager
+      value: 
+      objectReference: {fileID: 1649376414}
     - target: {fileID: 1765455700102112432, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
       propertyPath: isOn
       value: 1
@@ -12540,6 +12514,10 @@ PrefabInstance:
       propertyPath: indicatorOffSprite
       value: 
       objectReference: {fileID: 3225991162898088958, guid: ba3c9e864c8606347a8b1c2dd0351cac, type: 3}
+    - target: {fileID: 1987433834697366546, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
+      propertyPath: instabilityManager
+      value: 
+      objectReference: {fileID: 1649376414}
     - target: {fileID: 2123308404439981091, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
       propertyPath: elementID
       value: 36
@@ -12572,6 +12550,10 @@ PrefabInstance:
       propertyPath: indicatorOffSprite
       value: 
       objectReference: {fileID: 3225991162898088958, guid: ba3c9e864c8606347a8b1c2dd0351cac, type: 3}
+    - target: {fileID: 3297688070319621816, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
+      propertyPath: instabilityManager
+      value: 
+      objectReference: {fileID: 1649376414}
     - target: {fileID: 3403164711727398646, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
       propertyPath: spriteNormal
       value: 
@@ -12588,6 +12570,10 @@ PrefabInstance:
       propertyPath: indicatorOffSprite
       value: 
       objectReference: {fileID: 3225991162898088958, guid: ba3c9e864c8606347a8b1c2dd0351cac, type: 3}
+    - target: {fileID: 3403164711727398646, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
+      propertyPath: instabilityManager
+      value: 
+      objectReference: {fileID: 1649376414}
     - target: {fileID: 3430996748459402668, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
       propertyPath: isOn
       value: 1
@@ -12612,6 +12598,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4405597887509736467, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4478592202364095044, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
       propertyPath: spriteNormal
       value: 
@@ -12628,6 +12618,10 @@ PrefabInstance:
       propertyPath: indicatorOffSprite
       value: 
       objectReference: {fileID: 3225991162898088958, guid: ba3c9e864c8606347a8b1c2dd0351cac, type: 3}
+    - target: {fileID: 4478592202364095044, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
+      propertyPath: instabilityManager
+      value: 
+      objectReference: {fileID: 1649376414}
     - target: {fileID: 4532317225149721290, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
       propertyPath: elementID
       value: 32
@@ -12688,6 +12682,10 @@ PrefabInstance:
       propertyPath: indicatorOffSprite
       value: 
       objectReference: {fileID: 3225991162898088958, guid: ba3c9e864c8606347a8b1c2dd0351cac, type: 3}
+    - target: {fileID: 5557509642466123975, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
+      propertyPath: instabilityManager
+      value: 
+      objectReference: {fileID: 1649376414}
     - target: {fileID: 5637941051601366032, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
       propertyPath: elementID
       value: 18
@@ -12724,6 +12722,10 @@ PrefabInstance:
       propertyPath: indicatorOffSprite
       value: 
       objectReference: {fileID: 3225991162898088958, guid: ba3c9e864c8606347a8b1c2dd0351cac, type: 3}
+    - target: {fileID: 7147825171201513382, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
+      propertyPath: instabilityManager
+      value: 
+      objectReference: {fileID: 1649376414}
     - target: {fileID: 7185444350699213908, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
       propertyPath: applyButton
       value: 
@@ -12739,7 +12741,7 @@ PrefabInstance:
     - target: {fileID: 8441764382025330518, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
       propertyPath: applyButton
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1075493731}
     - target: {fileID: 8441764382025330518, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
       propertyPath: instabilityManager
       value: 
@@ -12816,7 +12818,8 @@ PrefabInstance:
       propertyPath: elementID
       value: 16
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8441764382025330518, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8505728821404906263, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
@@ -12832,9 +12835,18 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 741790376}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4320289151711165522, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1041498568}
+    - targetCorrespondingSourceObject: {fileID: 3626916532809856869, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 346404732}
+    - targetCorrespondingSourceObject: {fileID: 5926166729266960448, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 1161314048}
     - targetCorrespondingSourceObject: {fileID: 5357807577100912408, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
       insertIndex: 2
-      addedObject: {fileID: 547763467}
+      addedObject: {fileID: 547763471}
   m_SourcePrefab: {fileID: 100100000, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
