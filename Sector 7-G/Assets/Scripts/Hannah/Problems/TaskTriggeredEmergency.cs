@@ -1,9 +1,15 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Station;
 
 public class TaskTriggeredEmergency : MonoBehaviour
 {
+    // ==================================================
+    // REFERENCES
+    // ==================================================
+
     [Header("References")]
     [SerializeField] private TaskManager taskManager;
     [SerializeField] private GameState gameState;
@@ -11,25 +17,47 @@ public class TaskTriggeredEmergency : MonoBehaviour
     [SerializeField] private PhoneController phoneController;
 
 
+    // ==================================================
+    // EMERGENCY START
+    // ==================================================
+
     [Header("Level 1 Emergency")]
 
-    // После какого выполненного ежедневного задания
-    // должна начаться авария.
     [Min(1)]
     [SerializeField] private int triggerAfterCompletedTasks = 1;
 
-    // Задержка после выполнения задания.
     [Min(0f)]
     [SerializeField] private float emergencyDelay = 3f;
 
-    // Цех, в котором произойдет авария.
     [SerializeField]
     private StationSector emergencySector =
         StationSector.ReactorShop;
 
-    // Насколько падает стабильность АЭС.
-    [SerializeField] private int stabilityLoss = 25;
+    [SerializeField]
+    private int stabilityLoss = 25;
 
+
+    // ==================================================
+    // JOURNAL / RESOLUTION
+    // ==================================================
+
+    [Header("Journal")]
+
+    [Tooltip("ID должен совпадать с Emergency ID страницы журнала")]
+    [SerializeField]
+    private string emergencyID = "level1_emergency";
+
+
+    [Header("Emergency Resolution")]
+
+    [Tooltip("Действия, которые нужно выполнить по порядку")]
+    [SerializeField]
+    private List<EmergencyStep> emergencySteps = new();
+
+
+    // ==================================================
+    // PHONE
+    // ==================================================
 
     [Header("Phone Responses")]
 
@@ -44,27 +72,83 @@ public class TaskTriggeredEmergency : MonoBehaviour
         "В этом цехе всё в норме. Тревога не подтверждается.";
 
 
+    // ==================================================
+    // RUNTIME
+    // ==================================================
+
     [Header("Runtime State")]
 
-    [SerializeField] private bool waitingForEmergency;
-    [SerializeField] private bool isActive;
-    [SerializeField] private bool isConfirmed;
-    [SerializeField] private bool hasTriggered;
+    [SerializeField]
+    private bool waitingForEmergency;
 
+    [SerializeField]
+    private bool isActive;
+
+    [SerializeField]
+    private bool isConfirmed;
+
+    [SerializeField]
+    private bool hasTriggered;
+
+    [SerializeField]
+    private int currentStepIndex;
+
+
+    // ==================================================
+    // PUBLIC
+    // ==================================================
 
     public bool IsActive => isActive;
-    public bool IsConfirmed => isConfirmed;
-    public StationSector EmergencySector => emergencySector;
 
+    public bool IsConfirmed => isConfirmed;
+
+    public StationSector EmergencySector =>
+        emergencySector;
+
+    public string EmergencyID =>
+        emergencyID;
+
+    public int CompletedStepCount =>
+        currentStepIndex;
+
+    public int TotalStepCount =>
+        emergencySteps != null
+            ? emergencySteps.Count
+            : 0;
+
+
+    // ==================================================
+    // EVENTS FOR JOURNAL
+    // ==================================================
+
+    public event Action OnEmergencyStarted;
+
+    public event Action OnEmergencyProgressChanged;
+
+    public event Action OnEmergencyResolved;
+
+
+    // ==================================================
+    // UNITY
+    // ==================================================
 
     private void OnEnable()
     {
         if (taskManager != null)
         {
-            taskManager.OnTaskCompleted += HandleTaskCompleted;
+            // ВАЖНО:
+            // OnTaskCompleted = Action<int>
+            taskManager.OnTaskCompleted +=
+                HandleTaskCompleted;
         }
 
-        StationEvents.SectorCalled += HandleSectorCalled;
+        StationEvents.SectorCalled +=
+            HandleSectorCalled;
+
+        // ВАЖНО:
+        // используем именно Panel.PanelEvents
+        Panel.PanelEvents.OnElementChanged +=
+            HandlePanelElementChanged;
     }
 
 
@@ -72,10 +156,15 @@ public class TaskTriggeredEmergency : MonoBehaviour
     {
         if (taskManager != null)
         {
-            taskManager.OnTaskCompleted -= HandleTaskCompleted;
+            taskManager.OnTaskCompleted -=
+                HandleTaskCompleted;
         }
 
-        StationEvents.SectorCalled -= HandleSectorCalled;
+        StationEvents.SectorCalled -=
+            HandleSectorCalled;
+
+        Panel.PanelEvents.OnElementChanged -=
+            HandlePanelElementChanged;
     }
 
 
@@ -89,9 +178,10 @@ public class TaskTriggeredEmergency : MonoBehaviour
     // DAILY TASK
     // ==================================================
 
-    private void HandleTaskCompleted(int completedTaskCount)
+    private void HandleTaskCompleted(
+        int completedTaskCount)
     {
-        // Авария первого уровня должна произойти
+        // Авария первого уровня запускается
         // только один раз.
         if (hasTriggered)
             return;
@@ -102,11 +192,16 @@ public class TaskTriggeredEmergency : MonoBehaviour
         if (isActive)
             return;
 
-        if (completedTaskCount < triggerAfterCompletedTasks)
+        if (completedTaskCount <
+            triggerAfterCompletedTasks)
+        {
             return;
+        }
 
 
-        StartCoroutine(EmergencyDelayRoutine());
+        StartCoroutine(
+            EmergencyDelayRoutine()
+        );
     }
 
 
@@ -115,10 +210,15 @@ public class TaskTriggeredEmergency : MonoBehaviour
         waitingForEmergency = true;
 
         Debug.Log(
-            $"[EMERGENCY] Авария начнётся через {emergencyDelay} сек."
+            $"[EMERGENCY] Авария начнётся через " +
+            $"{emergencyDelay} сек."
         );
 
-        yield return new WaitForSeconds(emergencyDelay);
+
+        yield return new WaitForSeconds(
+            emergencyDelay
+        );
+
 
         waitingForEmergency = false;
 
@@ -137,11 +237,15 @@ public class TaskTriggeredEmergency : MonoBehaviour
 
 
         hasTriggered = true;
+
         isActive = true;
+
         isConfirmed = false;
 
+        currentStepIndex = 0;
 
-        // Подсвечиваем аварийный цех.
+
+        // Подсвечиваем проблемный цех.
         if (stationMonitor != null)
         {
             stationMonitor.SetSectorProblem(
@@ -151,7 +255,7 @@ public class TaskTriggeredEmergency : MonoBehaviour
         }
 
 
-        // Снижаем стабильность АЭС.
+        // Снижаем стабильность станции.
         if (gameState != null)
         {
             gameState.ChangeStationStability(
@@ -161,9 +265,18 @@ public class TaskTriggeredEmergency : MonoBehaviour
 
 
         Debug.Log(
-            $"[EMERGENCY STARTED] Цех: {emergencySector}. " +
-            $"Стабильность АЭС снижена на {Mathf.Abs(stabilityLoss)}%."
+            $"[EMERGENCY STARTED] " +
+            $"Цех: {emergencySector}. " +
+            $"Стабильность снижена на " +
+            $"{Mathf.Abs(stabilityLoss)}%."
         );
+
+
+        // Сообщаем журналу,
+        // что авария появилась.
+        OnEmergencyStarted?.Invoke();
+
+        OnEmergencyProgressChanged?.Invoke();
     }
 
 
@@ -171,15 +284,14 @@ public class TaskTriggeredEmergency : MonoBehaviour
     // PHONE
     // ==================================================
 
-    private void HandleSectorCalled(StationSector calledSector)
+    private void HandleSectorCalled(
+        StationSector calledSector)
     {
-        // Если авария ещё не началась,
-        // звонок к ней отношения не имеет.
         if (!isActive)
             return;
 
 
-        // Игрок позвонил именно в аварийный цех.
+        // Позвонили в правильный цех.
         if (calledSector == emergencySector)
         {
             ConfirmEmergency();
@@ -187,7 +299,7 @@ public class TaskTriggeredEmergency : MonoBehaviour
         }
 
 
-        // Игрок позвонил не туда.
+        // Позвонили не в тот цех.
         if (phoneController != null)
         {
             phoneController.ShowResponse(
@@ -197,8 +309,9 @@ public class TaskTriggeredEmergency : MonoBehaviour
 
 
         Debug.Log(
-            $"[EMERGENCY] Игрок позвонил в {calledSector}, " +
-            $"но авария находится в {emergencySector}."
+            $"[EMERGENCY] Игрок позвонил в " +
+            $"{calledSector}, но авария находится " +
+            $"в {emergencySector}."
         );
     }
 
@@ -222,17 +335,89 @@ public class TaskTriggeredEmergency : MonoBehaviour
 
         Debug.Log(
             $"[EMERGENCY CONFIRMED] " +
-            $"Авария в {emergencySector} подтверждена по телефону."
+            $"Авария в {emergencySector} подтверждена."
         );
     }
 
 
     // ==================================================
-    // FUTURE RESOLVE
+    // EMERGENCY STEPS
     // ==================================================
 
-    // Этот метод потом можно будет вызвать,
-    // когда игрок действительно устранит аварию.
+    private void HandlePanelElementChanged(
+        Panel.PanelElementID elementID,
+        int value)
+    {
+        // Если аварии нет,
+        // действия панели не проверяем.
+        if (!isActive)
+            return;
+
+
+        if (emergencySteps == null)
+            return;
+
+
+        if (emergencySteps.Count == 0)
+            return;
+
+
+        // Все шаги уже выполнены.
+        if (currentStepIndex >=
+            emergencySteps.Count)
+        {
+            return;
+        }
+
+
+        EmergencyStep currentStep =
+            emergencySteps[currentStepIndex];
+
+
+        // Проверяем ТОЛЬКО текущий шаг.
+        //
+        // Например:
+        // 1. Pump2 = 1
+        // 2. Valve1 = 0
+        //
+        // Valve1 раньше Pump2
+        // второй шаг не выполнит.
+        if (!currentStep.Matches(
+                elementID,
+                value))
+        {
+            return;
+        }
+
+
+        // Текущий шаг выполнен.
+        currentStepIndex++;
+
+
+        Debug.Log(
+            $"[EMERGENCY STEP] " +
+            $"{currentStepIndex}/" +
+            $"{emergencySteps.Count}"
+        );
+
+
+        // Журнал обновит галочки.
+        OnEmergencyProgressChanged?.Invoke();
+
+
+        // Выполнен последний шаг.
+        if (currentStepIndex >=
+            emergencySteps.Count)
+        {
+            ResolveEmergency();
+        }
+    }
+
+
+    // ==================================================
+    // RESOLVE
+    // ==================================================
+
     public void ResolveEmergency()
     {
         if (!isActive)
@@ -242,6 +427,7 @@ public class TaskTriggeredEmergency : MonoBehaviour
         isActive = false;
 
 
+        // Убираем красный цех.
         if (stationMonitor != null)
         {
             stationMonitor.SetSectorProblem(
@@ -252,8 +438,16 @@ public class TaskTriggeredEmergency : MonoBehaviour
 
 
         Debug.Log(
-            $"[EMERGENCY RESOLVED] Авария в {emergencySector} устранена."
+            $"[EMERGENCY RESOLVED] " +
+            $"Авария в {emergencySector} устранена."
         );
+
+
+        // Сначала обновляем UI шагов.
+        OnEmergencyProgressChanged?.Invoke();
+
+        // Потом сообщаем об устранении.
+        OnEmergencyResolved?.Invoke();
     }
 
 
@@ -266,28 +460,35 @@ public class TaskTriggeredEmergency : MonoBehaviour
         if (taskManager == null)
         {
             Debug.LogError(
-                "[TaskTriggeredEmergency] TaskManager не назначен."
+                "[TaskTriggeredEmergency] " +
+                "TaskManager не назначен."
             );
         }
+
 
         if (gameState == null)
         {
             Debug.LogError(
-                "[TaskTriggeredEmergency] GameState не назначен."
+                "[TaskTriggeredEmergency] " +
+                "GameState не назначен."
             );
         }
+
 
         if (stationMonitor == null)
         {
             Debug.LogError(
-                "[TaskTriggeredEmergency] StationMonitor не назначен."
+                "[TaskTriggeredEmergency] " +
+                "StationMonitor не назначен."
             );
         }
+
 
         if (phoneController == null)
         {
             Debug.LogError(
-                "[TaskTriggeredEmergency] PhoneController не назначен."
+                "[TaskTriggeredEmergency] " +
+                "PhoneController не назначен."
             );
         }
     }
