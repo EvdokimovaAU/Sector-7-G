@@ -7,6 +7,12 @@ public class JournalInteraction : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (PhoneClick.IsPhoneOpen)
+        {
+            Debug.Log("[JOURNAL] Телефон открыт. Журнал заблокирован.");
+            return;
+        }
+
         if (journal == null)
         {
             Debug.LogError(

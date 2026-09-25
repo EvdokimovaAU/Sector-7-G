@@ -25,12 +25,16 @@ public class WrongPanelActionHandler : MonoBehaviour
 
     [Header("Temporary Station Damage")]
 
-    [Tooltip("Минимальный временный урон АЭС за ошибку.")]
+    [Tooltip(
+        "Минимальный временный урон АЭС за ошибку."
+    )]
     [Min(0)]
     [SerializeField]
     private int minTemporaryDamage = 5;
 
-    [Tooltip("Максимальный временный урон АЭС за ошибку.")]
+    [Tooltip(
+        "Максимальный временный урон АЭС за ошибку."
+    )]
     [Min(0)]
     [SerializeField]
     private int maxTemporaryDamage = 20;
@@ -43,7 +47,7 @@ public class WrongPanelActionHandler : MonoBehaviour
     [Header("Panel Damage After Fix")]
 
     [Tooltip(
-        "Минимальное снижение надежности панели " +
+        "Минимальное снижение надёжности панели " +
         "после исправления ошибки."
     )]
     [Min(0)]
@@ -51,7 +55,7 @@ public class WrongPanelActionHandler : MonoBehaviour
     private int minPanelDamage = 3;
 
     [Tooltip(
-        "Максимальное снижение надежности панели " +
+        "Максимальное снижение надёжности панели " +
         "после исправления ошибки."
     )]
     [Min(0)]
@@ -85,27 +89,24 @@ public class WrongPanelActionHandler : MonoBehaviour
     // RUNTIME
     // ==================================================
 
-    // Все элементы панели, которые игрок сейчас
-    // оставил в неправильном состоянии.
     private readonly Dictionary<
         Panel.PanelElementID,
         WrongElementState
     > activeErrors = new();
 
 
-    // Последнее известное корректное состояние
-    // каждого элемента.
     private readonly Dictionary<
         Panel.PanelElementID,
         int
     > lastCorrectValues = new();
 
 
-    // Нужна защита от нескольких одинаковых
-    // событий за один кадр.
+    // Защита от двойного события
+    // одного элемента за один кадр.
     private int lastProcessedFrame = -1;
 
-    private Panel.PanelElementID lastProcessedElement;
+    private Panel.PanelElementID
+        lastProcessedElement;
 
 
     // ==================================================
@@ -114,11 +115,8 @@ public class WrongPanelActionHandler : MonoBehaviour
 
     private class WrongElementState
     {
-        // Значение, которое было ДО ошибки.
         public int PreviousValue;
 
-        // Сколько временной стабильности
-        // потеряла АЭС из-за этой ошибки.
         public int TemporaryDamage;
 
 
@@ -126,8 +124,11 @@ public class WrongPanelActionHandler : MonoBehaviour
             int previousValue,
             int temporaryDamage)
         {
-            PreviousValue = previousValue;
-            TemporaryDamage = temporaryDamage;
+            PreviousValue =
+                previousValue;
+
+            TemporaryDamage =
+                temporaryDamage;
         }
     }
 
@@ -168,66 +169,29 @@ public class WrongPanelActionHandler : MonoBehaviour
             return;
 
 
-        // Защита от случайного двойного события
-        // одного элемента в одном кадре.
-        if (lastProcessedFrame == Time.frameCount &&
-            lastProcessedElement == elementID)
-        {
-            return;
-        }
-
-
-        lastProcessedFrame = Time.frameCount;
-        lastProcessedElement = elementID;
-
-
         // ==================================================
-        // ЭТОТ ЭЛЕМЕНТ УЖЕ БЫЛ ОШИБОЧНЫМ
+        // EMERGENCY SAFE ACTION
         // ==================================================
 
-        if (activeErrors.TryGetValue(
+        // Если сейчас активна авария
+        // и игрок выставил значение,
+        // которое является одним из действий
+        // для устранения этой аварии:
+        //
+        // НЕ снимаем стабильность АЭС.
+        // НЕ снимаем надёжность панели.
+        // НЕ создаём ошибку.
+
+        if (emergency != null &&
+            emergency.IsValidEmergencyAction(
                 elementID,
-                out WrongElementState error))
-        {
-            // Игрок вернул элемент именно
-            // в состояние ДО своей ошибки.
-            if (value == error.PreviousValue)
-            {
-                FixError(
-                    elementID,
-                    error
-                );
-
-                return;
-            }
-
-
-            // Игрок продолжает менять уже ошибочный
-            // элемент, но пока не вернул правильное
-            // исходное состояние.
-            //
-            // Новую ошибку не создаём.
-            Debug.LogWarning(
-                $"[ERROR STILL ACTIVE] " +
-                $"{elementID} = {value}. " +
-                $"Return to {error.PreviousValue}"
-            );
-
-            return;
-        }
-
-
-        // ==================================================
-        // ЭЛЕМЕНТ ОТНОСИТСЯ К ЕЖЕДНЕВНЫМ ЗАДАНИЯМ
-        // ==================================================
-
-        if (taskManager != null &&
-            taskManager.IsElementUsedByTask(elementID))
+                value
+            ))
         {
             Debug.Log(
-                $"[NO DAMAGE] {elementID} относится " +
-                $"к ежедневным заданиям. " +
-                $"Стабильность АЭС не уменьшается."
+                $"[EMERGENCY SAFE ACTION] " +
+                $"{elementID} = {value}. " +
+                $"Station 0, Panel 0."
             );
 
 
@@ -242,7 +206,93 @@ public class WrongPanelActionHandler : MonoBehaviour
 
 
         // ==================================================
-        // НОВАЯ ОШИБКА
+        // DUPLICATE PROTECTION
+        // ==================================================
+
+        if (lastProcessedFrame ==
+                Time.frameCount &&
+            lastProcessedElement ==
+                elementID)
+        {
+            return;
+        }
+
+
+        lastProcessedFrame =
+            Time.frameCount;
+
+        lastProcessedElement =
+            elementID;
+
+
+        // ==================================================
+        // EXISTING ERROR
+        // ==================================================
+
+        if (activeErrors.TryGetValue(
+                elementID,
+                out WrongElementState error))
+        {
+            // Игрок вернул элемент
+            // в состояние до ошибки.
+            if (value ==
+                error.PreviousValue)
+            {
+                FixError(
+                    elementID,
+                    error
+                );
+
+
+                return;
+            }
+
+
+            // Ошибка уже существует.
+            // Дополнительный урон не наносим.
+            Debug.LogWarning(
+                $"[ERROR STILL ACTIVE] " +
+                $"{elementID} = {value}. " +
+                $"Return to {error.PreviousValue}"
+            );
+
+
+            return;
+        }
+
+
+        // ==================================================
+        // DAILY TASK ELEMENT
+        // ==================================================
+
+        // Если элемент используется
+        // текущими ежедневными заданиями,
+        // это не считается ошибкой панели.
+
+        if (taskManager != null &&
+            taskManager.IsElementUsedByTask(
+                elementID
+            ))
+        {
+            Debug.Log(
+                $"[NO DAMAGE] " +
+                $"{elementID} относится " +
+                $"к ежедневным заданиям."
+            );
+
+
+            RememberCorrectValue(
+                elementID,
+                value
+            );
+
+
+            return;
+        }
+
+
+        // ==================================================
+        // NEW ERROR
         // ==================================================
 
         RegisterNewError(
@@ -260,25 +310,24 @@ public class WrongPanelActionHandler : MonoBehaviour
         Panel.PanelElementID elementID,
         int wrongValue)
     {
-        // Получаем состояние элемента,
-        // которое было до неправильного действия.
-        int previousValue = GetPreviousValue(
-            elementID,
-            wrongValue
-        );
+        int previousValue =
+            GetPreviousValue(
+                elementID,
+                wrongValue
+            );
 
 
-        // Случайный временный урон станции.
-        int temporaryDamage = Random.Range(
-            Mathf.Min(
-                minTemporaryDamage,
-                maxTemporaryDamage
-            ),
-            Mathf.Max(
-                minTemporaryDamage,
-                maxTemporaryDamage
-            ) + 1
-        );
+        int temporaryDamage =
+            Random.Range(
+                Mathf.Min(
+                    minTemporaryDamage,
+                    maxTemporaryDamage
+                ),
+                Mathf.Max(
+                    minTemporaryDamage,
+                    maxTemporaryDamage
+                ) + 1
+            );
 
 
         WrongElementState newError =
@@ -294,8 +343,8 @@ public class WrongPanelActionHandler : MonoBehaviour
         );
 
 
-        // Пока это обычная ошибка,
-        // временно снижаем стабильность АЭС.
+        // Обычная ошибка временно
+        // уменьшает стабильность АЭС.
         gameState.ChangeStationStability(
             -temporaryDamage
         );
@@ -311,10 +360,11 @@ public class WrongPanelActionHandler : MonoBehaviour
 
 
         // ==================================================
-        // 3 ОШИБКИ = АВАРИЯ
+        // TOO MANY ERRORS
         // ==================================================
 
-        if (activeErrors.Count >= errorsForAccident)
+        if (activeErrors.Count >=
+            errorsForAccident)
         {
             TriggerAccident();
         }
@@ -329,30 +379,25 @@ public class WrongPanelActionHandler : MonoBehaviour
         Panel.PanelElementID elementID,
         WrongElementState error)
     {
-        // ----------------------------------------------
         // Возвращаем временно потерянную
-        // стабильность станции.
-        // ----------------------------------------------
-
+        // стабильность АЭС.
         gameState.ChangeStationStability(
             error.TemporaryDamage
         );
 
 
-        // ----------------------------------------------
-        // Но панель пострадала.
-        // ----------------------------------------------
-
-        int panelDamage = Random.Range(
-            Mathf.Min(
-                minPanelDamage,
-                maxPanelDamage
-            ),
-            Mathf.Max(
-                minPanelDamage,
-                maxPanelDamage
-            ) + 1
-        );
+        // Но ошибка повреждает саму панель.
+        int panelDamage =
+            Random.Range(
+                Mathf.Min(
+                    minPanelDamage,
+                    maxPanelDamage
+                ),
+                Mathf.Max(
+                    minPanelDamage,
+                    maxPanelDamage
+                ) + 1
+            );
 
 
         gameState.ChangePanelReliability(
@@ -360,14 +405,11 @@ public class WrongPanelActionHandler : MonoBehaviour
         );
 
 
-        // Ошибка устранена.
         activeErrors.Remove(
             elementID
         );
 
 
-        // Это значение снова считается
-        // нормальным состоянием элемента.
         RememberCorrectValue(
             elementID,
             error.PreviousValue
@@ -392,25 +434,13 @@ public class WrongPanelActionHandler : MonoBehaviour
     {
         Debug.LogError(
             $"[ACCIDENT] " +
-            $"{activeErrors.Count} active panel errors!"
+            $"{activeErrors.Count} " +
+            $"active panel errors!"
         );
 
 
-        // --------------------------------------------------
-        // Сначала отменяем временный урон.
-        //
-        // Например:
-        //
-        // 100
-        // ошибка 1 -> 90
-        // ошибка 2 -> 78
-        // ошибка 3 -> 70
-        //
-        // Возвращаем временные потери,
-        // чтобы потом применить единый
-        // постоянный штраф аварии -25.
-        // --------------------------------------------------
-
+        // Сначала возвращаем весь временный
+        // урон от отдельных ошибок.
         int temporaryDamageToRestore = 0;
 
 
@@ -434,10 +464,8 @@ public class WrongPanelActionHandler : MonoBehaviour
         }
 
 
-        // --------------------------------------------------
-        // Постоянный штраф аварии.
-        // --------------------------------------------------
-
+        // После этого применяется
+        // постоянный штраф аварии.
         gameState.ChangeStationStability(
             -accidentDamage
         );
@@ -448,8 +476,6 @@ public class WrongPanelActionHandler : MonoBehaviour
         );
 
 
-        // Старые ошибки больше нельзя
-        // "откатить" и вернуть эти 25%.
         activeErrors.Clear();
 
 
@@ -469,8 +495,6 @@ public class WrongPanelActionHandler : MonoBehaviour
         Panel.PanelElementID elementID,
         int currentWrongValue)
     {
-        // Если мы уже знаем последнее нормальное
-        // состояние этого элемента — используем его.
         if (lastCorrectValues.TryGetValue(
                 elementID,
                 out int previousValue))
@@ -479,20 +503,7 @@ public class WrongPanelActionHandler : MonoBehaviour
         }
 
 
-        // --------------------------------------------------
-        // FALLBACK
-        // --------------------------------------------------
-        //
-        // Если элемент ещё ни разу не участвовал
-        // в правильном действии, система пока
-        // не знает его стартового состояния.
-        //
-        // Для двухпозиционных элементов предполагаем
-        // противоположное состояние.
-        //
-        // 1 -> раньше было 0
-        // 0 -> раньше было 1
-
+        // Для двухпозиционных элементов.
         if (currentWrongValue == 0)
             return 1;
 
@@ -500,9 +511,8 @@ public class WrongPanelActionHandler : MonoBehaviour
             return 0;
 
 
-        // Для многопозиционных элементов без
-        // сохранённого состояния безопасно считаем
-        // стартовым 0.
+        // Для остальных элементов,
+        // если старое состояние неизвестно.
         return 0;
     }
 
@@ -511,7 +521,8 @@ public class WrongPanelActionHandler : MonoBehaviour
         Panel.PanelElementID elementID,
         int value)
     {
-        lastCorrectValues[elementID] = value;
+        lastCorrectValues[elementID] =
+            value;
     }
 
 
@@ -525,7 +536,7 @@ public class WrongPanelActionHandler : MonoBehaviour
         {
             Debug.LogError(
                 "[WrongPanelActionHandler] " +
-                "TaskManager is not assigned."
+                "TaskManager не назначен."
             );
         }
 
@@ -534,7 +545,7 @@ public class WrongPanelActionHandler : MonoBehaviour
         {
             Debug.LogError(
                 "[WrongPanelActionHandler] " +
-                "GameState is not assigned."
+                "GameState не назначен."
             );
         }
 
@@ -543,7 +554,7 @@ public class WrongPanelActionHandler : MonoBehaviour
         {
             Debug.LogWarning(
                 "[WrongPanelActionHandler] " +
-                "Emergency is not assigned."
+                "Emergency не назначен."
             );
         }
     }

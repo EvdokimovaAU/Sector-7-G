@@ -43,14 +43,18 @@ public class TaskTriggeredEmergency : MonoBehaviour
 
     [Header("Journal")]
 
-    [Tooltip("ID должен совпадать с Emergency ID страницы журнала")]
+    [Tooltip(
+        "ID должен совпадать с Emergency ID страницы журнала"
+    )]
     [SerializeField]
     private string emergencyID = "level1_emergency";
 
 
     [Header("Emergency Resolution")]
 
-    [Tooltip("Действия, которые нужно выполнить по порядку")]
+    [Tooltip(
+        "Действия, которые нужно выполнить по порядку"
+    )]
     [SerializeField]
     private List<EmergencyStep> emergencySteps = new();
 
@@ -136,8 +140,6 @@ public class TaskTriggeredEmergency : MonoBehaviour
     {
         if (taskManager != null)
         {
-            // ВАЖНО:
-            // OnTaskCompleted = Action<int>
             taskManager.OnTaskCompleted +=
                 HandleTaskCompleted;
         }
@@ -145,8 +147,6 @@ public class TaskTriggeredEmergency : MonoBehaviour
         StationEvents.SectorCalled +=
             HandleSectorCalled;
 
-        // ВАЖНО:
-        // используем именно Panel.PanelEvents
         Panel.PanelEvents.OnElementChanged +=
             HandlePanelElementChanged;
     }
@@ -181,8 +181,7 @@ public class TaskTriggeredEmergency : MonoBehaviour
     private void HandleTaskCompleted(
         int completedTaskCount)
     {
-        // Авария первого уровня запускается
-        // только один раз.
+        // Эта авария запускается только один раз.
         if (hasTriggered)
             return;
 
@@ -208,6 +207,7 @@ public class TaskTriggeredEmergency : MonoBehaviour
     private IEnumerator EmergencyDelayRoutine()
     {
         waitingForEmergency = true;
+
 
         Debug.Log(
             $"[EMERGENCY] Авария начнётся через " +
@@ -255,7 +255,8 @@ public class TaskTriggeredEmergency : MonoBehaviour
         }
 
 
-        // Снижаем стабильность станции.
+        // При начале аварии АЭС теряет 25%
+        // или другое значение stabilityLoss.
         if (gameState != null)
         {
             gameState.ChangeStationStability(
@@ -267,13 +268,10 @@ public class TaskTriggeredEmergency : MonoBehaviour
         Debug.Log(
             $"[EMERGENCY STARTED] " +
             $"Цех: {emergencySector}. " +
-            $"Стабильность снижена на " +
-            $"{Mathf.Abs(stabilityLoss)}%."
+            $"Стабильность АЭС -{Mathf.Abs(stabilityLoss)}%."
         );
 
 
-        // Сообщаем журналу,
-        // что авария появилась.
         OnEmergencyStarted?.Invoke();
 
         OnEmergencyProgressChanged?.Invoke();
@@ -291,7 +289,7 @@ public class TaskTriggeredEmergency : MonoBehaviour
             return;
 
 
-        // Позвонили в правильный цех.
+        // Позвонили именно в аварийный цех.
         if (calledSector == emergencySector)
         {
             ConfirmEmergency();
@@ -348,21 +346,15 @@ public class TaskTriggeredEmergency : MonoBehaviour
         Panel.PanelElementID elementID,
         int value)
     {
-        // Если аварии нет,
-        // действия панели не проверяем.
         if (!isActive)
             return;
-
 
         if (emergencySteps == null)
             return;
 
-
         if (emergencySteps.Count == 0)
             return;
 
-
-        // Все шаги уже выполнены.
         if (currentStepIndex >=
             emergencySteps.Count)
         {
@@ -374,14 +366,11 @@ public class TaskTriggeredEmergency : MonoBehaviour
             emergencySteps[currentStepIndex];
 
 
-        // Проверяем ТОЛЬКО текущий шаг.
-        //
-        // Например:
-        // 1. Pump2 = 1
-        // 2. Valve1 = 0
-        //
-        // Valve1 раньше Pump2
-        // второй шаг не выполнит.
+        if (currentStep == null)
+            return;
+
+
+        // Шаги выполняются строго по порядку.
         if (!currentStep.Matches(
                 elementID,
                 value))
@@ -390,7 +379,6 @@ public class TaskTriggeredEmergency : MonoBehaviour
         }
 
 
-        // Текущий шаг выполнен.
         currentStepIndex++;
 
 
@@ -401,7 +389,6 @@ public class TaskTriggeredEmergency : MonoBehaviour
         );
 
 
-        // Журнал обновит галочки.
         OnEmergencyProgressChanged?.Invoke();
 
 
@@ -415,6 +402,99 @@ public class TaskTriggeredEmergency : MonoBehaviour
 
 
     // ==================================================
+    // IS VALID EMERGENCY ACTION
+    // ==================================================
+
+    public bool IsValidEmergencyAction(
+        Panel.PanelElementID elementID,
+        int value)
+    {
+        // Без активной аварии никакие действия
+        // не считаются аварийными.
+        if (!isActive)
+            return false;
+
+
+        if (emergencySteps == null ||
+            emergencySteps.Count == 0)
+        {
+            return false;
+        }
+
+
+        // Проверяем весь список действий аварии.
+        //
+        // Это специально сделано не только
+        // для currentStepIndex.
+        //
+        // TaskTriggeredEmergency и
+        // WrongPanelActionHandler подписаны
+        // на одно событие PanelEvents.
+        //
+        // Поэтому один обработчик может успеть
+        // изменить currentStepIndex раньше другого.
+        foreach (EmergencyStep step in emergencySteps)
+        {
+            if (step == null)
+                continue;
+
+
+            if (step.Matches(
+                    elementID,
+                    value))
+            {
+                return true;
+            }
+        }
+
+
+        return false;
+    }
+
+
+    // ==================================================
+    // CURRENT STEP CHECK
+    // ==================================================
+
+    public bool IsCurrentEmergencyStep(
+        Panel.PanelElementID elementID,
+        int value)
+    {
+        if (!isActive)
+            return false;
+
+
+        if (emergencySteps == null ||
+            emergencySteps.Count == 0)
+        {
+            return false;
+        }
+
+
+        if (currentStepIndex < 0 ||
+            currentStepIndex >=
+            emergencySteps.Count)
+        {
+            return false;
+        }
+
+
+        EmergencyStep currentStep =
+            emergencySteps[currentStepIndex];
+
+
+        if (currentStep == null)
+            return false;
+
+
+        return currentStep.Matches(
+            elementID,
+            value
+        );
+    }
+
+
+    // ==================================================
     // RESOLVE
     // ==================================================
 
@@ -424,10 +504,29 @@ public class TaskTriggeredEmergency : MonoBehaviour
             return;
 
 
+        // ВАЖНО:
+        // сначала возвращаем стабильность,
+        // пока авария ещё считается активной.
+
+        if (gameState != null)
+        {
+            gameState.ChangeStationStability(
+                Mathf.Abs(stabilityLoss)
+            );
+
+
+            Debug.Log(
+                $"[EMERGENCY RESTORE] " +
+                $"Station +{Mathf.Abs(stabilityLoss)}%"
+            );
+        }
+
+
+        // Теперь авария окончательно устранена.
         isActive = false;
 
 
-        // Убираем красный цех.
+        // Убираем красную подсветку цеха.
         if (stationMonitor != null)
         {
             stationMonitor.SetSectorProblem(
@@ -439,14 +538,13 @@ public class TaskTriggeredEmergency : MonoBehaviour
 
         Debug.Log(
             $"[EMERGENCY RESOLVED] " +
-            $"Авария в {emergencySector} устранена."
+            $"Авария в {emergencySector} устранена. " +
+            $"Стабильность АЭС +{Mathf.Abs(stabilityLoss)}%."
         );
 
 
-        // Сначала обновляем UI шагов.
         OnEmergencyProgressChanged?.Invoke();
 
-        // Потом сообщаем об устранении.
         OnEmergencyResolved?.Invoke();
     }
 

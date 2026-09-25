@@ -4,10 +4,14 @@ public class UIWindowManager : MonoBehaviour
 {
     public static UIWindowManager Instance { get; private set; }
 
-    [Header("Windows")]
-    [SerializeField] private GameObject phoneWindow;
-    [SerializeField] private GameObject journalWindow;
-    [SerializeField] private GameObject noteWindow;
+    // Окно, которое сейчас открыто.
+    private GameObject currentWindow;
+
+    public bool HasOpenWindow =>
+        currentWindow != null &&
+        currentWindow.activeSelf;
+
+    public GameObject CurrentWindow => currentWindow;
 
 
     private void Awake()
@@ -31,14 +35,28 @@ public class UIWindowManager : MonoBehaviour
         if (window == null)
             return;
 
-        // Сначала закрываем остальные окна.
-        CloseAll();
 
-        // Затем открываем нужное.
+        // Уже открыто какое-то другое окно.
+        if (HasOpenWindow &&
+            currentWindow != window)
+        {
+            Debug.Log(
+                $"[UI] Нельзя открыть {window.name}. " +
+                $"Сейчас открыто {currentWindow.name}."
+            );
+
+            return;
+        }
+
+
         window.SetActive(true);
 
-        // Поднимаем его поверх остальных UI.
-        window.transform.SetAsLastSibling();
+        currentWindow = window;
+
+
+        Debug.Log(
+            $"[UI] Open: {window.name}"
+        );
     }
 
 
@@ -51,40 +69,41 @@ public class UIWindowManager : MonoBehaviour
         if (window == null)
             return;
 
+
         window.SetActive(false);
-    }
 
 
-    public void CloseAll()
-    {
-        if (phoneWindow != null)
-            phoneWindow.SetActive(false);
+        if (currentWindow == window)
+        {
+            currentWindow = null;
+        }
 
-        if (journalWindow != null)
-            journalWindow.SetActive(false);
 
-        if (noteWindow != null)
-            noteWindow.SetActive(false);
+        Debug.Log(
+            $"[UI] Close: {window.name}"
+        );
     }
 
 
     // ==================================================
-    // CHECK
+    // CLOSE CURRENT
     // ==================================================
 
-    public bool IsAnyWindowOpen()
+    public void CloseCurrentWindow()
     {
-        return
-            IsOpen(phoneWindow) ||
-            IsOpen(journalWindow) ||
-            IsOpen(noteWindow);
-    }
+        if (!HasOpenWindow)
+            return;
 
 
-    private bool IsOpen(GameObject window)
-    {
-        return
-            window != null &&
-            window.activeSelf;
+        GameObject window = currentWindow;
+
+        currentWindow = null;
+
+        window.SetActive(false);
+
+
+        Debug.Log(
+            $"[UI] Close: {window.name}"
+        );
     }
 }

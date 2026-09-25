@@ -12,8 +12,9 @@ public class LowStabilityScreenEffect : MonoBehaviour
     [SerializeField]
     private GameState gameState;
 
+    [Tooltip("Все аварии уровня")]
     [SerializeField]
-    private TaskTriggeredEmergency emergency;
+    private TaskTriggeredEmergency[] emergencies;
 
     [SerializeField]
     private Image redOverlay;
@@ -40,12 +41,10 @@ public class LowStabilityScreenEffect : MonoBehaviour
     [SerializeField]
     private float maxAlpha = 0.25f;
 
-    [Tooltip("Сколько секунд экран краснеет")]
     [Min(0.1f)]
     [SerializeField]
     private float fadeInDuration = 1.5f;
 
-    [Tooltip("Сколько секунд экран возвращается в норму")]
     [Min(0.1f)]
     [SerializeField]
     private float fadeOutDuration = 1.5f;
@@ -56,9 +55,6 @@ public class LowStabilityScreenEffect : MonoBehaviour
     // ==================================================
 
     private bool effectActive;
-
-    // true  = сейчас краснеем
-    // false = сейчас возвращаемся к нормальному
     private bool fadingToRed = true;
 
 
@@ -74,6 +70,7 @@ public class LowStabilityScreenEffect : MonoBehaviour
 
             Color color = redOverlay.color;
             color.a = 0f;
+
             redOverlay.color = color;
         }
 
@@ -86,9 +83,7 @@ public class LowStabilityScreenEffect : MonoBehaviour
         if (redOverlay == null)
             return;
 
-
         CheckEffectState();
-
 
         if (effectActive)
         {
@@ -102,7 +97,7 @@ public class LowStabilityScreenEffect : MonoBehaviour
 
 
     // ==================================================
-    // CHECK
+    // CHECK STATE
     // ==================================================
 
     private void CheckEffectState()
@@ -111,10 +106,7 @@ public class LowStabilityScreenEffect : MonoBehaviour
         bool emergencyActive = false;
 
 
-        // ------------------------------
-        // Стабильность АЭС
-        // ------------------------------
-
+        // Стабильность АЭС <= 50.
         if (gameState != null)
         {
             lowStability =
@@ -123,28 +115,33 @@ public class LowStabilityScreenEffect : MonoBehaviour
         }
 
 
-        // ------------------------------
-        // Авария
-        // ------------------------------
-
-        if (emergency != null)
+        // Проверяем все аварии.
+        if (emergencies != null)
         {
-            emergencyActive =
-                emergency.IsActive;
+            foreach (TaskTriggeredEmergency emergency in emergencies)
+            {
+                if (emergency != null &&
+                    emergency.IsActive)
+                {
+                    emergencyActive = true;
+                    break;
+                }
+            }
         }
 
 
-        // Эффект работает, если выполняется
-        // ХОТЯ БЫ одно условие.
+        // Красный экран нужен, если:
+        //
+        // 1. есть активная авария
+        // ИЛИ
+        // 2. стабильность АЭС <= 50.
 
         bool shouldBeActive =
-            lowStability ||
-            emergencyActive;
+            emergencyActive ||
+            lowStability;
 
 
-        // Если эффект только что включился —
-        // начинаем цикл с покраснения.
-
+        // Эффект только что включился.
         if (shouldBeActive && !effectActive)
         {
             fadingToRed = true;
@@ -156,7 +153,7 @@ public class LowStabilityScreenEffect : MonoBehaviour
 
 
     // ==================================================
-    // FLASH
+    // RED PULSE
     // ==================================================
 
     private void UpdateFlashing()
@@ -166,8 +163,6 @@ public class LowStabilityScreenEffect : MonoBehaviour
 
         if (fadingToRed)
         {
-            // Плавно краснеем.
-
             float speed =
                 maxAlpha / fadeInDuration;
 
@@ -179,19 +174,15 @@ public class LowStabilityScreenEffect : MonoBehaviour
             );
 
 
-            // Дошли до максимальной красноты.
             if (Mathf.Approximately(
-                    color.a,
-                    maxAlpha))
+                color.a,
+                maxAlpha))
             {
                 fadingToRed = false;
             }
         }
         else
         {
-            // Плавно возвращаем экран
-            // в нормальное состояние.
-
             float speed =
                 maxAlpha / fadeOutDuration;
 
@@ -203,12 +194,9 @@ public class LowStabilityScreenEffect : MonoBehaviour
             );
 
 
-            // Полностью исчез красный цвет —
-            // начинаем новый цикл.
-
             if (Mathf.Approximately(
-                    color.a,
-                    0f))
+                color.a,
+                0f))
             {
                 fadingToRed = true;
             }
@@ -220,7 +208,7 @@ public class LowStabilityScreenEffect : MonoBehaviour
 
 
     // ==================================================
-    // NORMAL STATE
+    // RETURN TO NORMAL
     // ==================================================
 
     private void FadeToNormal()
@@ -241,6 +229,10 @@ public class LowStabilityScreenEffect : MonoBehaviour
 
         redOverlay.color = color;
 
-        fadingToRed = true;
+
+        if (Mathf.Approximately(color.a, 0f))
+        {
+            fadingToRed = true;
+        }
     }
 }
