@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,12 +23,25 @@ namespace Station
         [Header("Call Limit")]
         [SerializeField] private bool callUsed = false;
 
+        [Header("Call Button Flash")]
+        [SerializeField] private Image callButtonImage;
+        [SerializeField] private Sprite callNormalSprite;
+        [SerializeField] private Sprite callGreenSprite;
+        [SerializeField] private Sprite callRedSprite;
+        [SerializeField] private int flashCount = 3;
+        [SerializeField] private float flashInterval = 0.15f;
+
         private string _currentNumber = "";
+        private Coroutine _flashRoutine;
 
         private void Awake()
         {
             if (callButton != null) callButton.onClick.AddListener(Call);
             if (clearButton != null) clearButton.onClick.AddListener(Clear);
+
+            // Если нормальный спрайт не задан — запомним текущий
+            if (callButtonImage != null && callNormalSprite == null)
+                callNormalSprite = callButtonImage.sprite;
         }
 
         private void Start()
@@ -35,6 +49,7 @@ namespace Station
             UpdateNumberUI();
             if (responseText != null) responseText.text = "";
         }
+
         public void AddDigit(string digit)
         {
             if (digit.Length != 1 || !char.IsDigit(digit[0])) return;
@@ -57,53 +72,34 @@ namespace Station
                 if (responseText != null)
                     responseText.text = "Звонок уже использован";
 
+                FlashCallButton(false);
                 return;
             }
 
+            if (string.IsNullOrEmpty(_currentNumber)) return;
 
-            if (string.IsNullOrEmpty(_currentNumber))
-                return;
-
-
-            var entry = phoneBook.Find(
-                e => e.phoneNumber == _currentNumber
-            );
-
-
+            var entry = phoneBook.Find(e => e.phoneNumber == _currentNumber);
             if (entry == null)
             {
                 if (responseText != null)
                     responseText.text = "Нет такого номера";
 
+                FlashCallButton(false);
+
                 _currentNumber = "";
                 UpdateNumberUI();
-
                 return;
             }
 
+            StationEvents.SectorCalled?.Invoke(entry.sector);
 
-            // Сначала обычный ответ.
             if (responseText != null)
-            {
                 responseText.text = GetRandomResponse();
-            }
 
-
-            // После этого сообщаем системам игры,
-            // в какой именно цех позвонил игрок.
-            //
-            // Если сейчас активна авария,
-            // TaskTriggeredEmergency сможет заменить
-            // обычный ответ на аварийный.
-            StationEvents.SectorCalled?.Invoke(
-                entry.sector
-            );
-
+            FlashCallButton(true);
 
             callUsed = true;
-
             _currentNumber = "";
-
             UpdateNumberUI();
         }
 
@@ -132,6 +128,33 @@ namespace Station
         {
             if (numberText != null)
                 numberText.text = _currentNumber;
+        }
+
+        private void FlashCallButton(bool success)
+        {
+            if (callButtonImage == null) return;
+
+            if (_flashRoutine != null)
+                StopCoroutine(_flashRoutine);
+
+            _flashRoutine = StartCoroutine(FlashRoutine(success));
+        }
+
+        private IEnumerator FlashRoutine(bool success)
+        {
+            Sprite flashSprite = success ? callGreenSprite : callRedSprite;
+
+            for (int i = 0; i < flashCount; i++)
+            {
+                callButtonImage.sprite = flashSprite;
+                yield return new WaitForSeconds(flashInterval);
+
+                callButtonImage.sprite = callNormalSprite;
+                yield return new WaitForSeconds(flashInterval);
+            }
+
+            callButtonImage.sprite = callNormalSprite;
+            _flashRoutine = null;
         }
     }
 }
