@@ -3001,6 +3001,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &547763463 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5357807577100912408, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
+  m_PrefabInstance: {fileID: 6961461372400618799}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &547763467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547763463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd09e1576888a6d4e9ca7c5cef2ffdab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Panel.PanelValueControl
+  elementID: 7
+  currentValue: 67
+  minValue: 0
+  maxValue: 100
+  step: 1
+  valueText: {fileID: 1130746180}
+  instabilityManager: {fileID: 1649376414}
 --- !u!4 &552380876 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3649193561716008524, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
@@ -5504,6 +5528,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1108263421}
   m_CullTransparentMesh: 1
+--- !u!114 &1130746180 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3662676419686644784, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
+  m_PrefabInstance: {fileID: 6961461372400618799}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &1141958506
 GameObject:
   m_ObjectHideFlags: 0
@@ -7718,8 +7753,19 @@ MonoBehaviour:
   emergencyDelay: 3
   emergencySector: 0
   stabilityLoss: 25
-  emergencyID: level1_emergency
-  emergencySteps: []
+  emergencyID: reactor_overheat
+  emergencySteps:
+  - description: "\u041D\u0430\u0441\u0430\u043E\u0441 1"
+    elementID: 3
+    requiredValue: 1
+  - description: "\u0412\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u043F\u043E\u0434\u0430\u0447\u0443
+      \u0432\u043E\u0434\u044B"
+    elementID: 41
+    requiredValue: 1
+  - description: "\u0412\u044B\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u043D\u0430\u0441\u043E\u0441
+      2"
+    elementID: 4
+    requiredValue: 0
   confirmedEmergencyText: "\u0422\u0440\u0435\u0432\u043E\u0433\u0430 \u043F\u043E\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043D\u0430.
     \u0412 \u0446\u0435\u0445\u0435 \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u043E
     \u0430\u0432\u0430\u0440\u0438\u0439\u043D\u0430\u044F \u0441\u0438\u0442\u0443\u0430\u0446\u0438\u044F."
@@ -8161,7 +8207,7 @@ MonoBehaviour:
   nextButton: {fileID: 309621382}
   pageNumberText: {fileID: 1148791807}
   pages:
-  - emergencyID: "\u0420\u0435\u0430\u043A\u0442\u043E\u0440\u043D\u044B\u0439"
+  - emergencyID: reactor_overheat
     title: "\u041F\u0435\u0440\u0435\u0433\u0440\u0435\u0432 \u0440\u0435\u0430\u043A\u0442\u043E\u0440\u0430"
     description: "\u0422\u0435\u043C\u043F\u0435\u0440\u0430\u0442\u0443\u0440\u0430
       \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u0439 \u0437\u043E\u043D\u044B \u043F\u0440\u0435\u0432\u044B\u0448\u0430\u0435\u0442
@@ -8173,31 +8219,18 @@ MonoBehaviour:
     sector: 0
     phoneNumber: 667
     steps:
-    - description: "\u0423\u0441\u0442\u0430\u043D\u043E\u0432\u0438 \u043C\u043E\u0449\u044C\u043D\u043E\u0441\u0442\u044C
-        40"
-      elementID: 9
-      requiredValue: 40
+    - description: "\u041D\u0430\u0441\u043E\u0441 1 \u0432\u043A\u043B"
+      elementID: 3
+      requiredValue: 1
     - description: "\u0412\u043A\u043B\u044E\u0447\u0438 \u043F\u043E\u0434\u0430\u0447\u0443
         \u0432\u043E\u0434\u044B"
       elementID: 41
       requiredValue: 1
-    - description: "\u0412\u043A\u043B\u044E\u0447\u0438 \u043D\u0430\u0441\u043E\u0441
+    - description: "\u0412\u044B\u043A\u043B\u044E\u0447\u0438 \u043D\u0430\u0441\u043E\u0441
         P2"
       elementID: 4
-      requiredValue: 1
-  - emergencyID: 
-    title: 
-    description: 
-    sector: 0
-    phoneNumber: 
-    steps: []
-  - emergencyID: 
-    title: 
-    description: 
-    sector: 0
-    phoneNumber: 
-    steps: []
-  emergency: {fileID: 0}
+      requiredValue: 0
+  emergency: {fileID: 1636677490}
 --- !u!114 &1672608674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10661,6 +10694,10 @@ PrefabInstance:
       propertyPath: applyButton
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7185444350699213908, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
+      propertyPath: instabilityManager
+      value: 
+      objectReference: {fileID: 1649376414}
     - target: {fileID: 7870958502907609818, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
       propertyPath: elementID
       value: 25
@@ -10717,6 +10754,10 @@ PrefabInstance:
       propertyPath: applyButton
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8579627585739269904, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
+      propertyPath: instabilityManager
+      value: 
+      objectReference: {fileID: 1649376414}
     - target: {fileID: 8583610235461281606, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
       propertyPath: elementID
       value: 21
@@ -10756,7 +10797,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2854110313881995759, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
       insertIndex: -1
       addedObject: {fileID: 741790376}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5357807577100912408, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 547763467}
   m_SourcePrefab: {fileID: 100100000, guid: 60ba3581b4702dd4c81d9ae6ba1001ab, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
