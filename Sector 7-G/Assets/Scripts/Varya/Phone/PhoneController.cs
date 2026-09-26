@@ -39,7 +39,6 @@ namespace Station
             if (callButton != null) callButton.onClick.AddListener(Call);
             if (clearButton != null) clearButton.onClick.AddListener(Clear);
 
-            // Если нормальный спрайт не задан — запомним текущий
             if (callButtonImage != null && callNormalSprite == null)
                 callNormalSprite = callButtonImage.sprite;
         }
@@ -63,6 +62,8 @@ namespace Station
             _currentNumber = "";
             if (responseText != null) responseText.text = "";
             UpdateNumberUI();
+
+            AudioManager.Instance?.PlayClick();
         }
 
         public void Call()
@@ -73,6 +74,7 @@ namespace Station
                     responseText.text = "Звонок уже использован";
 
                 FlashCallButton(false);
+                AudioManager.Instance?.PlayCallFail();     
                 return;
             }
 
@@ -85,6 +87,7 @@ namespace Station
                     responseText.text = "Нет такого номера";
 
                 FlashCallButton(false);
+                AudioManager.Instance?.PlayCallFail();     
 
                 _currentNumber = "";
                 UpdateNumberUI();
@@ -97,6 +100,7 @@ namespace Station
                 responseText.text = GetRandomResponse();
 
             FlashCallButton(true);
+            AudioManager.Instance?.PlayCallSuccess();      
 
             callUsed = true;
             _currentNumber = "";

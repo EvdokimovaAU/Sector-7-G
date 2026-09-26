@@ -11,7 +11,11 @@ namespace Station
 
         private void Awake()
         {
-            GetComponent<Button>().onClick.AddListener(() => controller.AddDigit(digit));
+            GetComponent<Button>().onClick.AddListener(() =>
+            {
+                controller.AddDigit(digit);
+                AudioManager.Instance?.PlayDigit();
+            });
         }
     }
 }

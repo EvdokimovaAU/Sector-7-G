@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,20 +29,24 @@ namespace Station
 
             RefreshAll();
 
-            //тут проверка
-            //SetSectorProblem(StationSector.ReactorShop, true);  
+            //С‚СѓС‚ РїСЂРѕРІРµСЂРєР°
+            //SetSectorProblem(StationSector.ReactorShop, true);
         }
 
         public void SetSectorProblem(StationSector sector, bool hasProblem)
         {
             if (!_isProblem.ContainsKey(sector))
             {
-                Debug.LogWarning($"[StationMonitor] Неизвестный сектор: {sector}");
+                Debug.LogWarning($"[StationMonitor] РќРµРёР·РІРµСЃС‚РЅС‹Р№ СЃРµРєС‚РѕСЂ: {sector}");
                 return;
             }
 
+            bool wasProblem = _isProblem[sector];
             _isProblem[sector] = hasProblem;
             RefreshSector(sector);
+
+            if (hasProblem && !wasProblem)
+                AudioManager.Instance?.PlayProblem();
         }
 
         public void ResetAllProblems()
