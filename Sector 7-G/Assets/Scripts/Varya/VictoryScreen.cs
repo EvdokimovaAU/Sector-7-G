@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -33,6 +34,11 @@ public class VictoryScreen : MonoBehaviour
     [SerializeField]
     private int minimumStationStability = 50;
 
+    [Tooltip("Задержка перед появлением экрана победы.")]
+    [Min(0f)]
+    [SerializeField]
+    private float victoryDelay = 2f;
+
 
     [Header("Scene")]
 
@@ -45,6 +51,7 @@ public class VictoryScreen : MonoBehaviour
     // RUNTIME
     // ==================================================
 
+    private bool victoryStarted;
     private bool victoryShown;
 
 
@@ -54,9 +61,9 @@ public class VictoryScreen : MonoBehaviour
 
     private void Awake()
     {
+        victoryStarted = false;
         victoryShown = false;
 
-        // В начале игры окно победы скрыто.
         if (victoryWindow != null)
         {
             victoryWindow.SetActive(false);
@@ -64,16 +71,9 @@ public class VictoryScreen : MonoBehaviour
     }
 
 
-    private void Start()
-    {
-        ValidateReferences();
-    }
-
-
     private void Update()
     {
-        // После победы больше ничего не проверяем.
-        if (victoryShown)
+        if (victoryStarted || victoryShown)
             return;
 
         CheckVictory();
@@ -96,29 +96,17 @@ public class VictoryScreen : MonoBehaviour
             return;
 
 
-        // ----------------------------------------------
-        // 1. ВСЕ ЗАДАНИЯ ВЫПОЛНЕНЫ
-        // ----------------------------------------------
-
+        // Все задания должны быть выполнены.
         if (!taskManager.AreAllTasksCompleted())
             return;
 
 
-        // ----------------------------------------------
-        // 2. СТАБИЛЬНОСТЬ СТАНЦИИ > 50
-        // ----------------------------------------------
-
-        if (gameState.StationStability <=
-            minimumStationStability)
-        {
+        // Стабильность станции должна быть выше 50.
+        if (gameState.StationStability <= minimumStationStability)
             return;
-        }
 
 
-        // ----------------------------------------------
-        // 3. НЕТ АКТИВНОЙ АВАРИИ
-        // ----------------------------------------------
-
+        // Не должно быть активной аварии.
         if (emergency != null &&
             emergency.IsActive)
         {
@@ -126,7 +114,41 @@ public class VictoryScreen : MonoBehaviour
         }
 
 
-        // Все условия выполнены.
+        victoryStarted = true;
+
+        StartCoroutine(
+            ShowVictoryAfterDelay()
+        );
+    }
+
+
+    // ==================================================
+    // VICTORY DELAY
+    // ==================================================
+
+    private IEnumerator ShowVictoryAfterDelay()
+    {
+        yield return new WaitForSeconds(victoryDelay);
+
+
+        // За время задержки могла начаться авария.
+        if (emergency != null &&
+            emergency.IsActive)
+        {
+            victoryStarted = false;
+            yield break;
+        }
+
+
+        // За время задержки могла упасть стабильность.
+        if (gameState.StationStability <=
+            minimumStationStability)
+        {
+            victoryStarted = false;
+            yield break;
+        }
+
+
         ShowVictory();
     }
 
@@ -143,18 +165,9 @@ public class VictoryScreen : MonoBehaviour
 
         victoryShown = true;
 
-
-        Debug.Log(
-            "[VICTORY] Смена успешно завершена! " +
-            $"Station Stability = {gameState.StationStability}"
-        );
-
-
         victoryWindow.SetActive(true);
 
-
-        // Останавливаем игровое время,
-        // чтобы после победы ничего больше не происходило.
+        // После появления окна останавливаем игру.
         Time.timeScale = 0f;
     }
 
@@ -165,82 +178,13 @@ public class VictoryScreen : MonoBehaviour
 
     public void ExitToMenu()
     {
-        // Иначе после загрузки меню
-        // Time.timeScale останется равным 0.
         Time.timeScale = 1f;
 
-
         if (string.IsNullOrWhiteSpace(menuSceneName))
-        {
-            Debug.LogError(
-                "[VictoryScreen] Menu Scene Name не указан!"
-            );
-
             return;
-        }
-
 
         SceneManager.LoadScene(
             menuSceneName
-        );
-    }
-
-
-    // ==================================================
-    // VALIDATION
-    // ==================================================
-
-    private void ValidateReferences()
-    {
-        if (taskManager == null)
-        {
-            Debug.LogError(
-                "[VictoryScreen] Task Manager не назначен!"
-            );
-        }
-
-
-        if (emergency == null)
-        {
-            Debug.LogError(
-                "[VictoryScreen] Emergency не назначен!"
-            );
-        }
-
-
-        if (gameState == null)
-        {
-            Debug.LogError(
-                "[VictoryScreen] Game State не назначен!"
-            );
-        }
-
-
-        if (victoryWindow == null)
-        {
-            Debug.LogError(
-                "[VictoryScreen] Victory Window не назначен!"
-            );
-        }
-    }
-
-
-    // ==================================================
-    // DEBUG
-    // ==================================================
-
-    [ContextMenu("DEBUG Victory State")]
-    private void DebugVictoryState()
-    {
-        Debug.Log(
-            "========== VICTORY STATE ==========\n" +
-            $"All Tasks Completed: " +
-            $"{(taskManager != null && taskManager.AreAllTasksCompleted())}\n" +
-            $"Station Stability: " +
-            $"{(gameState != null ? gameState.StationStability : -1)}\n" +
-            $"Emergency Active: " +
-            $"{(emergency != null && emergency.IsActive)}\n" +
-            "==================================="
         );
     }
 }
