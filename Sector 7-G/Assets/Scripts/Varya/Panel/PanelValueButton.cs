@@ -12,19 +12,9 @@ namespace Panel
             Apply
         }
 
-
-        // ==================================================
-        // TARGET
-        // ==================================================
-
         [Header("Target")]
         [SerializeField]
         private PanelValueControl valueControl;
-
-
-        // ==================================================
-        // ACTION
-        // ==================================================
 
         [Header("Action")]
         [SerializeField]
@@ -32,29 +22,51 @@ namespace Panel
 
 
         // ==================================================
-        // APPLY VISUAL
+        // VISUAL
         // ==================================================
 
-        [Header("Apply Button Visual")]
+        [Header("Visual")]
 
-        [Tooltip("SpriteRenderer кнопки Установить")]
         [SerializeField]
         private SpriteRenderer buttonRenderer;
 
-        [Tooltip("Обычная картинка кнопки")]
         [SerializeField]
         private Sprite normalSprite;
 
-        [Tooltip("Картинка нажатой кнопки")]
         [SerializeField]
         private Sprite pressedSprite;
 
-        [Tooltip("Через сколько секунд вернуть обычную картинку")]
+        [Min(0f)]
         [SerializeField]
         private float pressedDuration = 2f;
 
 
         private Coroutine visualCoroutine;
+
+
+        // ==================================================
+        // START
+        // ==================================================
+
+        private void Start()
+        {
+            // Если Renderer не указан,
+            // пробуем взять его с этого объекта.
+            if (buttonRenderer == null)
+            {
+                buttonRenderer =
+                    GetComponent<SpriteRenderer>();
+            }
+
+            // Если normalSprite не назначен,
+            // запоминаем текущую картинку.
+            if (buttonRenderer != null &&
+                normalSprite == null)
+            {
+                normalSprite =
+                    buttonRenderer.sprite;
+            }
+        }
 
 
         // ==================================================
@@ -64,14 +76,14 @@ namespace Panel
         private void OnMouseDown()
         {
             Debug.Log(
-                $"[VALUE CLICK] {name} -> {action}"
+                $"[VALUE BUTTON CLICK] {name} -> {action}"
             );
 
 
             if (valueControl == null)
             {
                 Debug.LogError(
-                    $"[{name}] Value Control не назначен!"
+                    $"[{name}] PanelValueControl НЕ назначен!"
                 );
 
                 return;
@@ -82,12 +94,20 @@ namespace Panel
             {
                 case ButtonAction.Increase:
 
+                    Debug.Log(
+                        $"[{name}] Increase"
+                    );
+
                     valueControl.Increase();
 
                     break;
 
 
                 case ButtonAction.Decrease:
+
+                    Debug.Log(
+                        $"[{name}] Decrease"
+                    );
 
                     valueControl.Decrease();
 
@@ -96,10 +116,15 @@ namespace Panel
 
                 case ButtonAction.Apply:
 
+                    Debug.Log(
+                        $"[{name}] APPLY -> " +
+                        $"{valueControl.CurrentValue}"
+                    );
+
+                    // СНАЧАЛА применяем значение.
                     valueControl.Apply();
 
-                    // Только у кнопки Apply
-                    // меняем картинку.
+                    // И только потом меняем картинку.
                     ShowPressedVisual();
 
                     break;
@@ -108,24 +133,39 @@ namespace Panel
 
 
         // ==================================================
-        // APPLY VISUAL
+        // VISUAL
         // ==================================================
 
         private void ShowPressedVisual()
         {
+            // Визуал вообще никак не влияет
+            // на работу Apply.
             if (buttonRenderer == null)
-                return;
-
-
-            if (pressedSprite != null)
             {
-                buttonRenderer.sprite =
-                    pressedSprite;
+                Debug.LogWarning(
+                    $"[{name}] Button Renderer не назначен. " +
+                    $"Apply всё равно выполнен."
+                );
+
+                return;
             }
 
 
-            // Если игрок нажал ещё раз,
-            // перезапускаем отсчёт двух секунд.
+            if (pressedSprite == null)
+            {
+                Debug.LogWarning(
+                    $"[{name}] Pressed Sprite не назначен. " +
+                    $"Apply всё равно выполнен."
+                );
+
+                return;
+            }
+
+
+            buttonRenderer.sprite =
+                pressedSprite;
+
+
             if (visualCoroutine != null)
             {
                 StopCoroutine(

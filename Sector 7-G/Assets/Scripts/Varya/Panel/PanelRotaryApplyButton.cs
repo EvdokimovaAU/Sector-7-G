@@ -5,22 +5,11 @@ namespace Panel
 {
     public class PanelRotaryApplyButton : MonoBehaviour
     {
-        // ==================================================
-        // ROTARY SWITCH
-        // ==================================================
-
         [Header("Rotary Switch")]
-
         [SerializeField]
         private PanelRotarySwitch rotarySwitch;
 
-
-        // ==================================================
-        // VISUAL
-        // ==================================================
-
         [Header("Visual")]
-
         [SerializeField]
         private SpriteRenderer buttonRenderer;
 
@@ -32,88 +21,68 @@ namespace Panel
 
         [Min(0f)]
         [SerializeField]
-        private float pressedDuration = 1f;
-
+        private float pressedDuration = 0.2f;
 
         private Coroutine visualCoroutine;
 
 
-        // ==================================================
-        // CLICK
-        // ==================================================
-
-        private void OnMouseDown()
+        private void Start()
         {
-            Apply();
+            if (buttonRenderer == null)
+            {
+                buttonRenderer = GetComponent<SpriteRenderer>();
+            }
+
+            if (buttonRenderer != null && normalSprite == null)
+            {
+                normalSprite = buttonRenderer.sprite;
+            }
         }
 
 
-        // ==================================================
-        // APPLY
-        // ==================================================
-
-        public void Apply()
+        public void Click()
         {
             if (rotarySwitch == null)
             {
                 Debug.LogError(
-                    $"[{name}] PanelRotarySwitch не назначен!"
+                    $"[{name}] Не назначен PanelRotarySwitch!"
                 );
 
                 return;
             }
 
+            Debug.Log("[ROTARY APPLY BUTTON CLICK]");
 
-            // Применяем выбранное положение крутилки.
             rotarySwitch.ApplyValue();
 
-
-            // Показываем нажатие кнопки.
             ShowPressedVisual();
         }
 
 
-        // ==================================================
-        // VISUAL
-        // ==================================================
-
         private void ShowPressedVisual()
         {
-            if (buttonRenderer == null)
+            if (buttonRenderer == null || pressedSprite == null)
                 return;
 
-
-            if (pressedSprite != null)
-            {
-                buttonRenderer.sprite = pressedSprite;
-            }
-
+            buttonRenderer.sprite = pressedSprite;
 
             if (visualCoroutine != null)
             {
                 StopCoroutine(visualCoroutine);
             }
 
-
-            visualCoroutine =
-                StartCoroutine(ResetVisual());
+            visualCoroutine = StartCoroutine(ResetVisual());
         }
 
 
         private IEnumerator ResetVisual()
         {
-            yield return new WaitForSeconds(
-                pressedDuration
-            );
+            yield return new WaitForSeconds(pressedDuration);
 
-
-            if (buttonRenderer != null &&
-                normalSprite != null)
+            if (buttonRenderer != null && normalSprite != null)
             {
-                buttonRenderer.sprite =
-                    normalSprite;
+                buttonRenderer.sprite = normalSprite;
             }
-
 
             visualCoroutine = null;
         }
