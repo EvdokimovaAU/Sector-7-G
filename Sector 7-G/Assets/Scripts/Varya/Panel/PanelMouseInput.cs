@@ -16,18 +16,24 @@ namespace Panel
 
         private void Update()
         {
+           
+
             if (Mouse.current == null)
                 return;
 
             if (!Mouse.current.leftButton.wasPressedThisFrame)
                 return;
 
+
             if (mainCamera == null)
             {
                 mainCamera = Camera.main;
 
                 if (mainCamera == null)
+                {
+                    Debug.LogError("[PanelMouseInput] Main Camera не найдена!");
                     return;
+                }
             }
 
 
@@ -35,31 +41,55 @@ namespace Panel
                 Mouse.current.position.ReadValue();
 
             Vector2 worldPosition =
-                mainCamera.ScreenToWorldPoint(
-                    screenPosition
-                );
+                mainCamera.ScreenToWorldPoint(screenPosition);
 
 
-            // Получаем ВСЕ коллайдеры под мышкой,
-            // а не только первый.
             Collider2D[] hits =
-                Physics2D.OverlapPointAll(
-                    worldPosition
-                );
+                Physics2D.OverlapPointAll(worldPosition);
 
 
             foreach (Collider2D hit in hits)
             {
+                // ==========================================
+                // СТРЕЛОЧКИ ЗНАЧЕНИЯ
+                // ==========================================
+
                 PanelValueArrow arrow =
                     hit.GetComponent<PanelValueArrow>();
 
-                if (arrow == null)
-                    continue;
+                if (arrow != null)
+                {
+                    arrow.Click();
+                    return;
+                }
 
 
-                arrow.Click();
+                // ==========================================
+                // УСТАНОВИТЬ ЗНАЧЕНИЕ
+                // ==========================================
 
-                return;
+                PanelValueApplyButton valueApply =
+                    hit.GetComponent<PanelValueApplyButton>();
+
+                if (valueApply != null)
+                {
+                    valueApply.Click();
+                    return;
+                }
+
+
+                // ==========================================
+                // УСТАНОВИТЬ КРУТИЛКУ
+                // ==========================================
+
+                PanelRotaryApplyButton rotaryApply =
+                    hit.GetComponent<PanelRotaryApplyButton>();
+
+                if (rotaryApply != null)
+                {
+                    rotaryApply.Click();
+                    return;
+                }
             }
         }
     }

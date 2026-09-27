@@ -95,24 +95,6 @@ public class EmergencyJournal : MonoBehaviour
     // UNITY
     // =========================================================
 
-    private void Awake()
-    {
-        if (previousButton != null)
-        {
-            previousButton.onClick.AddListener(
-                PreviousPage
-            );
-        }
-
-
-        if (nextButton != null)
-        {
-            nextButton.onClick.AddListener(
-                NextPage
-            );
-        }
-    }
-
 
     private void Start()
     {
@@ -141,23 +123,7 @@ public class EmergencyJournal : MonoBehaviour
     }
 
 
-    private void OnDestroy()
-    {
-        if (previousButton != null)
-        {
-            previousButton.onClick.RemoveListener(
-                PreviousPage
-            );
-        }
-
-
-        if (nextButton != null)
-        {
-            nextButton.onClick.RemoveListener(
-                NextPage
-            );
-        }
-    }
+   
 
 
     // =========================================================
@@ -605,5 +571,44 @@ public class EmergencyJournal : MonoBehaviour
                 item.gameObject.SetActive(false);
             }
         }
+    }
+
+    // =========================================================
+    // RANDOM EMERGENCY
+    // =========================================================
+
+    public EmergencyJournalPage GetRandomEmergencyPage()
+    {
+        if (pages == null ||
+            pages.Count == 0)
+        {
+            Debug.LogError(
+                "[EmergencyJournal] " +
+                "В Pages нет аварий."
+            );
+
+            return null;
+        }
+
+
+        int randomIndex =
+            Random.Range(
+                0,
+                pages.Count
+            );
+
+
+        EmergencyJournalPage page =
+            pages[randomIndex];
+
+
+        Debug.Log(
+            $"[JOURNAL RANDOM] " +
+            $"Выбрана авария: " +
+            $"{page.EmergencyID}"
+        );
+
+
+        return page;
     }
 }

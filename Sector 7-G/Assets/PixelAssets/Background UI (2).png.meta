@@ -1,0 +1,2281 @@
+fileFormatVersion: 2
+guid: 1218c86ba0984d841be140dafcd53733
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1000040429075384572
+    second: Background UI (2)_0
+  - first:
+      213: -5217219200294202309
+    second: Background UI (2)_1
+  - first:
+      213: -1781349978924886952
+    second: Background UI (2)_2
+  - first:
+      213: 6066916441988149980
+    second: Background UI (2)_3
+  - first:
+      213: 2209374732590314893
+    second: Background UI (2)_4
+  - first:
+      213: 2399641814893154599
+    second: Background UI (2)_5
+  - first:
+      213: 2300615521137811485
+    second: Background UI (2)_6
+  - first:
+      213: 6694944418967538804
+    second: Background UI (2)_7
+  - first:
+      213: -1628399177898881947
+    second: Background UI (2)_8
+  - first:
+      213: 8134169750861639224
+    second: Background UI (2)_9
+  - first:
+      213: 2615873366832903036
+    second: Background UI (2)_10
+  - first:
+      213: 5942500587856138487
+    second: Background UI (2)_11
+  - first:
+      213: 8637628151028334442
+    second: Background UI (2)_12
+  - first:
+      213: -5610266300976830281
+    second: Background UI (2)_13
+  - first:
+      213: 3866503097395873223
+    second: Background UI (2)_14
+  - first:
+      213: 5135995415092792713
+    second: Background UI (2)_15
+  - first:
+      213: -4832225591189927091
+    second: Background UI (2)_16
+  - first:
+      213: 1014043993520069904
+    second: Background UI (2)_17
+  - first:
+      213: 5452111787767050829
+    second: Background UI (2)_18
+  - first:
+      213: -7040429680385119749
+    second: Background UI (2)_19
+  - first:
+      213: 490993890442504467
+    second: Background UI (2)_20
+  - first:
+      213: 4253375102803576666
+    second: Background UI (2)_21
+  - first:
+      213: -6845967644528422238
+    second: Background UI (2)_22
+  - first:
+      213: 6286034384174155154
+    second: Background UI (2)_23
+  - first:
+      213: -2111551184367363384
+    second: Background UI (2)_24
+  - first:
+      213: 3900472303644497795
+    second: Background UI (2)_25
+  - first:
+      213: -3638968344841746063
+    second: Background UI (2)_26
+  - first:
+      213: -1683406020225903956
+    second: Background UI (2)_27
+  - first:
+      213: -7881496002319348671
+    second: Background UI (2)_28
+  - first:
+      213: -4382188987059124459
+    second: Background UI (2)_29
+  - first:
+      213: -861000324793581488
+    second: Background UI (2)_30
+  - first:
+      213: -8666270937752177594
+    second: Background UI (2)_31
+  - first:
+      213: -2596865796287027981
+    second: Background UI (2)_32
+  - first:
+      213: 3360255161967167877
+    second: Background UI (2)_33
+  - first:
+      213: 3653909779123018153
+    second: Background UI (2)_34
+  - first:
+      213: -1757824655591793725
+    second: Background UI (2)_35
+  - first:
+      213: -349494900581822909
+    second: Background UI (2)_36
+  - first:
+      213: 4680629483921441056
+    second: Background UI (2)_37
+  - first:
+      213: -9145462662623042109
+    second: Background UI (2)_38
+  - first:
+      213: 6064789000359029584
+    second: Background UI (2)_39
+  - first:
+      213: -4490862730394280148
+    second: Background UI (2)_40
+  - first:
+      213: 4552927100792840606
+    second: Background UI (2)_41
+  - first:
+      213: 4387606208662760716
+    second: Background UI (2)_42
+  - first:
+      213: 5552881530909045741
+    second: Background UI (2)_43
+  - first:
+      213: 6221317779452589322
+    second: Background UI (2)_44
+  - first:
+      213: -2005718365913252025
+    second: Background UI (2)_45
+  - first:
+      213: 208578630907883077
+    second: Background UI (2)_46
+  - first:
+      213: -3202857844215603950
+    second: Background UI (2)_47
+  - first:
+      213: 8341217326362294907
+    second: Background UI (2)_48
+  - first:
+      213: 7149139171644538101
+    second: Background UI (2)_49
+  - first:
+      213: -2420754958320373540
+    second: Background UI (2)_50
+  - first:
+      213: 342270698256249227
+    second: Background UI (2)_51
+  - first:
+      213: -5054255092737216505
+    second: Background UI (2)_52
+  - first:
+      213: 9009965195504615716
+    second: Background UI (2)_53
+  - first:
+      213: -6799817271617704583
+    second: Background UI (2)_54
+  - first:
+      213: -4956394122532716039
+    second: Background UI (2)_55
+  - first:
+      213: 8200292676981710598
+    second: Background UI (2)_56
+  - first:
+      213: -2748336414724481770
+    second: Background UI (2)_57
+  - first:
+      213: -1471026180855823108
+    second: Background UI (2)_58
+  - first:
+      213: -9112267543075549039
+    second: Background UI (2)_59
+  - first:
+      213: 5252681600104806653
+    second: Background UI (2)_60
+  - first:
+      213: 9006959520690782111
+    second: Background UI (2)_61
+  - first:
+      213: 3536836972029683527
+    second: Background UI (2)_62
+  - first:
+      213: 6205722404922910156
+    second: Background UI (2)_63
+  - first:
+      213: 6858705157279156261
+    second: Background UI (2)_64
+  - first:
+      213: -8850233841179154481
+    second: Background UI (2)_65
+  - first:
+      213: 5195361917558673821
+    second: Background UI (2)_66
+  - first:
+      213: -7040386886349373710
+    second: Background UI (2)_67
+  - first:
+      213: 6066326766301722541
+    second: Background UI (2)_68
+  - first:
+      213: 6058642047807365937
+    second: Background UI (2)_69
+  - first:
+      213: 6412791127664846427
+    second: Background UI (2)_70
+  - first:
+      213: -7262919307192009934
+    second: Background UI (2)_71
+  - first:
+      213: -980358698282822120
+    second: Background UI (2)_72
+  - first:
+      213: 4623642440846400249
+    second: Background UI (2)_73
+  - first:
+      213: 1070577757070976831
+    second: Background UI (2)_74
+  - first:
+      213: -834760875799007383
+    second: Background UI (2)_75
+  - first:
+      213: -3505124263217878683
+    second: Background UI (2)_76
+  - first:
+      213: -2967412387852400620
+    second: Background UI (2)_77
+  - first:
+      213: -3110831139829379435
+    second: Background UI (2)_78
+  - first:
+      213: -6510938018988871923
+    second: Background UI (2)_79
+  - first:
+      213: 7881424832992178065
+    second: Background UI (2)_80
+  - first:
+      213: 1539428366410466407
+    second: Background UI (2)_81
+  - first:
+      213: -4701053656879104178
+    second: Background UI (2)_82
+  - first:
+      213: -5854705129062627428
+    second: Background UI (2)_83
+  - first:
+      213: -3652587153030062640
+    second: Background UI (2)_84
+  - first:
+      213: -1365489636435692971
+    second: Background UI (2)_85
+  - first:
+      213: -2494590767685531031
+    second: Background UI (2)_86
+  - first:
+      213: -1753788894799387578
+    second: Background UI (2)_87
+  - first:
+      213: -1346640067849598960
+    second: Background UI (2)_88
+  - first:
+      213: 3496608308024366539
+    second: Background UI (2)_89
+  - first:
+      213: -7475819150995947739
+    second: Background UI (2)_90
+  - first:
+      213: -7193335925119217963
+    second: Background UI (2)_91
+  - first:
+      213: 8603151242286506357
+    second: Background UI (2)_92
+  - first:
+      213: -5281778289239449930
+    second: Background UI (2)_93
+  - first:
+      213: -7993449219869464328
+    second: Background UI (2)_94
+  - first:
+      213: 7966426589198513964
+    second: Background UI (2)_95
+  - first:
+      213: 9155618820309797628
+    second: Background UI (2)_96
+  - first:
+      213: 7741089334900165899
+    second: Background UI (2)_97
+  - first:
+      213: -1742331735853378785
+    second: Background UI (2)_98
+  - first:
+      213: -900763421892111395
+    second: Background UI (2)_99
+  - first:
+      213: -141034108472878303
+    second: Background UI (2)_100
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Background UI (2)_0
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 101
+        width: 48
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 407bee737842f12f0800000000000000
+      internalID: -1000040429075384572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_1
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 102
+        width: 84
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b34dd1387c6b897b0800000000000000
+      internalID: -5217219200294202309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_2
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 103
+        width: 48
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8545885d1af5747e0800000000000000
+      internalID: -1781349978924886952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_3
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 104
+        width: 84
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd23eae2c54023450800000000000000
+      internalID: 6066916441988149980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_4
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 119
+        width: 41
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d85f4cf0d9649ae10800000000000000
+      internalID: 2209374732590314893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_8
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 128
+        width: 64
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56c8cc84393c669e0800000000000000
+      internalID: -1628399177898881947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_13
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 106
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b86ee216845422b0800000000000000
+      internalID: -5610266300976830281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_14
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 94
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c58a3bd41498a530800000000000000
+      internalID: 3866503097395873223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_15
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 51
+        width: 43
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98d04ac4e98b64740800000000000000
+      internalID: 5135995415092792713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_16
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 53
+        width: 43
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4b82925d6c70fcb0800000000000000
+      internalID: -4832225591189927091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_17
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 82
+        width: 38
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01dd164b3ab921e00800000000000000
+      internalID: 1014043993520069904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_23
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 82
+        width: 30
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2958792b7fa7c3750800000000000000
+      internalID: 6286034384174155154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_26
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 50
+        width: 50
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17901d80299cf7dc0800000000000000
+      internalID: -3638968344841746063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_27
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 52
+        width: 50
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca25ea7c42753a8e0800000000000000
+      internalID: -1683406020225903956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_30
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 73
+        width: 38
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 050ce2134cc1d04f0800000000000000
+      internalID: -861000324793581488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_35
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 51
+        width: 38
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cb17020ac3fa97e0800000000000000
+      internalID: -1757824655591793725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_36
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 53
+        width: 38
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34e82085d38562bf0800000000000000
+      internalID: -349494900581822909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_38
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 34
+        width: 157
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c561cfb92ac41180800000000000000
+      internalID: -9145462662623042109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_39
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 34
+        width: 157
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05ba81496757a2450800000000000000
+      internalID: 6064789000359029584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_40
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2fdecbe3204da1c0800000000000000
+      internalID: -4490862730394280148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_41
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e91a103631f3f2f30800000000000000
+      internalID: 4552927100792840606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_42
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0d64a9a998e3ec30800000000000000
+      internalID: 4387606208662760716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_43
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de339a9f45ccf0d40800000000000000
+      internalID: 5552881530909045741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_44
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a05f717fe8f865650800000000000000
+      internalID: 6221317779452589322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_45
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74f7340e5c14a24e0800000000000000
+      internalID: -2005718365913252025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_46
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54e6003e82505e200800000000000000
+      internalID: 208578630907883077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_47
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21d947992c92d83d0800000000000000
+      internalID: -3202857844215603950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_48
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7a7824f6f4f1c370800000000000000
+      internalID: 8341217326362294907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_49
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5fcf3b7e238d63360800000000000000
+      internalID: 7149139171644538101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_50
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd07c0de030c76ed0800000000000000
+      internalID: -2420754958320373540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_51
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b81b69af26dffb400800000000000000
+      internalID: 342270698256249227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_52
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 700703195cdabd9b0800000000000000
+      internalID: -5054255092737216505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_53
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4218fa4cb93d90d70800000000000000
+      internalID: 9009965195504615716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_54
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97d29abe73232a1a0800000000000000
+      internalID: -6799817271617704583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_55
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f18a9f3ec9573bb0800000000000000
+      internalID: -4956394122532716039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_56
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60f5bb12eba4dc170800000000000000
+      internalID: 8200292676981710598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_57
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61d93159792fbd9d0800000000000000
+      internalID: -2748336414724481770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_58
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf40aca7b7dd59be0800000000000000
+      internalID: -1471026180855823108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_59
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19019acc2f8ba8180800000000000000
+      internalID: -9112267543075549039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_60
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df83a7cd51645e840800000000000000
+      internalID: 5252681600104806653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_61
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9fb81196f52ffc70800000000000000
+      internalID: 9006959520690782111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_62
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7472c42bc7e551130800000000000000
+      internalID: 3536836972029683527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_63
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc5ec10e5a72f1650800000000000000
+      internalID: 6205722404922910156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_64
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52883c660040f2f50800000000000000
+      internalID: 6858705157279156261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_65
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc720654637ad2580800000000000000
+      internalID: -8850233841179154481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_66
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d915da74322a91840800000000000000
+      internalID: 5195361917558673821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_67
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2feb3ddad658b4e90800000000000000
+      internalID: -7040386886349373710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_68
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da7bbdc9d0cef2450800000000000000
+      internalID: 6066326766301722541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_69
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 133adc8a7de941450800000000000000
+      internalID: 6058642047807365937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_70
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b566d3fdd8fcef850800000000000000
+      internalID: 6412791127664846427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_71
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23b7e76ee5de43b90800000000000000
+      internalID: -7262919307192009934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_72
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 816536445f01562f0800000000000000
+      internalID: -980358698282822120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_73
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fad1178d4a7a2040800000000000000
+      internalID: 4623642440846400249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_74
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3766a24cc47bde00800000000000000
+      internalID: 1070577757070976831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_75
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96f2b9df7655a64f0800000000000000
+      internalID: -834760875799007383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_76
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 569ab45bd0c4b5fc0800000000000000
+      internalID: -3505124263217878683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_77
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 418c6ffb722a1d6d0800000000000000
+      internalID: -2967412387852400620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_78
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59e0f3a6f8b14d4d0800000000000000
+      internalID: -3110831139829379435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_79
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0f259f3e5084a5a0800000000000000
+      internalID: -6510938018988871923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_80
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19fe076c022706d60800000000000000
+      internalID: 7881424832992178065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_81
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7644e0961f52d5510800000000000000
+      internalID: 1539428366410466407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_82
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4f7ba73b9082ceb0800000000000000
+      internalID: -4701053656879104178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_83
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c97809564b8efbea0800000000000000
+      internalID: -5854705129062627428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_84
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0dddc7826576f4dc0800000000000000
+      internalID: -3652587153030062640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_85
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 552f5cb096ecc0de0800000000000000
+      internalID: -1365489636435692971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_86
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96a8228e9ee616dd0800000000000000
+      internalID: -2494590767685531031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_87
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 644257aca4a49a7e0800000000000000
+      internalID: -1753788894799387578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_88
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 018448b3ef5cf4de0800000000000000
+      internalID: -1346640067849598960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_89
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc5d876fab2768030800000000000000
+      internalID: 3496608308024366539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_90
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52ff2db371e804890800000000000000
+      internalID: -7475819150995947739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_91
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5de863986132c2c90800000000000000
+      internalID: -7193335925119217963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_92
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 571a2713978846770800000000000000
+      internalID: 8603151242286506357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_93
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6be138741aa53b6b0800000000000000
+      internalID: -5281778289239449930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_94
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f8ae8f1940911190800000000000000
+      internalID: -7993449219869464328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_95
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c27776266ce6e8e60800000000000000
+      internalID: 7966426589198513964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_96
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfa427bfeca4f0f70800000000000000
+      internalID: 9155618820309797628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_97
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0d0a4d6cbfdd6b60800000000000000
+      internalID: 7741089334900165899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_98
+      rect:
+        serializedVersion: 2
+        x: 344
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f13d19b748ef1d7e0800000000000000
+      internalID: -1742331735853378785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_99
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 17
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd39473b078df73f0800000000000000
+      internalID: -900763421892111395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Background UI (2)_100
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 0
+        width: 157
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12b924fb932fa0ef0800000000000000
+      internalID: -141034108472878303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5958e76df497e444ebb96fc020c29619
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Background UI (2)_0: -1000040429075384572
+      Background UI (2)_1: -5217219200294202309
+      Background UI (2)_10: 2615873366832903036
+      Background UI (2)_100: -141034108472878303
+      Background UI (2)_11: 5942500587856138487
+      Background UI (2)_12: 8637628151028334442
+      Background UI (2)_13: -5610266300976830281
+      Background UI (2)_14: 3866503097395873223
+      Background UI (2)_15: 5135995415092792713
+      Background UI (2)_16: -4832225591189927091
+      Background UI (2)_17: 1014043993520069904
+      Background UI (2)_18: 5452111787767050829
+      Background UI (2)_19: -7040429680385119749
+      Background UI (2)_2: -1781349978924886952
+      Background UI (2)_20: 490993890442504467
+      Background UI (2)_21: 4253375102803576666
+      Background UI (2)_22: -6845967644528422238
+      Background UI (2)_23: 6286034384174155154
+      Background UI (2)_24: -2111551184367363384
+      Background UI (2)_25: 3900472303644497795
+      Background UI (2)_26: -3638968344841746063
+      Background UI (2)_27: -1683406020225903956
+      Background UI (2)_28: -7881496002319348671
+      Background UI (2)_29: -4382188987059124459
+      Background UI (2)_3: 6066916441988149980
+      Background UI (2)_30: -861000324793581488
+      Background UI (2)_31: -8666270937752177594
+      Background UI (2)_32: -2596865796287027981
+      Background UI (2)_33: 3360255161967167877
+      Background UI (2)_34: 3653909779123018153
+      Background UI (2)_35: -1757824655591793725
+      Background UI (2)_36: -349494900581822909
+      Background UI (2)_37: 4680629483921441056
+      Background UI (2)_38: -9145462662623042109
+      Background UI (2)_39: 6064789000359029584
+      Background UI (2)_4: 2209374732590314893
+      Background UI (2)_40: -4490862730394280148
+      Background UI (2)_41: 4552927100792840606
+      Background UI (2)_42: 4387606208662760716
+      Background UI (2)_43: 5552881530909045741
+      Background UI (2)_44: 6221317779452589322
+      Background UI (2)_45: -2005718365913252025
+      Background UI (2)_46: 208578630907883077
+      Background UI (2)_47: -3202857844215603950
+      Background UI (2)_48: 8341217326362294907
+      Background UI (2)_49: 7149139171644538101
+      Background UI (2)_5: 2399641814893154599
+      Background UI (2)_50: -2420754958320373540
+      Background UI (2)_51: 342270698256249227
+      Background UI (2)_52: -5054255092737216505
+      Background UI (2)_53: 9009965195504615716
+      Background UI (2)_54: -6799817271617704583
+      Background UI (2)_55: -4956394122532716039
+      Background UI (2)_56: 8200292676981710598
+      Background UI (2)_57: -2748336414724481770
+      Background UI (2)_58: -1471026180855823108
+      Background UI (2)_59: -9112267543075549039
+      Background UI (2)_6: 2300615521137811485
+      Background UI (2)_60: 5252681600104806653
+      Background UI (2)_61: 9006959520690782111
+      Background UI (2)_62: 3536836972029683527
+      Background UI (2)_63: 6205722404922910156
+      Background UI (2)_64: 6858705157279156261
+      Background UI (2)_65: -8850233841179154481
+      Background UI (2)_66: 5195361917558673821
+      Background UI (2)_67: -7040386886349373710
+      Background UI (2)_68: 6066326766301722541
+      Background UI (2)_69: 6058642047807365937
+      Background UI (2)_7: 6694944418967538804
+      Background UI (2)_70: 6412791127664846427
+      Background UI (2)_71: -7262919307192009934
+      Background UI (2)_72: -980358698282822120
+      Background UI (2)_73: 4623642440846400249
+      Background UI (2)_74: 1070577757070976831
+      Background UI (2)_75: -834760875799007383
+      Background UI (2)_76: -3505124263217878683
+      Background UI (2)_77: -2967412387852400620
+      Background UI (2)_78: -3110831139829379435
+      Background UI (2)_79: -6510938018988871923
+      Background UI (2)_8: -1628399177898881947
+      Background UI (2)_80: 7881424832992178065
+      Background UI (2)_81: 1539428366410466407
+      Background UI (2)_82: -4701053656879104178
+      Background UI (2)_83: -5854705129062627428
+      Background UI (2)_84: -3652587153030062640
+      Background UI (2)_85: -1365489636435692971
+      Background UI (2)_86: -2494590767685531031
+      Background UI (2)_87: -1753788894799387578
+      Background UI (2)_88: -1346640067849598960
+      Background UI (2)_89: 3496608308024366539
+      Background UI (2)_9: 8134169750861639224
+      Background UI (2)_90: -7475819150995947739
+      Background UI (2)_91: -7193335925119217963
+      Background UI (2)_92: 8603151242286506357
+      Background UI (2)_93: -5281778289239449930
+      Background UI (2)_94: -7993449219869464328
+      Background UI (2)_95: 7966426589198513964
+      Background UI (2)_96: 9155618820309797628
+      Background UI (2)_97: 7741089334900165899
+      Background UI (2)_98: -1742331735853378785
+      Background UI (2)_99: -900763421892111395
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

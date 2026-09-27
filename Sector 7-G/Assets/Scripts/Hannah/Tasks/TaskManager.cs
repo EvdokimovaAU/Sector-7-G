@@ -4,14 +4,46 @@ using UnityEngine;
 
 public class TaskManager : MonoBehaviour
 {
-    [Header("Current shift tasks")]
+    // ==================================================
+    // TASK POOL
+    // ==================================================
+
+    [Header("Task Pool")]
+
+    [Tooltip("Все возможные задания для этой смены.")]
+    [SerializeField]
+    private List<DailyTask> taskPool = new();
+
+
+    [Tooltip("Сколько случайных заданий выбрать на смену.")]
+    [Min(1)]
+    [SerializeField]
+    private int tasksPerShift = 3;
+
+
+    // ==================================================
+    // CURRENT TASKS
+    // ==================================================
+
+    [Header("Current Shift Tasks")]
+
+    [Tooltip("Сюда автоматически попадут выбранные задания.")]
     [SerializeField]
     private List<DailyTask> currentTasks = new();
 
 
+    // ==================================================
+    // EVENTS
+    // ==================================================
+
     public event Action OnTasksChanged;
+
     public event Action<int> OnTaskCompleted;
 
+
+    // ==================================================
+    // PUBLIC
+    // ==================================================
 
     public IReadOnlyList<DailyTask> CurrentTasks =>
         currentTasks;
@@ -24,9 +56,7 @@ public class TaskManager : MonoBehaviour
             if (currentTasks == null)
                 return 0;
 
-
             int count = 0;
-
 
             foreach (DailyTask task in currentTasks)
             {
@@ -37,7 +67,6 @@ public class TaskManager : MonoBehaviour
                 }
             }
 
-
             return count;
         }
     }
@@ -46,6 +75,12 @@ public class TaskManager : MonoBehaviour
     // ==================================================
     // UNITY
     // ==================================================
+
+    private void Awake()
+    {
+        GenerateRandomTasks();
+    }
+
 
     private void OnEnable()
     {
@@ -61,25 +96,90 @@ public class TaskManager : MonoBehaviour
     }
 
 
-    private void Start()
+    // ==================================================
+    // GENERATE TASKS
+    // ==================================================
+
+    private void GenerateRandomTasks()
     {
-        DebugCurrentTasks();
+        currentTasks.Clear();
+
+
+        if (taskPool == null ||
+            taskPool.Count == 0)
+        {
+            Debug.LogError(
+                "[TaskManager] Task Pool пуст!"
+            );
+
+            return;
+        }
+
+
+        // Создаём временную копию пула.
+        // Сам список в Inspector не изменяем.
+        List<DailyTask> availableTasks =
+            new List<DailyTask>();
+
+
+        foreach (DailyTask task in taskPool)
+        {
+            if (task != null)
+            {
+                availableTasks.Add(task);
+            }
+        }
+
+
+        int amount =
+            Mathf.Min(
+                tasksPerShift,
+                availableTasks.Count
+            );
+
+
+        // Случайно выбираем задания.
+        for (int i = 0; i < amount; i++)
+        {
+            int randomIndex =
+                UnityEngine.Random.Range(
+                    0,
+                    availableTasks.Count
+                );
+
+
+            DailyTask selectedTask =
+                availableTasks[randomIndex];
+
+
+            currentTasks.Add(
+                selectedTask
+            );
+
+
+            // Удаляем из временного списка,
+            // чтобы одно задание не выпало дважды.
+            availableTasks.RemoveAt(
+                randomIndex
+            );
+        }
+
+
+        Debug.Log(
+            $"[TaskManager] Выбрано заданий: " +
+            $"{currentTasks.Count}"
+        );
     }
 
 
     // ==================================================
-    // PANEL EVENT
+    // PANEL ACTION
     // ==================================================
 
     private void HandlePanelElementChanged(
         Panel.PanelElementID elementID,
         int value)
     {
-        Debug.Log(
-            $"[TASK ACTION] {elementID} = {value}"
-        );
-
-
         if (currentTasks == null)
             return;
 
@@ -94,45 +194,18 @@ public class TaskManager : MonoBehaviour
                 continue;
 
 
-            // ------------------------------------------
-            // Это вообще элемент данного задания?
-            // ------------------------------------------
-
+            // Это не элемент текущего задания.
             if (task.TargetElement != elementID)
                 continue;
 
 
-            Debug.Log(
-                $"[TASK] Найдено задание для {elementID}. " +
-                $"Нужно значение {task.RequiredValue}, " +
-                $"получено {value}."
-            );
-
-
-            // ------------------------------------------
             // Элемент правильный,
-            // но значение пока неправильное.
-            //
-            // Задание НЕ выполняем,
-            // но это НЕ считается ошибкой.
-            // ------------------------------------------
-
+            // но значение неправильное.
             if (task.RequiredValue != value)
-            {
-                Debug.Log(
-                    $"[TASK] {elementID} относится к заданию, " +
-                    $"но значение пока неправильное."
-                );
-
-
                 return;
-            }
 
 
-            // ------------------------------------------
-            // ID + VALUE совпали.
-            // ------------------------------------------
-
+            // Проверяем задание.
             bool completed =
                 task.Check(
                     elementID,
@@ -144,15 +217,12 @@ public class TaskManager : MonoBehaviour
                 return;
 
 
-            Debug.Log(
-                $"[TASK COMPLETED] " +
-                $"{task.Description}"
-            );
-
-
+            // Обновляем UI.
             OnTasksChanged?.Invoke();
 
 
+            // Сообщаем системе аварий,
+            // сколько заданий выполнено.
             OnTaskCompleted?.Invoke(
                 CompletedTaskCount
             );
@@ -160,26 +230,12 @@ public class TaskManager : MonoBehaviour
 
             return;
         }
-
-
-        Debug.Log(
-            $"[TASK] {elementID} не выполнил задание."
-        );
     }
 
 
     // ==================================================
-    // EXACT ACTION
+    // EXACT ACTION CHECK
     // ==================================================
-
-    /// <summary>
-    /// Проверяет, является ли действие
-    /// точным действием какого-либо задания:
-    ///
-    /// совпадает ID
-    /// И
-    /// совпадает Value.
-    /// </summary>
 
     public bool IsActionRequiredByTask(
         Panel.PanelElementID elementID,
@@ -215,16 +271,6 @@ public class TaskManager : MonoBehaviour
     // ELEMENT USED BY TASK
     // ==================================================
 
-    /// <summary>
-    /// Проверяет только сам элемент.
-    ///
-    /// Если B3 используется хотя бы в одном
-    /// ежедневном задании, возвращает true
-    /// независимо от текущего Value.
-    ///
-    /// Этот метод нужен WrongPanelActionHandler.
-    /// </summary>
-
     public bool IsElementUsedByTask(
         Panel.PanelElementID elementID)
     {
@@ -238,32 +284,11 @@ public class TaskManager : MonoBehaviour
                 continue;
 
 
-            // Выполненные задания здесь тоже учитываем.
-            //
-            // Если B3 является частью списка заданий
-            // текущей смены, взаимодействие с B3
-            // не должно внезапно считаться
-            // посторонней кнопкой.
-
             if (task.TargetElement == elementID)
             {
-                Debug.Log(
-                    $"[TASK ELEMENT CHECK] " +
-                    $"{elementID} присутствует " +
-                    $"в ежедневных заданиях."
-                );
-
-
                 return true;
             }
         }
-
-
-        Debug.LogWarning(
-            $"[TASK ELEMENT CHECK] " +
-            $"{elementID} НЕТ " +
-            $"в ежедневных заданиях."
-        );
 
 
         return false;
@@ -297,61 +322,5 @@ public class TaskManager : MonoBehaviour
 
 
         return true;
-    }
-
-
-    // ==================================================
-    // DEBUG
-    // ==================================================
-
-    [ContextMenu("DEBUG Current Tasks")]
-    public void DebugCurrentTasks()
-    {
-        Debug.Log(
-            "========== DAILY TASKS =========="
-        );
-
-
-        if (currentTasks == null)
-        {
-            Debug.LogError(
-                "Current Tasks = NULL"
-            );
-
-            return;
-        }
-
-
-        for (int i = 0;
-             i < currentTasks.Count;
-             i++)
-        {
-            DailyTask task =
-                currentTasks[i];
-
-
-            if (task == null)
-            {
-                Debug.Log(
-                    $"Task #{i + 1}: NULL"
-                );
-
-                continue;
-            }
-
-
-            Debug.Log(
-                $"TASK #{i + 1}\n" +
-                $"Text: {task.Description}\n" +
-                $"Element: {task.TargetElement}\n" +
-                $"Required Value: {task.RequiredValue}\n" +
-                $"Completed: {task.IsCompleted}"
-            );
-        }
-
-
-        Debug.Log(
-            "================================="
-        );
     }
 }
